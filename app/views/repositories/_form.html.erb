@@ -1,0 +1,31 @@
+<%= form_for @repository do |f| %>
+id <%= f.text_field :id %><br>
+author_name <%= f.text_field :author_name %><br>
+avatar_url <%= f.text_field :avatar_url %><br>
+repo_id <%= f.text_field :repo_id %><br>
+name <%= f.text_field :name %><br>
+
+description <%= f.text_field :description %><br>
+private <%= f.text_field :private %><br>
+download_link <%= f.text_field :download_link %><br>
+clone_url <%= f.text_field :clone_url %><br>
+git_url <%= f.text_field :git_url %><br>
+ssh_url <%= f.text_field :ssh_url %><br>
+svn_url <%= f.text_field :svn_url %><br>
+no_of_stars <%= f.text_field :no_of_stars %><br>
+no_of_watchers <%= f.text_field :no_of_watchers %><br>
+has_wiki <%= f.text_field :has_wiki %><br>
+wiki_url <%= f.text_field :wiki_url %><br>
+repo_created_at <%= f.text_field :repo_created_at %><br>
+last_updated_at <%= f.text_field :last_updated_at %><br>
+no_of_downloads <%= f.text_field :no_of_downloads %><br>
+no_of_views <%= f.text_field :no_of_views %><br>
+no_of_bookmarks <%= f.text_field :no_of_bookmarks %><br>
+
+language used:
+<%= f.fields_for :languages do |builder| %>
+  <%= render 'language_fields', :f => builder %>
+<% end %>
+
+<%= f.submit %><br>
+<% end %>

@@ -1,3 +1,3 @@
 class Language < ApplicationRecord
-  has_one :repository
+  belongs_to :repository
 end
