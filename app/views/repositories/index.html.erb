@@ -1,0 +1,17 @@
+ <% url = "https://github.com/#{@repository[:full_name]}/archive/#{@repository[:default_branch]}.zip" %>
+download url : <a href="<%= url %>"><%= url%></a> <br>
+description:  <%= @repository[:description] %><br>
+
+<% @language.each do |key, value| %>
+  <%= "#{key}:   #{(@language[key].to_f/@total.to_f )* 100}"%> <br>
+<% end %>
+
+<br><br><br><br><br>
+<table border=1>
+<% @repository.each do |key, value| %>
+  <tr>
+  <td><%= key %></td>
+  <td><%= value %></td>
+  </tr>
+<% end %>
+</table>
