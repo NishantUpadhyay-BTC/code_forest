@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831072638) do
+ActiveRecord::Schema.define(version: 20160831073236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,8 +45,12 @@ ActiveRecord::Schema.define(version: 20160831072638) do
     t.integer  "no_of_downloads"
     t.integer  "no_of_views"
     t.integer  "no_of_bookmarks"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "poc_image_file_name"
+    t.string   "poc_image_content_type"
+    t.integer  "poc_image_file_size"
+    t.datetime "poc_image_updated_at"
   end
 
   add_foreign_key "languages", "repositories"
