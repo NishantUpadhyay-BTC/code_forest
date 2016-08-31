@@ -1,0 +1,45 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  author_name: MyString
+  avatar_url: MyString
+  repo_id: 1
+  name: MyString
+  description: MyString
+  private: false
+  download_link: MyString
+  clone_url: MyString
+  git_url: MyString
+  ssh_url: MyString
+  svn_url: MyString
+  no_of_stars: 1
+  no_of_watchers: 1
+  has_wiki: false
+  wiki_url: MyString
+  repo_created_at: 2016-08-31
+  last_updated_at: 2016-08-31
+  no_of_downloads: 1
+  no_of_views: 1
+  no_of_bookmarks: 1
+
+two:
+  author_name: MyString
+  avatar_url: MyString
+  repo_id: 1
+  name: MyString
+  description: MyString
+  private: false
+  download_link: MyString
+  clone_url: MyString
+  git_url: MyString
+  ssh_url: MyString
+  svn_url: MyString
+  no_of_stars: 1
+  no_of_watchers: 1
+  has_wiki: false
+  wiki_url: MyString
+  repo_created_at: 2016-08-31
+  last_updated_at: 2016-08-31
+  no_of_downloads: 1
+  no_of_views: 1
+  no_of_bookmarks: 1
