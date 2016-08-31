@@ -1,0 +1,11 @@
+<h1>Users#new</h1>
+<% if current_user %>
+  <li>
+    Welcome <%= current_user.name %>
+    <%= link_to('Logout', signout_path, :method => :delete) %>
+  </li>
+<% else %>
+  <li>
+  <%= link_to("Sign in with Github", "/auth/github")  %>
+  </li>
+<% end %>
