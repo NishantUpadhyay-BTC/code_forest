@@ -23,15 +23,15 @@
                                 </div>
                                 <div class="card-content">
                                     <p class="area">
-                                        <a href="https://github.com/<%= repository.author_name %>"><%= repository.author_name %></a>
+                                        <a href=""></a>
                                     </p>
                                     <a data-deeplink="adbeus://standard-coffee-bar" href="https://adbeus.com/montreal/westmount/standard-coffee-bar/">
                                         <span class="card-title activator brown-text text-darken-4">
                                         <%= repository.name %></span>
                                     </a>
                                     <br>
-                                    <a style="font-size: 0.9rem;  ;" target="_blank" class="green-text" href=<%= "https://github.com/#{repository.author_name}/#{repository.name}" %>>OPEN</a>
-                                    <span style="float: right; padding-right: 1rem;"><i style="font-size: 1.3rem; padding-right: 10px;cursor: pointer;" data-tooltip="112 Views" data-delay="50" data-position="top" class="material-icons light-blue-text tooltipped">visibility</i> <i style="font-size: 1.3rem; padding-right: 10px; cursor: pointer;" data-tooltip="Likes 1" data-delay="50" data-position="top" data-workpad-key="41XQ4DjUPJAaE52k9Hr87i" class="material-icons pink-text tooltipped action-like">favorite</i> <span style="float: left;"></span></span>
+                                    <a style="font-size: 0.9rem;  ;" target="_blank" class="green-text" href="<%= repository.svn_url %>">OPEN</a>
+                                    <span style="float: right; padding-right: 1rem;"><i style="font-size: 1.3rem; padding-right: 10px;cursor: pointer;" data-tooltip="<%=repository.no_of_views %> Views" data-delay="50" data-position="top" class="material-icons light-blue-text tooltipped">visibility</i> <i style="font-size: 1.3rem; padding-right: 10px; cursor: pointer;" data-tooltip="Likes <%= repository.no_of_bookmarks%>" data-delay="50" data-position="top" data-workpad-key="41XQ4DjUPJAaE52k9Hr87i" class="material-icons pink-text tooltipped action-like">favorite</i> <span style="float: left;"></span></span>
                           </div>
                       </div>
                   </div>
