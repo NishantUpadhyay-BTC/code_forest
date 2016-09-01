@@ -1,0 +1,38 @@
+<b>User Info</b><br>
+<%= image_tag @user[:avatar_url], size: "200x200", alt: "Author's image" %> <br>
+name: <%= @user[:login] %><br>
+
+
+<b>Repo Info</b><br>
+Name: <%= @repository[:name] %><br>
+small description:  <%= @repository[:description] %><br><br>
+
+languages with %: <br>
+<% @language.each do |key, value| %>
+  <%= "#{key}:   #{(@language[key].to_f/@total.to_f )* 100}"%> <br>
+<% end %><br>
+
+Tags: take from user<br>
+
+ <% url = "https://github.com/#{@repository[:full_name]}/archive/#{@repository[:default_branch]}.zip" %>
+download url : <a href="<%= url %>"><%= url%></a> <br>
+description:  <%= @repository[:description] %><br>
+
+clone url: <%= @repository[:clone_url] %><br>
+no of stars: <%= @repository[:stargazers_count] %><br>
+no of forks: <%= @repository[:forks] %><br>
+no of watchers: <%= @repository[:subscribers_count] %><br>
+wiki link: <%= "http://github.com/#{@repository[:full_name]}/wiki" %><br>
+created at: <%= @repository[:created_at] %><br>
+last updated at: <%= @repository[:updated_at] %><br>
+
+
+<br><br><br><br><br>
+<table border=1>
+<% @repository.each do |key, value| %>
+  <tr>
+  <td><%= key %></td>
+  <td><%= value %></td>
+  </tr>
+<% end %>
+</table>

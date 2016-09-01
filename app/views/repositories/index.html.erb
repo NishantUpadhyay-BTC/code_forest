@@ -1,38 +1,47 @@
-<b>User Info</b><br>
-<%= image_tag @user[:avatar_url], size: "200x200", alt: "Author's image" %> <br>
-name: <%= @user[:login] %><br>
+<main class="no-padding">
+    <div class="section white">
+        <div class="container">
 
 
-<b>Repo Info</b><br>
-Name: <%= @repository[:name] %><br>
-small description:  <%= @repository[:description] %><br><br>
+          <!-- iterate for all repos -->
+          <div class="row">
+                <div class="col m12 s12">
+                    <div class="section">
+          <% @repositories.each do |repository| %>
 
-languages with %: <br>
-<% @language.each do |key, value| %>
-  <%= "#{key}:   #{(@language[key].to_f/@total.to_f )* 100}"%> <br>
-<% end %><br>
+                        <div class="col s12 m4"><!-- new card start -->
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <a href="">
+                                      <%= image_tag repository.poc_image, 
+                                            width: "305", height: "229",
+                                            sizes: "(max-width: 305px) 100vw, 305px",
+                                            title: "POC Image",
+                                            alt: "POC Image",
+                                            class: "responsive-img wp-post-image" %>
+                                    </a>
+                                </div>
+                                <div class="card-content">
+                                    <p class="area">
+                                        <a href="https://github.com/<%= repository.author_name %>"><%= repository.author_name %></a>
+                                    </p>
+                                    <a data-deeplink="adbeus://standard-coffee-bar" href="https://adbeus.com/montreal/westmount/standard-coffee-bar/">
+                                        <span class="card-title activator brown-text text-darken-4">
+                                        <%= repository.name %></span>
+                                    </a>
+                                    <br>
+                                    <a style="font-size: 0.9rem;  ;" target="_blank" class="green-text" href=<%= "https://github.com/#{repository.author_name}/#{repository.name}" %>>OPEN</a>
+                                    <span style="float: right; padding-right: 1rem;"><i style="font-size: 1.3rem; padding-right: 10px;cursor: pointer;" data-tooltip="112 Views" data-delay="50" data-position="top" class="material-icons light-blue-text tooltipped">visibility</i> <i style="font-size: 1.3rem; padding-right: 10px; cursor: pointer;" data-tooltip="Likes 1" data-delay="50" data-position="top" data-workpad-key="41XQ4DjUPJAaE52k9Hr87i" class="material-icons pink-text tooltipped action-like">favorite</i> <span style="float: left;"></span></span>
+                          </div>
+                      </div>
+                  </div>
+        <% end %>
+              </div>
+            </div>
+          </div><!-- row complete-->
+      </div>
+  </div>
+</main>
 
-Tags: take from user<br>
 
- <% url = "https://github.com/#{@repository[:full_name]}/archive/#{@repository[:default_branch]}.zip" %>
-download url : <a href="<%= url %>"><%= url%></a> <br>
-description:  <%= @repository[:description] %><br>
-
-clone url: <%= @repository[:clone_url] %><br>
-no of stars: <%= @repository[:stargazers_count] %><br>
-no of forks: <%= @repository[:forks] %><br>
-no of watchers: <%= @repository[:subscribers_count] %><br>
-wiki link: <%= "http://github.com/#{@repository[:full_name]}/wiki" %><br>
-created at: <%= @repository[:created_at] %><br>
-last updated at: <%= @repository[:updated_at] %><br>
-
-
-<br><br><br><br><br>
-<table border=1>
-<% @repository.each do |key, value| %>
-  <tr>
-  <td><%= key %></td>
-  <td><%= value %></td>
-  </tr>
-<% end %>
-</table>
+                     

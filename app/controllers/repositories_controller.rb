@@ -1,17 +1,21 @@
 class RepositoriesController < ApplicationController
-  def initialize
-    @github = Github.new
-  end
+  # def initialize
+  #   @github = Github.new
+  # end
 
   def index
-    @repository = response_from_uri("https://api.github.com/repos/rails/rails")
+    @repositories = Repository.all
+  end
+  
+  def show
+    @repository = response_from_uri("https://api.github.com/repos/NishantUpadhyay-BTC/code_forest")
     @language = response_from_uri(@repository[:languages_url])
     @total = @language.values.sum
     @user = author_info('rails')
   end
 
   def new
-    repository_values_result = repository_values('Naiya123', 'app1')
+    repository_values_result = repository_values('NishantUpadhyay-BTC', 'code_forest')
     @repository = Repository.new(repository_values_result[:repository_details])
     
     repository_values_result[:language].each do |language,code|
