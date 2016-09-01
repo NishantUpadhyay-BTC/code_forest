@@ -7,7 +7,7 @@ class RepositoriesController < ApplicationController
   end
 
   def new
-    repository_values_result = repository_values(nil, nil)
+    repository_values_result = repository_values('Naiya123', 'app1')
     @repository = Repository.new(repository_values_result[:repository_details])
     
     repository_values_result[:language].each do |language,code|
@@ -16,6 +16,8 @@ class RepositoriesController < ApplicationController
   end
 
   def create
+    @repository = Repository.new(repository_params)
+    save = @repository.save
   end
 
   private
@@ -34,9 +36,9 @@ class RepositoriesController < ApplicationController
   #returns repository details for initializing @repository object in new action
   #returns hash of languages used in that repository
   def repository_values(user_name, repository_name)
-    repository = response_from_uri("https://api.github.com/repos/rails/rails")
+    repository = response_from_uri("https://api.github.com/repos/#{user_name}/#{repository_name}")
     language = response_from_uri(repository[:languages_url])
-    user = author_info('rails')
+    user = author_info(user_name)
 
     repository_details = {
       author_name: user[:login],
@@ -62,8 +64,9 @@ class RepositoriesController < ApplicationController
   end
 
   def repository_params
-    params[:repository].permit(:author_name, :avatar_url, :repo_id, :name, :description, :private, 
+    params.require(:repository).permit(:id, :author_name, :avatar_url, :repo_id, :name, :description, :private, 
                   :download_link, :clone_url, :git_url, :ssh_url, :svn_url, :no_of_stars, :no_of_watchers,
-                  :has_wiki, :wiki_url, :repo_created_at, :last_updated_at)
+                  :no_of_downloads, :no_of_views, :no_of_bookmarks,
+                  :has_wiki, :wiki_url, :repo_created_at, :last_updated_at, :poc_image, languages_attributes: [:id, :repository_id, :name, :code])
   end
 end

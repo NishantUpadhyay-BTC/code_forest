@@ -1,5 +1,7 @@
 <%= form_for @repository do |f| %>
 id <%= f.text_field :id %><br>
+POC Image: <%= f.file_field :poc_image, id: 'poc_image' ,accept:'image/*' %>
+<img id="image" /><br>
 author_name <%= f.text_field :author_name %><br>
 avatar_url <%= f.text_field :avatar_url %><br>
 repo_id <%= f.text_field :repo_id %><br>
@@ -29,3 +31,13 @@ language used:
 
 <%= f.submit %><br>
 <% end %>
+
+<script>
+$("#poc_image").onchange = function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#image").src = e.target.result;
+    };
+    reader.readAsDataURL(this.files[0]);
+};
+</script>
