@@ -3,6 +3,6 @@ Rails.application.routes.draw do
 
   root to: "users#new"
   get "/auth/:provider/callback" => "callbacks#create"
-  get "/index" => "users#index"
+  get "/users/index" => "users#index"
   delete "/signout" => "callbacks#destroy", :as => :signout
 end
