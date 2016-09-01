@@ -1,36 +1,76 @@
 <%= form_for @repository do |f| %>
-id <%= f.text_field :id %><br>
-<%=image_tag "default_repo.png",id: 'image', alt: 'poc image', size: "200x200" %><br>
-POC Image: <%= f.file_field :poc_image, id: 'poc_image' ,accept:'image/*' %><br>
-author_name <%= f.text_field :author_name %><br>
-avatar_url <%= f.text_field :avatar_url %><br>
-repo_id <%= f.text_field :repo_id %><br>
-name <%= f.text_field :name %><br>
 
-description <%= f.text_field :description %><br>
-tags: <%= f.text_area :tag_list %>
-private <%= f.text_field :private %><br>
-download_link <%= f.text_field :download_link %><br>
-clone_url <%= f.text_field :clone_url %><br>
-git_url <%= f.text_field :git_url %><br>
-ssh_url <%= f.text_field :ssh_url %><br>
-svn_url <%= f.text_field :svn_url %><br>
-no_of_stars <%= f.text_field :no_of_stars %><br>
-no_of_watchers <%= f.text_field :no_of_watchers %><br>
-has_wiki <%= f.text_field :has_wiki %><br>
-wiki_url <%= f.text_field :wiki_url %><br>
-repo_created_at <%= f.text_field :repo_created_at %><br>
-last_updated_at <%= f.text_field :last_updated_at %><br>
-no_of_downloads <%= f.text_field :no_of_downloads %><br>
-no_of_views <%= f.text_field :no_of_views %><br>
-no_of_bookmarks <%= f.text_field :no_of_bookmarks %><br>
+<div class="row repo-show white">
+    <div class="container z-depth-1">
+         <div class="row">
+            <div class="col l12"><h4 class="para-text" style="margin-left: 10px"> Repo Name</h4></div>
+            <form class="col s12 poc_form">
+                <div class="row">
+                  <div class="col l5">
+                    <div style="width:300">
+                        <div class="hovereffect" onclick="$('#poc_image').trigger('click');   ">
+                            <%= image_tag @repository.poc_image, width: 300 %>
+                            <div class="overlay">
+                                <h2>Image</h2>
+                                <p>
+                                  <a href="#">EDIT</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col l7">
+                    <div class="input-field col l12">
+                        <%= f.text_area :description, class: "materialize-textarea poc_desc_text_area" %>
+                        <label for="textarea1">Description</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col l12">
+                    <label for="chips">Tags</label>
+                      <%= f.text_field :tag_list, class: "materialize-textarea poc_desc_text_area" %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col l12">
+                    <button class="btn waves-effect waves-light" style="float:right" type="submit" name="action">PREVIEW
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-language used:
+<%= f.hidden_field :id %>
+<%= f.file_field :poc_image, id: 'poc_image' ,accept:'image/*', hidden: true %>
+<%= f.hidden_field :author_name %>
+<%= f.hidden_field :avatar_url %>
+<%= f.hidden_field :repo_id %>
+<%= f.hidden_field :name %>
+<%= f.hidden_field :private %>
+<%= f.hidden_field :download_link %>
+<%= f.hidden_field :clone_url %>
+<%= f.hidden_field :git_url %>
+<%= f.hidden_field :ssh_url %>
+<%= f.hidden_field :svn_url %>
+<%= f.hidden_field :no_of_stars %>
+<%= f.hidden_field :no_of_watchers %>
+<%= f.hidden_field :has_wiki %>
+<%= f.hidden_field :wiki_url %>
+<%= f.hidden_field :repo_created_at %>
+<%= f.hidden_field :last_updated_at %>
+<%= f.hidden_field :no_of_downloads %>
+<%= f.hidden_field :no_of_views %>
+<%= f.hidden_field :no_of_bookmarks %>
+
 <%= f.fields_for :languages do |builder| %>
   <%= render 'language_fields', :f => builder %>
 <% end %>
 
-<%= f.submit %><br>
+<%= f.submit %>
 <% end %>
 
 <script>
@@ -41,4 +81,14 @@ document.getElementById("poc_image").onchange = function () {
     };
     reader.readAsDataURL(this.files[0]);
 };
+$(document).ready(function(){
+  $('.chips-placeholder').material_chip({
+    placeholder: 'Enter a tag',
+    secondaryPlaceholder: '+Tag',
+  });
+})
+  $("#poc_image").onclick = function () {
+    alert('abc');
+};
+
 </script>
