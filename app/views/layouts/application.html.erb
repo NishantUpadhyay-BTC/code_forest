@@ -2,13 +2,17 @@
 <html>
   <head>
     <title>CodeForest</title>
-    <%= csrf_meta_tags %>
+
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
-  <body>
+  <body class="home page page-id-5 page-template page-template-home-page page-template-home-page-php" data-gr-c-s-loaded="true">
+    <%= render partial: 'layouts/header'%>
     <%= yield %>
+    <%= render partial: 'layouts/footer'%>
   </body>
 </html>

@@ -1,0 +1,124 @@
+nav{
+  background-color: #689f38 !important;
+  color: #fff;
+  height: 56px;
+  line-height: 56px;
+  width: 100%;
+}
+.navfeature{
+  box-shadow: none !important
+}
+.form-text{
+    font-size: 52px;
+    padding: 5% 0
+}
+.card{
+  background-color: #fff;
+  border-radius: 2px;
+  margin: 0.5rem 0 1rem;
+  position: relative;
+  transition: box-shadow 0.25s ease 0s;
+  .card-image {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    img{
+     border-radius: 2px 2px 0 0;
+     bottom: 0;
+     display: block;
+     left: 0;
+     position: relative;
+     right: 0;
+     top: 0;
+     width: 100%;
+     height: auto;
+     max-height: 100%
+   }
+  }
+  .waves-effect{
+    display: block;
+    -moz-user-select: none;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease-out 0s;
+    vertical-align: middle;
+    will-change: opacity, transform;
+    z-index: 1;
+  }
+}
+.page-footer{
+  background-color: #689f38 !important;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+ul.languages{
+  a{
+  color: #fff !important
+  }
+
+}
+p.area{
+  font-size: 12px;
+    line-height: 0.75rem;
+}
+.card-title{
+  line-height: 22px;
+  padding-top: 10px;
+  cursor: pointer;
+  color: #846c63 !important;
+}
+.card .card-title{
+  font-size: 18px !important
+}
+#splash-blue{
+    height: 600px;
+    background-color: #7cb342 !important
+}
+.github_login{
+  color: #000 !important;
+  text-align: center;
+  padding: 30px;
+  a{
+    min-width: 30%;
+    min-height: 50px;
+    color: #689f38 !important;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2.6
+  }
+}
+#search {
+
+}
+#search input[type="text"] {
+    background: #fff;
+    border: 0 none;
+    font: bold 18px Arial,Helvetica,Sans-serif;
+    color: #d7d7d7;
+    padding: 6px 15px 6px 35px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+    }
+
+#search input[type="text"]:focus {
+    background: #fff;
+    color: #6a6f75;
+    border-radius: 0px;
+    box-shadow: none
+}
+.fa-search {
+    position: absolute;
+   top: 421px;
+   left: 1146px;
+   font-size: 22px;
+   color: #ccc;
+ }
