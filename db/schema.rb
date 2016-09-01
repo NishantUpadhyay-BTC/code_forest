@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160901073218) do
+ActiveRecord::Schema.define(version: 20160830123344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,18 @@ ActiveRecord::Schema.define(version: 20160901073218) do
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "email"
+    t.string   "avtar_url"
+    t.string   "github_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 
   add_foreign_key "languages", "repositories"
 end

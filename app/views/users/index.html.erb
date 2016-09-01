@@ -1,0 +1,15 @@
+<% if current_user %>
+  Welcome
+  <%= image_tag(current_user.avtar_url) %>
+  <%= current_user.name %>
+  <%- @repositories.each do |repo| %>
+    <li><a href= <%= repo["html_url"] %>>
+      <%= repo["name"] %>
+    </a></li>
+  <% end %>
+  <%= link_to('Logout', signout_path, :method => :delete) %>
+<% else %>
+  <li>
+  <%= link_to("Sign in with Github", "/auth/github")  %>
+  </li>
+<% end %>
