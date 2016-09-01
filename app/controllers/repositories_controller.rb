@@ -1,4 +1,8 @@
 class RepositoriesController < ApplicationController
+  def initialize
+    @github = Github.new
+  end
+
   def index
     @repository = response_from_uri("https://api.github.com/repos/rails/rails")
     @language = response_from_uri(@repository[:languages_url])
@@ -67,6 +71,6 @@ class RepositoriesController < ApplicationController
     params.require(:repository).permit(:id, :author_name, :avatar_url, :repo_id, :name, :description, :private, 
                   :download_link, :clone_url, :git_url, :ssh_url, :svn_url, :no_of_stars, :no_of_watchers,
                   :no_of_downloads, :no_of_views, :no_of_bookmarks,
-                  :has_wiki, :wiki_url, :repo_created_at, :last_updated_at, :poc_image, languages_attributes: [:id, :repository_id, :name, :code])
+                  :has_wiki, :wiki_url, :repo_created_at, :last_updated_at, :poc_image, :tag_list, languages_attributes: [:id, :repository_id, :name, :code])
   end
 end

@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'github_api'
 #for image upload
 gem "paperclip", "~> 5.0.0"
+#for tag add and search by it
+gem 'acts-as-taggable-on', '~> 4.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Use sqlite3 as the database for Active Record
@@ -29,7 +31,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
