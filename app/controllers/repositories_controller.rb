@@ -8,7 +8,6 @@ class RepositoriesController < ApplicationController
   end
 
   def show
-    # binding.pry
     @repository = Repository.find(params[:id])
     # @repository = response_from_uri("https://api.github.com/repos/NishantUpadhyay-BTC/code_forest")
     @language = response_from_uri(@repository[:languages_url])
@@ -35,7 +34,6 @@ class RepositoriesController < ApplicationController
 
   private
   def response_from_uri(uri)
-    binding.pry
     uri = URI(uri)
     http_response = Net::HTTP.get_response(uri)
     response = JSON(http_response.body).symbolize_keys
@@ -50,7 +48,6 @@ class RepositoriesController < ApplicationController
   #returns repository details for initializing @repository object in new action
   #returns hash of languages used in that repository
   def repository_values(user_name, repository_name)
-    binding.pry
     repository = response_from_uri("https://api.github.com/repos/#{user_name}/#{repository_name}")
     language = response_from_uri(repository[:languages_url])
     user = author_info(user_name)
