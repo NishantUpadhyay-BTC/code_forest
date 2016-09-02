@@ -76,7 +76,11 @@ GEM
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     hashie (3.4.4)
+    httpclient (2.8.2.3)
     i18n (0.7.0)
+    impressionist (1.5.1)
+      httpclient (~> 2.2)
+      nokogiri (~> 1.5)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -215,6 +219,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   font-awesome-rails
   github_api
+  impressionist
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

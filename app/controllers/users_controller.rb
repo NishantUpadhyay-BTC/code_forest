@@ -12,4 +12,9 @@ class UsersController < ApplicationController
     response = JSON(http_response.body)
     response
   end
+
+  def favourite
+    current_user.favourites.build(repository_id: @repository.id)
+    current_user.save
+  end
 end
