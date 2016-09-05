@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160901073218) do
+ActiveRecord::Schema.define(version: 20160905081018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "github_responses", force: :cascade do |t|
+    t.string   "url"
+    t.string   "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "languages", force: :cascade do |t|
     t.string   "name"
@@ -51,6 +58,7 @@ ActiveRecord::Schema.define(version: 20160901073218) do
     t.string   "poc_image_content_type"
     t.integer  "poc_image_file_size"
     t.datetime "poc_image_updated_at"
+    t.integer  "no_of_forks"
   end
 
   create_table "taggings", force: :cascade do |t|
