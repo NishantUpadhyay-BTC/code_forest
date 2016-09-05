@@ -10,6 +10,7 @@
     </div>
     <div class="row github_login">
       <a href="/auth/github" class="waves-effect waves-light btn white text-primarycolor modal-trigger"><i class="fa fa-github" style="color: #689f38 !important"></i></i> SIGN UP WITH GITHUB</a>
+      <a href="/auth/bitbucket" class="waves-effect waves-light btn white text-primarycolor modal-trigger"><i class="fa fa-bitbucket" style="color: #689f38 !important"></i></i> SIGN UP WITH BITBUCKET</a>
     </div>
     <div class="row">
       <form method="get" action="/search" id="search">
@@ -38,5 +39,6 @@
 <% else %>
   <li>
   <%= link_to("Sign in with Github", "/auth/github")  %>
+  <%= link_to("Sign in with Bitbucket", "/auth/bitbucket")  %>
   </li>
 <% end %>

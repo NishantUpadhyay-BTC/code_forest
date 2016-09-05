@@ -12,4 +12,8 @@ class User < ApplicationRecord
       user.github_url = auth["info"]["urls"]["GitHub"]
     end
   end
+
+  def is_favourited?(repository)
+    favourites.find_by_repository_id(repository.id)
+  end
 end

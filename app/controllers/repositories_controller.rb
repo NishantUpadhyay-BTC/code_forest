@@ -1,35 +1,58 @@
 class RepositoriesController < ApplicationController
-  # def initialize
-  #   @github = Github.new
-  # end
-
   def index
     @repositories = Repository.all
   end
 
   def show
     @repository = Repository.find(params[:id])
-    # @repository = response_from_uri("https://api.github.com/repos/NishantUpadhyay-BTC/code_forest")
-    @language = response_from_uri(@repository[:languages_url])
-    @total = @language.values.sum
-    @user = author_info('rails')
+    impressionist(@repository, nil, { unique: [:session_hash] })
   end
 
   def new
-    repository_values_result = repository_values('NishantUpadhyay-BTC', 'code_forest')
+    repository_values_result = repository_values(params[:user_name], params[:repo_name])
     @repository = Repository.new(repository_values_result[:repository_details])
 
     repository_values_result[:language].each do |language,code|
       @repository.languages.build(name: language, code: code)
     end
-
-    impressionist(@repository, nil, { unique: [:session_hash] })
   end
 
   def create
     @repository = Repository.new(repository_params)
     save = @repository.save
     redirect_to repositories_path
+  end
+
+  def edit
+    @repository = Repository.find(params[:id])
+  end
+
+  def update
+    @repository = Repository.find(params[:id])
+    @repository.update_attributes(repository_params)
+
+    redirect_to repositories_path
+  end
+
+  def favourite
+    @repository = Repository.find(params[:id])
+    if current_user.present?
+      if current_user.is_favourited?(@repository)
+        current_user.favourites.find_by_repository_id(params[:id]).destroy
+      else
+        current_user.favourites.build(repository_id: params[:id])
+        current_user.save
+      end
+    end
+    respond_to do |format|
+      format.js
+      format.html { redirect_to :back }
+    end
+  end
+
+  def destroy
+    Repository.find(params[:id]).destroy
+    redirect_to :back
   end
 
   private

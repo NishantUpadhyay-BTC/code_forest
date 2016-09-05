@@ -1,22 +1,36 @@
 <header class="no-padding">
-    <div class="navbar-fixed">
-        <nav class="navfeature">
-            <div class="container nav-wrapper">
-                <a class="waves-effect waves-light" href="/Home/Start" style="width: 200px">
-                    <span class="hide-on-small-only">
-                        <%= image_tag "logo.png", width: 30, id: "appicon", style: 'vertical-align: middle;margin-bottom:10px;margin-right:10px;'%>
-                    </span>
-                    <span style="font-weight:300;font-size:1.3rem;" id="header-large" class="leftRapper">Code Forest</span>
-                </a>
-                <ul class="hide-on-med-and-down right" id="nav-mobile">
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-5 current_page_item menu-item-24" id="menu-item-24">
-                        <a href="/auth/github">LOGIN</a>
-                    </li>
-                </ul>
-                <a class="button-collapse" data-activates="slide-out" href="#">
-                    <i class="mdi mdi-menu"></i>
-                </a>
-            </div>
-        </nav>
-    </div>
+	<div class="navbar-fixed">
+		<nav class="navfeature">
+			<div class="container nav-wrapper">
+				<a class="waves-effect waves-light" href="/Home/Start" style="width: 200px">
+					<span class="hide-on-small-only">
+						<%= image_tag "logo.png", width: 30, id: "appicon", style: 'vertical-align: middle;margin-bottom:10px;margin-right:10px;'%>
+					</span>
+					<span style="font-weight:300;font-size:1.3rem;" id="header-large" class="leftRapper">Code Forest</span>
+				</a>
+				<ul class="hide-on-med-and-down right" id="nav-mobile">
+					<% unless current_user.present? %>
+					<li class="menu-item" id="menu-item-24">
+						<a href="/auth/github">LOGIN</a>
+					</li>
+					<% else %>
+					<li class="menu-item" id="menu-item-24">
+						<%= link_to repositories_path do %>
+						<%= image_tag current_user.avtar_url, size: "60x60" %>
+						<% end %>
+					</li>
+					<li class="menu-item" id="menu-item-24">
+						<%= link_to(current_user.name, user_path(current_user.id)) %>
+					</li>
+					<li class="menu-item" id="menu-item-24">
+						<%= link_to('Logout', signout_path, :method => :delete) %>
+					</li>
+					<% end %>
+				</ul>
+				<a class="button-collapse" data-activates="slide-out" href="#">
+					<i class="mdi mdi-menu"></i>
+				</a>
+			</div>
+		</nav>
+	</div>
 </header>
