@@ -13,7 +13,7 @@
                   <h4 class="para-text"><%= @repository.name %></h4>
                   <h6>last updated on
                     <%= time_ago_in_words(@repository.last_updated_at) %> ago
-									</h6>
+                  </h6>
                   <% @repository.tags.each do |tag| %>
                   <div class="chip">
                     <%= tag %>
@@ -86,7 +86,7 @@
             <div class="col l6">
               <i class="medium fa fa-code-fork"></i>
             </div>
-            <div class="col l6"><%= @repository[:forks] %></div>
+            <div class="col l6"><%= @repository.no_of_forks %></div>
           </div>
           <div class="row">
             <div class="col l6">
