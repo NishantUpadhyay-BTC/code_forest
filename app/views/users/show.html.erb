@@ -11,12 +11,10 @@
           <th data-field="price">Views</th>
           <th data-field="price">Favourites</th>
           <th data-field="price">Show/Hide</th>
-
         </tr>
       </thead>
 
       <tbody>
-        <td><%= @pocs.pluck(:name) %></td>
         <% @pocs.each.with_index do |poc, index| %>
         <tr>
 

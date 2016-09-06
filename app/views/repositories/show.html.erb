@@ -117,15 +117,16 @@
     </div>
   </div>
 </div>
-<script>
+<script type="text/javascript">
   google.charts.load("current", {packages: ["corechart"]});
-  google.charts.setOnLoadCallback(drawChart(<%= raw language_graph(@repository) %>));
+  google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart(language_graph) {
-    var graph_style = [["Element", "Density", { role: "style" } ]];
+  function drawChart() {
+    array_data = <%= raw language_graph(@repository) %>
+    var graph_style = [["Language", "Percentage", { role: "style" } ]];
 
-    for(var lg=0; lg < language_graph.length; lg++){
-      graph_style.push(language_graph[lg]);
+    for(var lg=0; lg < array_data.length; lg++){
+      graph_style.push(array_data[lg]);
     }
 
     var data = google.visualization.arrayToDataTable(graph_style);

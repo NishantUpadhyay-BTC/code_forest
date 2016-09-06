@@ -1,14 +1,14 @@
 <div class="row repo-show white" id="repository_form">
     <div class="container z-depth-1">
          <div class="row">
-            <div class="col l12"><h4 class="para-text" style="margin-left: 10px"> Repo Name</h4></div>
-            <%= form_for @repository, url:  preview_repositories_path, method: :post, authenticity_token: true, class: "col s12 poc_form", remote: true, multipart: true do |f| %>
+            <div class="col l12"><h4 class="para-text" style="margin-left: 10px"> <%= @repository.name %></h4></div>
+            <%= form_for @repository, url: preview_repositories_path, method: :post, authenticity_token: true, class: "col s12 poc_form", remote: true, multipart: true do |f| %>
               <%= f.file_field :poc_image, id: 'poc_image' ,accept:'image/*', hidden: true %>
-              
+
               <% hidden_fields_array.each do |field| %>
                 <%= f.hidden_field field %>
               <% end %>
-              
+
               <%= f.fields_for :languages do |builder| %>
                 <%= render 'language_fields', :f => builder %>
               <% end %>

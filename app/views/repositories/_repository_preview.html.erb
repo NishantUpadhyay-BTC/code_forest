@@ -10,7 +10,7 @@
                                 <%= image_tag @repository.poc_image %>
                               </div>
                               <div class="col l8 para-text">
-                                <h4 class="para-text"> Repo Name</h4>
+                                <h4 class="para-text"><%= @repository.name %></h4>
                                 <h6>last updated on 12th Dec</h6>
                                 <% @repository.tag_list.each do |tag| %>
                                 <div class="chip">
@@ -61,13 +61,13 @@
                                   <%= f.file_field :poc_image, id: 'poc_image' ,accept:'image/*', hidden: true %>
                                   <%= f.hidden_field :description %>
                                   <% # f.hidden_field :poc_image %>
-                                  <%= f.hidden_field :tag_list %>                                  
+                                  <%= f.hidden_field :tag_list %>
                                   <%= f.hidden_field :author_name %>
 
                                   <% hidden_fields_array.each do |field| %>
                                     <%= f.hidden_field field %>
                                   <% end %>
-              
+
                                   <%= f.fields_for :languages do |builder| %>
                                     <%= render 'language_fields', :f => builder %>
                                   <% end %>
@@ -122,34 +122,43 @@
         </div>
     </div>
 </div>
-<script>
-google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawChart(<%= raw language_graph(@repository) %>));
-    function drawChart(languages_data) {
-      var languages_data_chart = []
-      languages_data_chart.push(["Element", "Density", { role: "style" } ])
-      for(var i=0; i<languages_data.length; i++)
-      {
-        languages_data_chart.push(languages_data[i]);
+<script type="text/javascript">
+  google.charts.load("current", {packages: ["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    array_data = <%= raw language_graph(@repository) %>
+    var graph_style = [["Language", "Percentage", { role: "style" } ]];
+
+    for(var lg=0; lg < array_data.length; lg++){
+      graph_style.push(array_data[lg]);
+    }
+
+    var data = google.visualization.arrayToDataTable(graph_style);
+    var view = new google.visualization.DataView(data);
+    view.setColumns([
+      0,
+      1, {
+        calc: "stringify",
+        sourceColumn: 1,
+        type: "string",
+        role: "annotation"
+      },
+      2
+    ]);
+
+    var options = {
+      title: "Language used in percentage",
+      width: 350,
+      height: 300,
+      bar: {
+        groupWidth: "15%"
+      },
+      legend: {
+        position: "none"
       }
-      var data = google.visualization.arrayToDataTable(languages_data_chart);
-
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
-
-      var options = {
-        title: "Language used in percentage",
-        width: 350,
-        height: 300,
-        bar: {groupWidth: "15%"},
-        legend: { position: "none" },
-      };
-      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-      chart.draw(view, options);
+    };
+    var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+    chart.draw(view, options);
   }
 </script>
