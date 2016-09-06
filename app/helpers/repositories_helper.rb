@@ -21,7 +21,20 @@ module RepositoriesHelper
     language_graph_array
   end
 
+  def update_repo(description, tag_list )
+    @repository.description = description
+    @repository.tag_list = tag_list
+  end
+
   def hidden_fields_array
-    [:avatar_url, :name , :private , :download_link , :clone_url , :git_url , :ssh_url , :svn_url , :no_of_stars , :no_of_watchers , :has_wiki , :wiki_url , :repo_created_at , :last_updated_at , :no_of_downloads , :no_of_views , :no_of_bookmarks]
+    [:avatar_url, :name , :private , :download_link , :clone_url , :git_url , :ssh_url , :svn_url , :no_of_stars , :no_of_watchers , :has_wiki , :wiki_url , :repo_created_at , :last_updated_at , :no_of_downloads , :no_of_views , :no_of_bookmarks, :description, :tag_list]
+  end
+
+  def display_tag
+    tags = ""
+    @repository.tag_list.each do |tag|
+      tags += "<div class='chip'>#{tag}</div>"
+    end
+    tags.html_safe
   end
 end

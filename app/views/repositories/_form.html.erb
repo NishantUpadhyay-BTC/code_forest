@@ -1,75 +1,70 @@
-<div class="row repo-show white" id="repository_form">
-    <div class="container z-depth-1">
-         <div class="row">
-            <div class="col l12"><h4 class="para-text" style="margin-left: 10px"> Repo Name</h4></div>
-            <%= form_for @repository, url:  preview_repositories_path, method: :post, authenticity_token: true, class: "col s12 poc_form", remote: true, multipart: true do |f| %>
-              <%= f.file_field :poc_image, id: 'poc_image' ,accept:'image/*', hidden: true %>
-              
-              <% hidden_fields_array.each do |field| %>
-                <%= f.hidden_field field %>
-              <% end %>
-              
-              <%= f.fields_for :languages do |builder| %>
-                <%= render 'language_fields', :f => builder %>
-              <% end %>
-                <div class="row">
-                  <div class="col l5">
-                    <div style="width:300">
-                        <div class="hovereffect" onclick="$('#poc_image').trigger('click');">
-                            <%= image_tag @repository.poc_image, width: 300, id: "image" %>
-                            <div class="overlay">
-                                <h2>Image</h2>
-                                <p>
-                                  <a href="#">EDIT</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col l7">
-                    <div class="input-field col l12">
-                        <%= f.text_area :description, class: "materialize-textarea poc_desc_text_area" %>
-                        <label for="textarea1">Description</label>
-                    </div>
-                  </div>
+<div class="row repo-show white" id="repository_update">
+  <div class="container z-depth-1">
+    <div class="row">
+      <div class="col l12">
+        <h4 class="para-text" style="margin-left: 10px">
+          <%= @repository.name.titleize %></h4>
+      </div>
+      <div class="col s12 poc_form">
+        <div class="row">
+          <div class="col l5">
+            <div style="width:300">
+              <div class="hovereffect" onclick="$('#poc_image').trigger('click');">
+                <%= image_tag @repository.poc_image, width: 300, id: "image" %>
+                <div class="overlay">
+                  <h2>Image</h2>
+                  <p>
+                    <a href="#">EDIT</a>
+                  </p>
                 </div>
-                <div class="row">
-                  <div class="col l12">
-                    <label for="chips">Tags</label>
-                      <%= f.text_field :tag_list, class: "materialize-textarea poc_desc_text_area" %>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col l12">
-                      <%= f.submit class: "btn waves-effect waves-light", style: "float:right", name: "action" do %>
-                      PREVIEW<i class='material-icons right'>send</i>
-                      <% end %>
-                  </div>
-                </div>
-            <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="col l7">
+            <div class="input-field col l12">
+              <textarea id="description" class="materialize-textarea poc_desc_text_area"><%= @repository.description %></textarea>
+              <label for="textarea1">Description</label>
+            </div>
+          </div>
         </div>
+        <div class="row">
+          <div class="col l12">
+            <label for="chips">Tags</label>
+            <input type="text" class="chips chips-placeholder" id="tag_list" value="<%= @repository.tag_list %>">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l12">
+            <button class="btn waves-effect waves-light right" style="float:left" name="action" onclick="displayPreview();">
+              PREVIEW<i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div id="repository_preview" hidden=true>
+  <%= render 'repository_preview' %>
 </div>
 
 <script>
-document.getElementById("poc_image").onchange = function () {
+  document.getElementById("poc_image").onchange = function () {
     var reader = new FileReader();
     reader.onload = function (e) {
-        document.getElementById("image").src = e.target.result;
+      document.getElementById("image").src = e.target.result;
+      document.getElementById("image_preview").src = e.target.result;
     };
     reader.readAsDataURL(this.files[0]);
-};
-$(document).ready(function(){
-  $('.chips-placeholder').material_chip({
-    placeholder: 'Enter a tag',
-    secondaryPlaceholder: '+Tag',
-  });
-})
-  $("#poc_image").onclick = function () {
-    alert('abc');
-};
-
+  };
+  $(document).ready(function () {
+    $('.chips-placeholder').material_chip({placeholder: 'Enter a tag', secondaryPlaceholder: '+Tag'});
+  })
+  function displayPreview() {
+    $("#repository_description").val($("#description")[0].value);
+    $("#repository_tag_list").val($("#tag_list")[0].value);
+    $("#repository_preview").show();
+    $("#repository_update").hide();
+  }
 </script>

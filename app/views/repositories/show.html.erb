@@ -12,8 +12,9 @@
                 <div class="col l8 para-text">
                   <h4 class="para-text"><%= @repository.name %></h4>
                   <h6>last updated on
-                    <%= time_ago_in_words(@repository.last_updated_at) %> ago
-									</h6>
+                    <%= time_ago_in_words(@repository.last_updated_at) %>
+                    ago
+                  </h6>
                   <% @repository.tags.each do |tag| %>
                   <div class="chip">
                     <%= tag %>
@@ -55,9 +56,9 @@
                       <li>
                         <i class="medium fa fa-file-text-o"></i>
                         <% if @repository.has_wiki? %>
-                          <%= link_to "#{ @repository.wiki_url }" do %>
-                          GITHUB WIKI
-                          <% end %>
+                        <%= link_to "#{ @repository.wiki_url }" do %>
+                        GITHUB WIKI
+                        <% end %>
                         <% end %>
                       </li>
                       <li>
@@ -122,9 +123,16 @@
   google.charts.setOnLoadCallback(drawChart(<%= raw language_graph(@repository) %>));
 
   function drawChart(language_graph) {
-    var graph_style = [["Element", "Density", { role: "style" } ]];
+    var graph_style = [
+      [
+        "Element",
+        "Density", {
+          role: "style"
+        }
+      ]
+    ];
 
-    for(var lg=0; lg < language_graph.length; lg++){
+    for (var lg = 0; lg < language_graph.length; lg++) {
       graph_style.push(language_graph[lg]);
     }
 
