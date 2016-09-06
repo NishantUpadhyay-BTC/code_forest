@@ -1,5 +1,4 @@
 <div class="row repo-show white">
-  <%= current_user.email %>
   <div class="container z-depth-1">
     <% if @pocs.present? %>
     <table class="highlight para-text dash-table">
@@ -17,7 +16,6 @@
       <tbody>
         <% @pocs.each.with_index do |poc, index| %>
         <tr>
-
           <td><%= index + 1 %></td>
           <td><%= poc.name %></td>
           <td><%= poc.no_of_downloads %></td>
@@ -33,10 +31,10 @@
           </td>
           <td data-field="price">
             <%= link_to edit_repository_path(poc.id) do %>
-            <i class="material-icons">mode_edit</i>
+              <i class="material-icons">mode_edit</i>
             <% end %>
             <%= link_to repository_path(poc.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
-            <i class="material-icons">delete</i>
+              <i class="material-icons">delete</i>
             <% end %>
           </td>
         </tr>
@@ -45,10 +43,12 @@
       </tbody>
     </table>
     <% else %>
-    <p>No POCs to show.</p>
+      <p>No POCs to show.</p>
     <% end %>
   </div>
+
   <br>
+
   <div class="container z-depth-1">
     <% if @repositories.present? %>
     <table class="highlight para-text dash-table">
@@ -66,17 +66,20 @@
         <tr>
           <td><%= index + 1 %></td>
           <td><%= repo["name"] %></td>
-          <td><%= link_to new_repository_path(user_name: current_user.name, repo_name: repo["name"]) do %>
-          <i class="material-icons">mode_add</i><% end %>
+          <td>
+            <%= link_to new_repository_path(user_name: current_user.name, repo_name: repo["name"]) do %>
+              <i class="material-icons">mode_add</i>
+            <% end %>
+          </td>
 
-        </tr>
-        <% end %>
-        <% end %>
+          </tr>
+          <% end %>
+          <% end %>
 
-      </tbody>
-    </table>
+        </tbody>
+      </table>
     <% else %>
-    <p>No repositories to create POC.</p>
+      <p>No repositories to create POC.</p>
     <% end %>
   </div>
 </div>
