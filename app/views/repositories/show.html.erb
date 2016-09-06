@@ -1,38 +1,158 @@
-<b>User Info</b><br>
-<%= image_tag @user[:avatar_url], size: "200x200", alt: "Author's image" %> <br>
-name: <%= @user[:login] %><br>
+<div class="row repo-show white">
+  <div class="container z-depth-1">
+    <div class="panel-layout">
+      <div class="panel-box col-xs-8 col l10 white">
+        <div class="panel-layout">
+          <div class="panel-box col-xs-12 bg-green poc-img-show-box">
+            <div class="panel-content">
+              <div class="row">
+                <div class="col l4">
+                  <%= image_tag @repository.poc_image %>
+                </div>
+                <div class="col l8 para-text">
+                  <h4 class="para-text"><%= @repository.name %></h4>
+                  <h6>last updated on
+                    <%= time_ago_in_words(@repository.last_updated_at) %> ago
+									</h6>
+                  <% @repository.tags.each do |tag| %>
+                  <div class="chip">
+                    <%= tag %>
+                  </div>
+                  <% end %>
+                  <div class="row">
+                    <div class="col l12">
+                      <div class="testimonial-author-wrapper">
+                        <%= image_tag @repository.avatar_url, class: "auth-img img-rounded float-right", alt: "Author's image" %>
+                        <div class="testimonial-author text-right">
+                          <b><%= @repository.author_name %></b>
+                          <span>UI Designer, Supina.com</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col l12 para-text">
+                  <p class="poc-desc">
+                    <%= @repository.description %>
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col l6">
+                  <div id="barchart_values" style="margin-left: 20px; width: auto; height: 300px;"></div>
+                </div>
+                <div class="col l6 para-text">
+                  <div class="row download-links">
+                    <ul>
+                      <li>
+                        <i class="medium fa fa-github"></i>
+                        <%= link_to "#{ @repository.svn_url }" do %>
+                        GITHUB PAGE
+                        <% end %>
+                      </li>
+                      <li>
+                        <i class="medium fa fa-file-text-o"></i>
+                        <% if @repository.has_wiki? %>
+                          <%= link_to "#{ @repository.wiki_url }" do %>
+                          GITHUB WIKI
+                          <% end %>
+                        <% end %>
+                      </li>
+                      <li>
+                        <i class="medium fa fa-download"></i>
+                        <%= link_to "#{ @repository.download_link }" do %>
+                        DOWNLOAD
+                        <% end %>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-box col-xs-2 col l2 counter-box " style="vertical-align: top">
+        <div class="panel-content">
+          <div class="row">
+            <div class="col l6">
+              <i class="medium fa fa-star"></i>
+            </div>
+            <div class="col l6"><%= @repository.no_of_stars %></div>
+          </div>
+          <div class="row">
+            <div class="col l6">
+              <i class="medium fa fa-code-fork"></i>
+            </div>
+            <div class="col l6"><%= @repository[:forks] %></div>
+          </div>
+          <div class="row">
+            <div class="col l6">
+              <i class="medium fa fa-bell"></i>
+            </div>
+            <div class="col l6"><%= @repository.no_of_watchers %></div>
+          </div>
+          <div class="row">
+            <div class="col l6">
+              <i class="medium fa fa-download"></i>
+            </div>
+            <div class="col l6"><%= @repository.no_of_downloads %></div>
+          </div>
+          <div class="row">
+            <div class="col l6">
+              <i class="medium fa fa-eye"></i>
+            </div>
+            <div class="col l6"><%= @repository.impressions.count %></div>
+          </div>
+          <div class="row">
+            <div class="col l6">
+              <i class="medium fa fa-bookmark"></i>
+            </div>
+            <div class="col l6"><%= @repository.favourites.count %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  google.charts.load("current", {packages: ["corechart"]});
+  google.charts.setOnLoadCallback(drawChart(<%= raw language_graph(@repository) %>));
 
+  function drawChart(language_graph) {
+    var graph_style = [["Element", "Density", { role: "style" } ]];
 
-<b>Repo Info</b><br>
-Name: <%= @repository[:name] %><br>
-small description:  <%= @repository[:description] %><br><br>
+    for(var lg=0; lg < language_graph.length; lg++){
+      graph_style.push(language_graph[lg]);
+    }
 
-languages with %: <br>
-<% @language.each do |key, value| %>
-  <%= "#{key}:   #{(@language[key].to_f/@total.to_f )* 100}"%> <br>
-<% end %><br>
+    var data = google.visualization.arrayToDataTable(graph_style);
+    var view = new google.visualization.DataView(data);
+    view.setColumns([
+      0,
+      1, {
+        calc: "stringify",
+        sourceColumn: 1,
+        type: "string",
+        role: "annotation"
+      },
+      2
+    ]);
 
-Tags: take from user<br>
-
- <% url = "https://github.com/#{@repository[:full_name]}/archive/#{@repository[:default_branch]}.zip" %>
-download url : <a href="<%= url %>"><%= url%></a> <br>
-description:  <%= @repository[:description] %><br>
-
-clone url: <%= @repository[:clone_url] %><br>
-no of stars: <%= @repository[:stargazers_count] %><br>
-no of forks: <%= @repository[:forks] %><br>
-no of watchers: <%= @repository[:subscribers_count] %><br>
-wiki link: <%= "http://github.com/#{@repository[:full_name]}/wiki" %><br>
-created at: <%= @repository[:created_at] %><br>
-last updated at: <%= @repository[:updated_at] %><br>
-
-
-<br><br><br><br><br>
-<table border=1>
-<% @repository.each do |key, value| %>
-  <tr>
-  <td><%= key %></td>
-  <td><%= value %></td>
-  </tr>
-<% end %>
-</table>
+    var options = {
+      title: "Language used in percentage",
+      width: 350,
+      height: 300,
+      bar: {
+        groupWidth: "15%"
+      },
+      legend: {
+        position: "none"
+      }
+    };
+    var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+    chart.draw(view, options);
+  }
+</script>
