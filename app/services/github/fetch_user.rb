@@ -1,7 +1,7 @@
 class Github::FetchUser
   GITHUB_URI = "https://api.github.com/users/"
 
-  def initialize(user_name)
+  def self.call_user(user_name)
     get_response(user_name)
   end
 

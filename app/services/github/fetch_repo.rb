@@ -2,7 +2,7 @@ class Github::FetchRepo
   def self.repository_values(user_name, repository_name)
     repository = get_response(user_name, repository_name)
     language = get_response(user_name, repository_name, "/languages")
-    user = Github::FetchUser.new(user_name)
+    user = Github::FetchUser.call_user(user_name)
 
     repository_details = {
       author_name: user["login"],
