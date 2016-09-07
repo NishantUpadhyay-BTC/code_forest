@@ -11,8 +11,10 @@
                 </div>
                 <div class="col l8 para-text">
                   <h4 class="para-text"><%= @repository.name %></h4>
-                  <h6>last updated on 12th Dec</h6>
-                  <% @repository.tag_list.each do |tag| %>
+                  <h6>last updated on
+                    <%= time_ago_in_words(@repository.last_updated_at) %> ago
+                  </h6>
+                  <% @repository.tags.each do |tag| %>
                   <div class="chip">
                     <%= tag %>
                   </div>
