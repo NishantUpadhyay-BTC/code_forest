@@ -1,4 +1,5 @@
 class Repository < ApplicationRecord
+  include PgSearch
   is_impressionable
   has_many :languages, inverse_of: :repository, dependent: :destroy
   has_many :favourites, dependent: :destroy
@@ -11,4 +12,7 @@ class Repository < ApplicationRecord
   #searching by tags using actastaggable gem
   acts_as_taggable
   acts_as_taggable_on :tags_for_repository
+
+  pg_search_scope :search_by_all,
+	 :against => [:name, :author_name, :description]
 end

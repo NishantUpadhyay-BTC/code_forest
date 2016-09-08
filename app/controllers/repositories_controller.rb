@@ -1,6 +1,10 @@
 class RepositoriesController < ApplicationController
   def index
-    @repositories = Repository.all
+    if params[:search].blank?
+      @repositories = Repository.all
+    else
+      @repositories = Repository.search_by_all(params[:search])
+    end
   end
 
   def show
