@@ -64,10 +64,6 @@
                   <%= form_for @repository do |f| %>
                   <%= f.hidden_field :id %>
                   <%= f.file_field :poc_image, id: 'poc_image' ,accept:'image/*', hidden: true %>
-                  <%= f.hidden_field :description %>
-                  <%= f.hidden_field :tag_list %>
-                  <%= f.hidden_field :author_name %>
-
                   <% hidden_fields_array.each do |field| %>
                   <%= f.hidden_field field %>
                   <% end %>

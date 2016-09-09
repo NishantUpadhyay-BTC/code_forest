@@ -14,7 +14,7 @@
                   <h6>last updated on
                     <%= time_ago_in_words(@repository.last_updated_at) %> ago
                   </h6>
-                  <% @repository.tags.each do |tag| %>
+                  <% @repository.tag_list.each do |tag| %>
                   <div class="chip">
                     <%= tag %>
                   </div>
@@ -80,37 +80,37 @@
             <div class="col l6">
               <i class="medium fa fa-star"></i>
             </div>
-            <div class="col l6"><%= @repository.no_of_stars %></div>
+            <div class="col l6"><%= @repository.no_of_stars.to_i %></div>
           </div>
           <div class="row">
             <div class="col l6">
               <i class="medium fa fa-code-fork"></i>
             </div>
-            <div class="col l6"><%= @repository.no_of_forks %></div>
+            <div class="col l6"><%= @repository.no_of_forks.to_i %></div>
           </div>
           <div class="row">
             <div class="col l6">
               <i class="medium fa fa-bell"></i>
             </div>
-            <div class="col l6"><%= @repository.no_of_watchers %></div>
+            <div class="col l6"><%= @repository.no_of_watchers.to_i %></div>
           </div>
           <div class="row">
             <div class="col l6">
               <i class="medium fa fa-download"></i>
             </div>
-            <div class="col l6"><%= @repository.no_of_downloads %></div>
+            <div class="col l6"><%= @repository.no_of_downloads.to_i %></div>
           </div>
           <div class="row">
             <div class="col l6">
               <i class="medium fa fa-eye"></i>
             </div>
-            <div class="col l6"><%= @repository.impressions.count %></div>
+            <div class="col l6"><%= @repository.impressions.count.to_i %></div>
           </div>
           <div class="row">
             <div class="col l6">
               <i class="medium fa fa-bookmark"></i>
             </div>
-            <div class="col l6"><%= @repository.favourites.count %></div>
+            <div class="col l6"><%= @repository.favourites.count.to_i %></div>
           </div>
         </div>
       </div>
