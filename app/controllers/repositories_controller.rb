@@ -1,10 +1,6 @@
 class RepositoriesController < ApplicationController
   def index
-    if params[:search].blank?
-      @repositories = Repository.all
-    else
-      @repositories = Repository.search_by_all(params[:search])
-    end
+    @repositories = Repository.all
   end
 
   def show
@@ -59,6 +55,13 @@ class RepositoriesController < ApplicationController
   def destroy
     Repository.find(params[:id]).destroy
     redirect_to :back
+  end
+
+  def search
+    @repositories = Repository.search_repo(params[:key_word])
+    respond_to do |format|
+       format.js
+   end
   end
 
   def total_downloads

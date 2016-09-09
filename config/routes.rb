@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     member do
       put :total_downloads
     end
+    collection do
+      get :search
+  	end
   end
   resources :users
   get "/auth/:provider/callback" => "callbacks#create"
