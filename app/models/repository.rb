@@ -14,5 +14,14 @@ class Repository < ApplicationRecord
   acts_as_taggable_on :tags_for_repository
 
   pg_search_scope :search_by_all,
-	 :against => [:name, :author_name, :description]
+	 :against => [:name, :author_name, :description],
+   :using => { :tsearch => {:prefix => true} }
+
+  def self.search_repo(key_word)
+    if key_word.present?
+      where("name LIKE '%#{key_word}%' OR author_name LIKE '%#{key_word}%' OR description LIKE '%#{key_word}%'")
+    else
+      all
+    end
+  end
 end

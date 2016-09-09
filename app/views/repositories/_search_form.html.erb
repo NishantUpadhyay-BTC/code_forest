@@ -1,9 +1,8 @@
-<%= form_tag(repositories_path, method: :get) do %>
-  <div class = "form-group">
-    <div class = "input-group">
-      <%= text_field_tag 'search', nil, placeholder: "search", size: 40, title: "Enter to search" do %>
-        <span class="fa fa-search"></span>
-      <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col m4 s4">
+          <input type="text" placeholder="search" size=40 title="Enter to search" id="key_word" onkeyup="search_repo();">
+          <span class="fa fa-search"></span>
     </div>
   </div>
-<% end %>
+</div>
