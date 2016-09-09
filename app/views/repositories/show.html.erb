@@ -54,11 +54,7 @@
                       </li>
                       <li>
                         <i class="medium fa fa-file-text-o"></i>
-                        <% if @repository.has_wiki? %>
-                        <%= link_to "#{ @repository.wiki_url }" do %>
-                        GITHUB WIKI
-                        <% end %>
-                        <% end %>
+                        <a href="<%= "https://github.com/#{@repository.author_name}/#{@repository.name}/wiki" %>">GITHUB WIKI</a>
                       </li>
                       <li>
                         <i class="medium fa fa-download"></i>

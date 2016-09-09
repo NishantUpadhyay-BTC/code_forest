@@ -19,14 +19,14 @@
                   <p class="area">
                     <a href="https://github.com/<%= repository.author_name %>"><%= repository.author_name %></a>
                   </p>
-                  <a data-deeplink="adbeus://standard-coffee-bar" href="https://adbeus.com/montreal/westmount/standard-coffee-bar/">
-                    <span class="card-title activator brown-text text-darken-4">
-                      <%= repository.name %>
-                    </span>
-                  </a>
+                  <span class="card-title activator brown-text text-darken-4">
+                    <%= link_to(repository) do %>
+                    <%= repository.name %>
+                    <% end %>
+                  </span>
                   <p>
                     <span style="float: left; padding-right: 1rem;">
-                      <i style="font-size: 1.3rem; padding-right: 10px;cursor: pointer;" class="material-icons light-blue-text">visibility</i><%= repository.impressions.count %>
+                      <i style="font-size: 1.3rem; padding-right: 10px;" class="material-icons light-blue-text">visibility</i><%= repository.impressions.count %>
                     </span>
                     <span style="float: right; padding-right: 1rem;">
                       <div id="fav_repo_<%=repository.id%>"><%= render partial: "favourite_repo", locals: { repository: repository } %></div>
