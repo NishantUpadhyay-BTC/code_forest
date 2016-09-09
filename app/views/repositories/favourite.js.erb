@@ -1,0 +1,5 @@
+$("#fav_repo_<%= @repository.id %>").html("<%= escape_javascript(render partial: 'repositories/favourite_repo', locals: {repository: @repository}) %>");
+<% unless current_user.present? %>
+  var $toastContent = $('<span>Please login first</span>');
+  Materialize.toast($toastContent, 5000, 'red');
+<% end %>
