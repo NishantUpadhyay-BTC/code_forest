@@ -8,7 +8,7 @@ module RepositoriesHelper
   end
 
   def language_graph(repo)
-    total = repo.languages.pluck(:code).sum
+    total = @repository.languages.collect{|l| l.code}.sum
     language_graph_array = []
     lang_with_percent = {}
     color = "#689f38"

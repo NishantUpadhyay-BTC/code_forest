@@ -12,8 +12,7 @@
                 <div class="col l8 para-text">
                   <h4 class="para-text"><%= @repository.name %></h4>
                   <h6>last updated on
-                    <%= time_ago_in_words(@repository.last_updated_at) %>
-                    ago
+                    <%= time_ago_in_words(@repository.last_updated_at) %> ago
                   </h6>
                   <% @repository.tags.each do |tag| %>
                   <div class="chip">
@@ -87,7 +86,7 @@
             <div class="col l6">
               <i class="medium fa fa-code-fork"></i>
             </div>
-            <div class="col l6"><%= @repository[:forks] %></div>
+            <div class="col l6"><%= @repository.no_of_forks %></div>
           </div>
           <div class="row">
             <div class="col l6">
@@ -118,22 +117,16 @@
     </div>
   </div>
 </div>
-<script>
+<script type="text/javascript">
   google.charts.load("current", {packages: ["corechart"]});
-  google.charts.setOnLoadCallback(drawChart(<%= raw language_graph(@repository) %>));
+  google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart(language_graph) {
-    var graph_style = [
-      [
-        "Element",
-        "Density", {
-          role: "style"
-        }
-      ]
-    ];
+  function drawChart() {
+    array_data = <%= raw language_graph(@repository) %>
+    var graph_style = [["Language", "Percentage", { role: "style" } ]];
 
-    for (var lg = 0; lg < language_graph.length; lg++) {
-      graph_style.push(language_graph[lg]);
+    for(var lg=0; lg < array_data.length; lg++){
+      graph_style.push(array_data[lg]);
     }
 
     var data = google.visualization.arrayToDataTable(graph_style);
