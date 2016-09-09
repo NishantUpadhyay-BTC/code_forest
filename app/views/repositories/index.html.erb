@@ -12,13 +12,3 @@
     </div>
   </div>
 </main>
-<script>
-function search_repo()
-{
-  $.ajax({
-    url: '/repositories/search/',
-    type: 'get',
-    data: {key_word: $("#key_word")[0].value}
-  });
-}
-</script>

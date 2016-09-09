@@ -1,8 +1,15 @@
 <div class="container">
   <div class="row">
-    <div class="col m4 s4">
-          <input type="text" placeholder="search" size=40 title="Enter to search" id="key_word" onkeyup="search_repo();">
+    <%= form_tag("/repositories/search/", method: :get, remote: true) do %>
+    <div class="form-group">
+      <div class="col m4 s4">
+        <div class="input-group">
+          <%= text_field_tag 'key_word', nil, placeholder: "search", size: 40, title: "Enter to search" do %>
           <span class="fa fa-search"></span>
+          <% end %>
+        </div>
+      </div>
     </div>
+    <% end %>
   </div>
 </div>
