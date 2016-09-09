@@ -61,6 +61,12 @@ class RepositoriesController < ApplicationController
     redirect_to :back
   end
 
+  def total_downloads
+    repo = Repository.find(params[:id])
+    repo.no_of_downloads = repo.no_of_downloads.to_i + 1
+    repo.save
+  end
+
   private
 
   def repository_params
