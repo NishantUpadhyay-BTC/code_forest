@@ -24,7 +24,7 @@
           <td>
             <div class="switch">
               <label>
-                <input type="checkbox">
+                <input type="checkbox" onchange="change_hide('<%= hide_repository_path(poc.id) %>')" <%= "checked" if poc.hide %>>
                 <span class="lever"></span>
               </label>
             </div>
@@ -84,3 +84,11 @@
     <% end %>
   </div>
 </div>
+<script>
+  function change_hide(path)
+  {
+    $.ajax({
+    url: path,
+    type: 'put'});
+  }
+</script>

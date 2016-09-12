@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   collection do
     get :search
   end
+
+  member do
+    put :hide
+  end
  end
 
   resources :users

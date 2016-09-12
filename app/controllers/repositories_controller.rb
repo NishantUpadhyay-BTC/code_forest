@@ -1,6 +1,6 @@
 class RepositoriesController < ApplicationController
   def index
-    @repositories = Repository.all
+    @repositories = Repository.where(hide: false)
   end
 
   def show
@@ -58,10 +58,15 @@ class RepositoriesController < ApplicationController
   end
 
   def search
-    @repositories = Repository.search_repo(params[:key_word])
+    @repositories = Repository.search_repo(params[:key_word], params[:language])
     respond_to do |format|
        format.js
    end
+  end
+
+  def hide
+    repository = Repository.find(params[:id])
+    repository.update_attribute(:hide, !repository.hide)
   end
 
   private

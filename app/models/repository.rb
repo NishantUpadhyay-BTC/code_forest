@@ -17,11 +17,10 @@ class Repository < ApplicationRecord
 	 :against => [:name, :author_name, :description],
    :using => { :tsearch => {:prefix => true} }
 
-  def self.search_repo(key_word)
-    if key_word.present?
-      where("name LIKE '%#{key_word}%' OR author_name LIKE '%#{key_word}%' OR description LIKE '%#{key_word}%'")
-    else
-      all
-    end
+  def self.search_repo(key_word, language)
+    condition_for_key_word = "name LIKE '%#{key_word}%' OR author_name LIKE '%#{key_word}%' OR description LIKE '%#{key_word}%'"
+    result = key_word.present? ? where(condition_for_key_word) : all
+    result = result.select{ |repo| repo.languages.select{|l| l.name == language}.present? } if language.present?
+    result
   end
 end

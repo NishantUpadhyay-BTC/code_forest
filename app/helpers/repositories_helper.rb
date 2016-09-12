@@ -7,6 +7,11 @@ module RepositoriesHelper
     end
   end
 
+  def languages_for_option
+    l = Language.pluck(:name).uniq
+    l.zip(l)
+  end
+
   def language_graph(repo)
     total = @repository.languages.collect{|l| l.code}.sum
     language_graph_array = []
