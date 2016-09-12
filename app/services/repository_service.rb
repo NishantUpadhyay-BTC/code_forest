@@ -1,11 +1,23 @@
-class Github::FetchRepo
-  def self.repository_values(user_name, repository_name)
-    repository = get_response(user_name, repository_name)
-    language = get_response(user_name, repository_name, "/languages")
-    user = Github::FetchUser.call_user(user_name)
-    repository_details = {
-      author_name: user["login"],
-      avatar_url: user["avatar_url"],
+require
+class RepositoryService
+
+  def initialize
+    @client = Utilities::Github::Client.new
+  end
+
+  def self.call(user_name, repository_name)
+    @client = Utilities::GitHub::Client.new
+    repository = @client.repository(user_name, repository_name)
+    language = Support::Common.get_response(repository[:languages_url])
+
+    { repository_details: repository_details(repository), language: language }
+  end
+
+  private
+    def repository_values(repository)
+      {
+      author_name: repository[:owner]["login"],
+      avatar_url: repository[:owner]["avatar_url"],
       repo_id: repository[:id],
       name: repository[:name],
       description: repository[:description],
@@ -21,16 +33,6 @@ class Github::FetchRepo
       wiki_url: "http://github.com/#{repository["full_name"]}/wiki",
       repo_created_at: repository[:created_at],
       last_updated_at: repository[:updated_at]
-    }
-
-    { repository_details: repository_details, language: language }
-  end
-
-  private
-
-  def self.get_response(user_name, repo_name, language_uri="")
-    uri = URI("https://api.github.com/repos/#{user_name}/#{repo_name}" + language_uri)
-    http_response = Net::HTTP.get_response(uri)
-    JSON(http_response.body).symbolize_keys
-  end
+      }
+    end
 end
