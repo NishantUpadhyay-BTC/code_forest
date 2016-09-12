@@ -62,6 +62,8 @@
     $('.chips-placeholder').material_chip({placeholder: 'Enter a tag', secondaryPlaceholder: '+Tag'});
   })
   function displayPreview() {
+    $('#p_decription').text($("#description")[0].value);
+    $('#div_tag_list').text($("#tag_list")[0].value);
     $("#repository_description").val($("#description")[0].value);
     $("#repository_tag_list").val($("#tag_list")[0].value);
     $("#repository_preview").show();
