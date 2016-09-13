@@ -1,6 +1,10 @@
 class RepositoriesController < ApplicationController
   def index
-    @repositories = Repository.where(hide: false)
+    @repositories = Repository.where(hide: false).paginate(:page => params[:page])
+    respond_to do |format|
+        format.html
+        format.js
+    end
   end
 
   def show

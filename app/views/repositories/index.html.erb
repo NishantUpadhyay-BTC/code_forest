@@ -5,8 +5,11 @@
       <!-- iterate for all repos -->
       <div class="row">
         <div class="col m12 s12">
+          <div class="section">
           <%= render partial: 'repositories_view', locals: { repositories: @repositories} %>
         </div>
+        </div>
+        <center><p id="load_info"></p></center>
       </div>
       <!-- row complete-->
     </div>

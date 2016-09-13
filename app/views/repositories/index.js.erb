@@ -1,0 +1,3 @@
+<% if @repositories.count > 1 %>
+$("#repositories_section").append("<%= escape_javascript(render partial: 'repositories_view', locals: { repositories: @repositories } ) %>");
+<% end %>

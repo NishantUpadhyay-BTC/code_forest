@@ -1,5 +1,6 @@
 class Repository < ApplicationRecord
   include PgSearch
+  self.per_page = 1
   is_impressionable
   has_many :languages, inverse_of: :repository, dependent: :destroy
   has_many :favourites, dependent: :destroy
