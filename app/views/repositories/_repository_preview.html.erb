@@ -14,11 +14,7 @@
                   <h6>last updated on
                     <%= time_ago_in_words(@repository.last_updated_at) %> ago
                   </h6>
-                  <% @repository.tags.each do |tag| %>
-                  <div class="chip">
-                    <%= tag %>
-                  </div>
-                  <% end %>
+                  <div id="display_tags"></div>
                   <div class="row">
                     <div class="col l12">
                       <div class="testimonial-author-wrapper">
@@ -35,7 +31,6 @@
               <div class="row">
                 <div class="col l12 para-text">
                   <p class="poc-desc" id="p_decription">
-                    <%= @repository.description %>
                   </p>
                 </div>
               </div>

@@ -54,7 +54,11 @@ class RepositoriesController < ApplicationController
 
   def destroy
     Repository.find(params[:id]).destroy
-    redirect_to :back
+    @pocs = Repository.where(author_name: current_user.name)
+    @repositories = Github::FetchUser.call_user_repos(current_user.name)
+    respond_to do |format|
+       format.js
+    end
   end
 
   def search

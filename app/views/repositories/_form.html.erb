@@ -30,6 +30,11 @@
         <div class="row">
           <div class="col l12">
             <label for="chips">Tags</label>
+            <div id="div_for_tags">
+              <% @repository.tag_list.each do |tag| %>
+              <div class="chip"><%= tag %></div>
+              <% end %>
+            </div>
             <input type="text" class="chips chips-placeholder" id="tag_list" value="<%= @repository.tag_list %>">
           </div>
         </div>
@@ -50,6 +55,17 @@
 </div>
 
 <script>
+  var tags_string = ""
+
+  $("#tag_list").keyup(function (e) {
+    if (e.which == 13) {
+      $('#div_for_tags').append("<div class='chip'>" + ($("#tag_list")[0].value + "</div>"));
+      $('#display_tags').append("<div class='chip'>" + ($("#tag_list")[0].value + "</div>"));
+      tags_string = tags_string.concat($("#tag_list")[0].value + ", ");
+      $("#tag_list")[0].value = ""
+    }
+  });
+
   document.getElementById("poc_image").onchange = function () {
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -61,9 +77,11 @@
   $(document).ready(function () {
     $('.chips-placeholder').material_chip({placeholder: 'Enter a tag', secondaryPlaceholder: '+Tag'});
   })
+
   function displayPreview() {
+    $("#p_decription").text($("#description")[0].value);
     $("#repository_description").val($("#description")[0].value);
-    $("#repository_tag_list").val($("#tag_list")[0].value);
+    $("#repository_tag_list").val(tags_string);
     $("#repository_preview").show();
     $("#repository_update").hide();
   }
