@@ -1,6 +1,6 @@
 class Repository < ApplicationRecord
   include PgSearch
-  self.per_page = 1
+  self.per_page = 3
   is_impressionable
   has_many :languages, inverse_of: :repository, dependent: :destroy
   has_many :favourites, dependent: :destroy
@@ -18,10 +18,12 @@ class Repository < ApplicationRecord
 	 :against => [:name, :author_name, :description],
    :using => { :tsearch => {:prefix => true} }
 
-  def self.search_repo(key_word, language)
-    condition_for_key_word = "name LIKE '%#{key_word}%' OR author_name LIKE '%#{key_word}%' OR description LIKE '%#{key_word}%'"
-    result = key_word.present? ? where(condition_for_key_word) : all
-    result = result.select{ |repo| repo.languages.select{|l| l.name == language}.present? } if language.present?
-    result
+  def self.search_repo(key_word, language, page = 1)
+    condition_for_key_word = language.present? ? "languages.name LIKE '%#{language}%' AND " : ""
+    condition_for_key_word += "repositories.name LIKE '%#{key_word}%' OR author_name LIKE '%#{key_word}%' OR description LIKE '%#{key_word}%'"
+    # # result = key_word.present? ? where(condition_for_key_word) : all
+    result =  joins(:languages).where(condition_for_key_word)
+    # result = result.select{ |repo| repo.languages.select{|l| l.name == language}.present? } if language.present?
+    result.paginate(page: page)
   end
 end
