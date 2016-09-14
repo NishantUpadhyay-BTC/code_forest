@@ -21,7 +21,7 @@
             <%= link_to(current_user.name, user_path(current_user.id)) %>
           </li>
           <li class="menu-item" id="menu-item-24">
-            <%= link_to('Logout', signout_path, :method => :delete) %>
+            <%= link_to('Logout', signout_path, method: :delete) %>
           </li>
           <% end %>
         </ul>

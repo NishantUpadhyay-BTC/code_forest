@@ -72,11 +72,16 @@ class RepositoriesController < ApplicationController
    end
   end
 
+  def total_downloads
+    repo = Repository.find(params[:id])
+    repo.no_of_downloads = repo.no_of_downloads.to_i + 1
+    repo.save
+  end
+
   def hide
     repository = Repository.find(params[:id])
     repository.update_attribute(:hide, !repository.hide)
   end
-
   private
 
   def repository_params
