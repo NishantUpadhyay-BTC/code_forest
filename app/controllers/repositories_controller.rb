@@ -66,7 +66,7 @@ class RepositoriesController < ApplicationController
   end
 
   def search
-    @repositories = Repository.search_repo(params[:key_word], params[:language], params[:page])
+    @repositories = Repository.search_repo(params[:key_word], params[:language]).paginate(page: params[:page])
     respond_to do |format|
        format.js
    end

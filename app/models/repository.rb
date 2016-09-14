@@ -18,11 +18,10 @@ class Repository < ApplicationRecord
 	 :against => [:name, :author_name, :description],
    :using => { :tsearch => {:prefix => true} }
 
-  def self.search_repo(key_word, language, page = 1)
+  def self.search_repo(key_word, language)
     key_word = key_word.upcase
     condition_for_key_word = language.present? ? "languages.name LIKE '%#{language}%' AND " : ""
     condition_for_key_word += "UPPER(repositories.name) LIKE '%#{key_word}%' OR UPPER(author_name) LIKE '%#{key_word}%' OR UPPER(description) LIKE '%#{key_word}%'"
-    result =  joins(:languages).where(condition_for_key_word)
-    result.paginate(page: page)
+    joins(:languages).where(condition_for_key_word)
   end
 end
