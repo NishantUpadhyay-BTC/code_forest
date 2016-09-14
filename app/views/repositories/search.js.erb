@@ -1,1 +1,5 @@
-$("#repositories_section").html("<%= escape_javascript(render partial: 'repositories_view', locals: { repositories: @repositories } ) %>"); 
+<% if  params[:append] == "true" %>
+$("#repositories_section").append("<%= escape_javascript(render partial: 'repositories_view', locals: { repositories: @repositories } ) %>");
+<% else %>
+$("#repositories_section").html("<%= escape_javascript(render partial: 'repositories_view', locals: { repositories: @repositories } ) %>");
+<% end %>
