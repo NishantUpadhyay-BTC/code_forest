@@ -1,9 +1,9 @@
 class RepositoriesController < ApplicationController
   def index
-    if params[:search].blank?
-      @repositories = Repository.all
-    else
-      @repositories = Repository.search_by_all(params[:search])
+    @repositories = Repository.where(hide: false).paginate(:page => params[:page])
+    respond_to do |format|
+        format.html
+        format.js
     end
   end
 
@@ -58,7 +58,23 @@ class RepositoriesController < ApplicationController
 
   def destroy
     Repository.find(params[:id]).destroy
-    redirect_to :back
+    @pocs = Repository.where(author_name: current_user.name)
+    @repositories = Github::FetchUser.call_user_repos(current_user.name)
+    respond_to do |format|
+       format.js
+    end
+  end
+
+  def search
+    @repositories = Repository.search_repo(params[:key_word], params[:language], params[:page])
+    respond_to do |format|
+       format.js
+   end
+  end
+
+  def hide
+    repository = Repository.find(params[:id])
+    repository.update_attribute(:hide, !repository.hide)
   end
 
   private

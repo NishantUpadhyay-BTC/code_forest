@@ -1,9 +1,19 @@
-<%= form_tag(repositories_path, method: :get) do %>
-  <div class = "form-group">
-    <div class = "input-group">
-      <%= text_field_tag 'search', nil, placeholder: "search", size: 40, title: "Enter to search" do %>
-        <span class="fa fa-search"></span>
-      <% end %>
+<div class="container">
+  <div class="row">
+    <%= form_tag("/repositories/search/", method: :get, remote: true) do %>
+    <div class="form-group">
+       <div class="col m4 s4"></div>
+       <div class="col m4 s4">
+          <%= select_tag 'language', options_for_select(languages_for_option), style: "display: block" %>
+      </div>      
+      <div class="col m4 s4">
+        <div class="input-group">
+          <%= text_field_tag 'key_word', nil, placeholder: "search", size: 40, title: "Enter to search" do %>
+          <span class="fa fa-search"></span>
+          <% end %>
+        </div>
+      </div>
     </div>
+    <% end %>
   </div>
-<% end %>
+</div>

@@ -1,25 +1,22 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
-default: &default
-  adapter: sqlite3
+postgre_common_config: &postgre_common_config
+  adapter: postgresql
+  encoding: unicode
   pool: 5
-  timeout: 5000
+  username: postgres # if using default PostgreSQL user then the value should be: postgres
+  password: root
+  host: localhost # If the DB is setup on local machine then use: localhost
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  database: code_forest_development
+  <<: *postgre_common_config
 
-# Warning: The database defined as "test" will be erased and
+# Warning: The database defined as "skill_hunt_test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: db/test.sqlite3
+  database: code_forest_test
+  <<: *postgre_common_config
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  database: code_forest_production
+  <<: *postgre_common_config

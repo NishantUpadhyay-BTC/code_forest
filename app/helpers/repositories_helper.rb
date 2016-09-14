@@ -7,6 +7,11 @@ module RepositoriesHelper
     end
   end
 
+  def languages_for_option
+    l = Language.pluck(:name).uniq
+    l.zip(l)
+  end
+  
   def language_graph(repo)
     total = @repository.languages.collect{|l| l.code}.sum
     language_graph_array = []
@@ -28,7 +33,7 @@ module RepositoriesHelper
 
   def hidden_fields_array
     [:avatar_url, :name, :private, :download_link, :clone_url, :git_url, :ssh_url, :author_name,
-     :svn_url, :no_of_stars, :no_of_watchers, :has_wiki, :wiki_url, :repo_created_at, 
+     :svn_url, :no_of_stars, :no_of_watchers, :has_wiki, :wiki_url, :repo_created_at,
      :last_updated_at, :no_of_downloads, :no_of_views, :no_of_bookmarks, :description, :tag_list]
   end
 
