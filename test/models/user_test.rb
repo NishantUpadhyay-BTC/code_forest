@@ -48,19 +48,6 @@ class UserTest < ActiveSupport::TestCase
   private
 
   def stub_request_response
-    # stub_request(:get, "http://localhost:3000/auth/github/callback").
-    #   with(query:
-    #         {
-    #           code: "476aea39d84ca85110ff",
-    #           state: "782609ba6439a062f948f9b6eb8c3fe9abaad21f4e0f09d7"
-    #         }
-    #       )
-    # uri = URI.parse('http://localhost:3000/auth/github/callback')
-    # req = Net::HTTP::Get.new(uri.path)
-    # # req['Header-Name'] = 'Header-Value'
-    # Net::HTTP.start(uri.host, uri.port) {|http| http.request(req) }
-    #   res = Net::HTTP.start(uri.host, uri.port) do |http|
-    #     http.request(req, 'abc')
-    #   end    # ===> Success
+    # WIP
   end
 end
