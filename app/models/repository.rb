@@ -18,6 +18,6 @@ class Repository < ApplicationRecord
     key_word = key_word.upcase
     condition_for_key_word = language.present? ? "languages.name LIKE '%#{language}%' AND " : ""
     condition_for_key_word += "repositories.hide != true AND (UPPER(repositories.name) LIKE '%#{key_word}%' OR UPPER(author_name) LIKE '%#{key_word}%' OR UPPER(description) LIKE '%#{key_word}%')"
-    joins(:languages).where(condition_for_key_word).uniq
+    joins(:languages).where(condition_for_key_word).distinct
   end
 end
