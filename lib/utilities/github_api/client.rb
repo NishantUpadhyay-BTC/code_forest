@@ -1,34 +1,32 @@
 module Utilities
   module GithubApi
+    include Support
     class Client
+      include Support
       def initialize
         @github = Github.new
       end
 
       def fetch_repository(user_name, repository_name)
-        repository = fetch_repo_info_from_github(user_name, repository_name)
-        language = get_response(repository[:languages_url])
-        { repository_details: repository_details(repository), language: language }
+        begin
+          all_repos = @github.repos.list(user: user_name).body
+          repository = all_repos.select{ |repo| repo["name"] == repository_name }.first.symbolize_keys
+          language =  Support::Common.get_response(repository[:languages_url])
+          { repository_details: repository_details(repository), language: language }
+        rescue => e
+          #write code for handling exception
+        end
+      end
+
+      def fetch_all_repositories(user_name)
+        begin
+          @github.repos.list(user: user_name).body
+        rescue => e
+          #write code for handling exception
+        end
       end
 
       private
-      def get_response(uri)
-        uri = URI(uri)
-        http_response = Net::HTTP.get_response(uri)
-        JSON(http_response.body).symbolize_keys
-      end
-
-      def fetch_repo_info_from_github(user_name, repository_name)
-        begin
-          all_repos = @github.repos.list(user: user_name).body
-        rescue => e
-          flash[:red] = "API Limit Exceed for Github: #{e}"
-          redirect_to repositories_path
-        end
-        repository = all_repos.select{ |repo| repo["name"] == repository_name }.first
-        repository.symbolize_keys
-      end
-
       def repository_details(repository)
         {
           author_name: repository[:owner][:login],

@@ -13,8 +13,7 @@ class RepositoriesController < ApplicationController
   end
 
   def new
-    fecth_repo = Github::FetchRepo.new(params[:user_name], params[:repo_name])
-    repository_values_result = fecth_repo.call
+    repository_values_result = Github::FetchRepo.new(params[:user_name], params[:repo_name]).call
     @repository = Repository.new(repository_values_result[:repository_details])
     repository_values_result[:language].each do |language,code|
       @repository.languages.build(name: language, code: code)
@@ -60,7 +59,7 @@ class RepositoriesController < ApplicationController
   def destroy
     Repository.find(params[:id]).destroy
     @pocs = Repository.where(author_name: current_user.name)
-    @repositories = Github::FetchUser.call_user_repos(current_user.name)
+    @repositories = Github::FetchAllRepos.new(current_user.name).call
     respond_to do |format|
        format.js
     end
