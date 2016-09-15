@@ -3,8 +3,8 @@ module Utilities
     include Support
     class Client
       include Support
-      def initialize
-        @github = Github.new
+      def initialize(oauth_token)
+        @github = Github.new(oauth_token: oauth_token)
       end
 
       def fetch_repository(user_name, repository_name)
