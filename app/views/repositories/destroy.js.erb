@@ -1,1 +1,2 @@
+Materialize.toast('<%= @message %>', 5000, 'green');
 $("#repos_and_pocs").html("<%= escape_javascript(render partial: 'users/repos_and_pocs', locals: { pocs: @pocs, repositories: @repositories } ) %>");

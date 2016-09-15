@@ -13,7 +13,7 @@ class RepositoriesController < ApplicationController
   end
 
   def new
-    repository_values_result = Github::FetchRepo.repository_values(params[:user_name], params[:repo_name])
+    repository_values_result = Github::FetchRepo.new(params[:user_name], params[:repo_name], session[:github_token]).call
     @repository = Repository.new(repository_values_result[:repository_details])
     repository_values_result[:language].each do |language,code|
       @repository.languages.build(name: language, code: code)
@@ -27,23 +27,28 @@ class RepositoriesController < ApplicationController
   def create
     @repository = Repository.new(repository_params)
     save = @repository.save
+    flash[:green] = "POC is created successfully..!";
     redirect_to repositories_path
   end
 
   def update
     @repository = Repository.find(params[:id])
-    @repository.update_attributes(repository_params)
+    updated = @repository.update_attributes(repository_params)
+    flash[:green] = "POC #{@repository.name} updated successfully..!"
     redirect_to repositories_path
   end
 
   def favourite
     @repository = Repository.find(params[:id])
+    @message = ""
     if current_user.present?
       if current_user.is_favourited?(@repository)
         current_user.favourites.find_by_repository_id(params[:id]).destroy
+        @message = "POC #{@repository.name} removed from your favourites..!"
       else
         current_user.favourites.build(repository_id: params[:id])
         current_user.save
+        @message = "POC #{@repository.name} added to your favourites..!"
       end
     end
     respond_to do |format|
@@ -53,9 +58,10 @@ class RepositoriesController < ApplicationController
   end
 
   def destroy
-    Repository.find(params[:id]).destroy
+    destroyed = Repository.find(params[:id]).destroy
+    @message = "POC Removed successfully..!" if destroyed
     @pocs = Repository.where(author_name: current_user.name)
-    @repositories = Github::FetchUser.call_user_repos(current_user.name)
+    @repositories = Github::FetchAllRepos.new(current_user.name, session[:github_token]).call
     respond_to do |format|
        format.js
     end
