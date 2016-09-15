@@ -13,7 +13,7 @@ class RepositoriesController < ApplicationController
   end
 
   def new
-    repository_values_result = Github::FetchRepo.new(params[:user_name], params[:repo_name]).call
+    repository_values_result = Github::FetchRepo.new(params[:user_name], params[:repo_name], session[:github_token]).call
     @repository = Repository.new(repository_values_result[:repository_details])
     repository_values_result[:language].each do |language,code|
       @repository.languages.build(name: language, code: code)
