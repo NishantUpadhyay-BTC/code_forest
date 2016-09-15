@@ -60,6 +60,8 @@ end
 
 group :test do
   gem "minitest-rails"
+  gem "webmock"
+  gem 'mocha'
   # gem "minitest-rails-capybara"
 end
 

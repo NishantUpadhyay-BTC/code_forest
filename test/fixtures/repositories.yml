@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  author_name: MyString
+app1:
+  author_name: Foo
   avatar_url: MyString
   repo_id: 1
-  name: MyString
-  description: MyString
+  name: app1
+  description: My First App
   private: false
   download_link: MyString
   clone_url: MyString
@@ -22,12 +22,12 @@ one:
   no_of_views: 1
   no_of_bookmarks: 1
 
-two:
-  author_name: MyString
+demo_app:
+  author_name: Bar
   avatar_url: MyString
-  repo_id: 1
-  name: MyString
-  description: MyString
+  repo_id: 2
+  name: demo_app
+  description: My Demo App
   private: false
   download_link: MyString
   clone_url: MyString
