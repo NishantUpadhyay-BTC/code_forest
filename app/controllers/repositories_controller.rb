@@ -30,10 +30,6 @@ class RepositoriesController < ApplicationController
     redirect_to repositories_path
   end
 
-  def edit
-    @repository = Repository.find(params[:id])
-  end
-
   def update
     @repository = Repository.find(params[:id])
     @repository.update_attributes(repository_params)
@@ -69,7 +65,7 @@ class RepositoriesController < ApplicationController
     @repositories = Repository.search_repo(params[:key_word], params[:language]).paginate(page: params[:page])
     respond_to do |format|
        format.js
-   end
+    end
   end
 
   def total_downloads
@@ -82,6 +78,7 @@ class RepositoriesController < ApplicationController
     repository = Repository.find(params[:id])
     repository.update_attribute(:hide, !repository.hide)
   end
+
   private
 
   def repository_params
