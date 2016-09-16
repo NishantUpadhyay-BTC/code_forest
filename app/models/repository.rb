@@ -9,6 +9,7 @@ class Repository < ApplicationRecord
                       url: "/system/:id/:style/:filename"
   accepts_nested_attributes_for :lang_repos
   validates_attachment_content_type :poc_image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  validates :description, presence: true, length: { maximum: 200 }
 
   #searching by tags using actastaggable gem
   acts_as_taggable
