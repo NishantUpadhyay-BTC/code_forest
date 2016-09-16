@@ -25,6 +25,7 @@ gem "font-awesome-rails"
 gem 'impressionist'
 gem 'config'
 gem 'pg_search'
+gem 'social-share-button'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
