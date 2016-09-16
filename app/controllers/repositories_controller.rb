@@ -79,6 +79,11 @@ class RepositoriesController < ApplicationController
     end
   end
 
+  def search_by_tag
+    @repositories = Repository.tagged_with(params[:tag]).paginate(:page => params[:page])
+    render :index
+  end
+
   def total_downloads
     repo = Repository.find(params[:id])
     repo.no_of_downloads = repo.no_of_downloads.to_i + 1
