@@ -43,7 +43,7 @@ module Utilities
           no_of_stars: repository[:stargazers_count],
           no_of_watchers: repository[:forks],
           has_wiki: repository[:has_wiki],
-          wiki_url: "http://github.com/#{repository["full_name"]}/wiki",
+          wiki_url: "http://github.com/#{repository[:full_name]}/wiki",
           repo_created_at: repository[:created_at],
           last_updated_at: repository[:updated_at]
         }
