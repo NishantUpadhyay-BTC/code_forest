@@ -16,7 +16,11 @@ class RepositoriesController < ApplicationController
     repository_values_result = Github::FetchRepo.new(params[:user_name], params[:repo_name], session[:github_token]).call
     @repository = Repository.new(repository_values_result[:repository_details])
     repository_values_result[:language].each do |language,code|
-      @repository.languages.build(name: language, code: code)
+      l = Language.find_or_create_by(name: language);
+      @repository.languages.push l
+      @repository.lang_repos.each do |lr|
+        lr.code = code if lr.language == l
+      end
     end
   end
 
@@ -94,6 +98,6 @@ class RepositoriesController < ApplicationController
     params.require(:repository).permit(:id, :author_name, :avatar_url, :repo_id, :name, :description, :private,
                   :download_link, :clone_url, :git_url, :ssh_url, :svn_url, :no_of_stars, :no_of_watchers,
                   :no_of_downloads, :no_of_views, :no_of_bookmarks,
-                  :has_wiki, :wiki_url, :repo_created_at, :last_updated_at, :poc_image, :tag_list, languages_attributes: [:id, :repository_id, :name, :code])
+                  :has_wiki, :wiki_url, :repo_created_at, :last_updated_at, :poc_image, :tag_list, lang_repos_attributes: [:id, :repository_id, :language_id , :code])
   end
 end

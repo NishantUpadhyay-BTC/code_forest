@@ -24,7 +24,6 @@ gem 'materialize-sass'
 gem "font-awesome-rails"
 gem 'impressionist'
 gem 'config'
-gem 'pg_search'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
