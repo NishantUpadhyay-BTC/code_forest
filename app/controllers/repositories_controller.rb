@@ -18,10 +18,6 @@ class RepositoriesController < ApplicationController
     repository_values_result[:language].each do |language,code|
       l = Language.find_or_create_by(name: language);
       @repository.lang_repos.build(language_id: l.id, code: code, repository_id: @repository.id)
-      # @repository.languages.push l
-      # @repository.lang_repos.each do |lr|
-      #   lr.code = code if lr.language == l
-      # end
     end
   end
 
