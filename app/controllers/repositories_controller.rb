@@ -21,13 +21,13 @@ class RepositoriesController < ApplicationController
   end
 
   def edit
-    @repository = Repository.find_by(params[:id])
+    @repository = Repository.find(params[:id])
   end
 
   def create
     @repository = Repository.new(repository_params)
     save = @repository.save
-    flash[:green] = "POC is created successfully..!";
+    flash[:green] = "POC is created successfully..!"
     redirect_to repositories_path
   end
 

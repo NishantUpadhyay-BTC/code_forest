@@ -1,6 +1,9 @@
 require 'test_helper'
+require 'fake_json_responses'
 
 class UserTest < ActiveSupport::TestCase
+  include FakeJsonResponses
+
   before do
     @john = users(:john)
     @app1 = repositories(:app1)
@@ -16,10 +19,10 @@ class UserTest < ActiveSupport::TestCase
 
   test "create user with omniauth" do
     total_users = User.count
-    User.create_with_omniauth(auth)
+    User.create_with_omniauth(auth_response)
     assert total_users + 1, User.count
-    assert_equal auth["uid"], User.last.uid
-    assert_equal auth["info"]["nickname"], User.last.name
+    assert_equal auth_response["uid"], User.last.uid
+    assert_equal auth_response["info"]["nickname"], User.last.name
   end
 
   test "repository_is_favourited" do
@@ -27,22 +30,6 @@ class UserTest < ActiveSupport::TestCase
     @john.save
     assert @john.is_favourited?(@app1)
     assert_not @john.is_favourited?(repositories(:demo_app))
-  end
-
-  def auth
-    {
-      "provider"=>"github",
-      "uid"=>"123456",
-      "info"=>
-      {
-        "nickname"=>"John-BTC",
-        "email"=>"john@mail.com",
-        "name"=>"John ",
-        "image"=>"https://avatars.githubusercontent.com/u/123456?v=3",
-        "urls"=>{"GitHub"=>"https://github.com/John-BTC", "Blog"=>nil}
-      },
-      "credentials"=>{"token"=>"dd2ea37e3fdc1277e7692f562bd4b66fb2dbc14b", "expires"=>false},
-    }
   end
 
   private

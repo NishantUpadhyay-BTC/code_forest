@@ -1,6 +1,9 @@
 require 'test_helper'
+require 'fake_json_responses'
 
 class RepositoriesControllerTest < ActionDispatch::IntegrationTest
+  include FakeJsonResponses
+
   before do
     @app1 = repositories(:app1)
     stub_request(:get, "https://api.github.com/#{users(:john).name}/repos").
@@ -8,7 +11,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "index" do
-    get repositories_url
+    get repositories_path
     assert_response 200
     assert_template :index
     assert assigns(:repositories)
@@ -18,7 +21,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "show" do
     no_of_views = @app1.impressions.count
-    get repository_url(id: @app1.id)
+    get repository_path(id: @app1.id)
     assert_response 200
     assert assigns(:repository)
     assert_template :show
@@ -31,33 +34,42 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
   # to_return(:status => 200, :body => "", :headers => {})
   #   uri = URI.parse("https://api.github.com/#{users(:john).name}/repos")
   #   response = Net::HTTP.get(uri)
-  #   get new_repository_url
+  #   get new_repository_path
   #   assert_response 200
   end
 
   test "edit" do
-    get edit_repository_url(id: @app1.id)
+    get edit_repository_path(@app1.id)
     assert_response 200
     assert assigns(:repository)
     assert_equal @app1, assigns(:repository)
   end
 
   test "create" do
-    # post repositories_url
+    total_repos = Repository.count
+    post repositories_path, repo_params
+    assert_redirected_to repositories_path
+    assert total_repos + 1, Repository.count
+    assert_match /POC is created successfully/, flash[:green]
   end
 
   test "update" do
-    # put repository_url(id: @app1.id)
+    created_repo_params = repo_params
+    created_repo_params["repository"]["id"] = 1
+    created_repo_params["repository"]["name"] = 'test_app'
+    put repository_path(@app1.id), created_repo_params
+    assert_redirected_to repositories_path
+    assert_match /POC #{assigns(@repository)["repository"].name} updated successfully/, flash[:green]
   end
 
   test "favourite" do
-    # user = User.create_with_omniauth(auth)
-    # # session[:user_id] = user.id
+    # user = User.create_with_omniauth(auth_response)
     # open_session do |sess|
-    #   sess.get "/auth/github", user_id: user.id
-    #   assert_redirected_to repositories_url, 'Expected redirect to root'
+    #   sess[:user_id] = user.id
+    #   get repositories_favourite_path(id: @app1.id)
+    #   # sess.get "/auth/github", {user_id: user.id}
+    #   # assert_redirected_to repositories_path, 'Expected redirect to root'
     # end
-    # get repositories_favourite_url(id: @app1.id)
 
   end
 
@@ -66,33 +78,27 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "search" do
-
+    @app1.languages.build(name: "Ruby", code: 200)
+    @app1.save
+    get search_repositories_path, params: { key_word: "app1", language: "Ruby", format: 'js' }, xhr: true, as: :js
+    assert_response 200
+    assert assigns(@repositories)["repositories"].include?@app1
   end
 
   test "total_downloads" do
     no_of_downloads = @app1.no_of_downloads
-    put total_downloads_repository_url(id: @app1.id)
+    put total_downloads_repository_path(@app1.id)
     @app1.reload
     assert_equal no_of_downloads + 1, @app1.no_of_downloads
   end
 
   test "hide" do
+    put hide_repository_path(@app1.id)
+    @app1.reload
+    assert @app1.hide
 
-  end
-
-  def auth
-    {
-      "provider"=>"github",
-      "uid"=>"123456",
-      "info"=>
-      {
-        "nickname"=>"John-BTC",
-        "email"=>"john@mail.com",
-        "name"=>"John ",
-        "image"=>"https://avatars.githubusercontent.com/u/123456?v=3",
-        "urls"=>{"GitHub"=>"https://github.com/John-BTC", "Blog"=>nil}
-      },
-      "credentials"=>{"token"=>"dd2ea37e3fdc1277e7692f562bd4b66fb2dbc14b", "expires"=>false},
-    }
+    put hide_repository_path(@app1.id)
+    @app1.reload
+    assert_not @app1.hide
   end
 end
