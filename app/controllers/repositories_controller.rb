@@ -31,7 +31,6 @@ class RepositoriesController < ApplicationController
 
   def create
     @repository = Repository.new(repository_params)
-    binding.pry
     save = @repository.save!
     redirect_to repositories_path
   end
