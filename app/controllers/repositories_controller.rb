@@ -17,10 +17,7 @@ class RepositoriesController < ApplicationController
     @repository = Repository.new(repository_values_result[:repository_details])
     repository_values_result[:language].each do |language,code|
       l = Language.find_or_create_by(name: language);
-      @repository.languages.push l
-      @repository.lang_repos.each do |lr|
-        lr.code = code if lr.language == l
-      end
+      @repository.lang_repos.build(language_id: l.id, code: code, repository_id: @repository.id)
     end
   end
 
@@ -31,14 +28,14 @@ class RepositoriesController < ApplicationController
   def create
     @repository = Repository.new(repository_params)
     save = @repository.save
-    flash[:green] = "POC is created successfully..!"
+    flash[:green] = "POC is created successfully..!" if save
     redirect_to repositories_path
   end
 
   def update
     @repository = Repository.find(params[:id])
     updated = @repository.update_attributes(repository_params)
-    flash[:green] = "POC #{@repository.name} updated successfully..!"
+    flash[:green] = "POC #{@repository.name} updated successfully..!" if updated
     redirect_to repositories_path
   end
 

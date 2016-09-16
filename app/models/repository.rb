@@ -1,8 +1,8 @@
 class Repository < ApplicationRecord
   self.per_page = 3
   is_impressionable
-  has_many :lang_repos
-  has_many :languages, through: :lang_repos
+  has_many :lang_repos, dependent: :destroy, inverse_of: :repository
+  has_many :languages, through: :lang_repos, dependent: :destroy
   has_many :favourites, dependent: :destroy
   has_many :users, through: :favourites
   has_attached_file :poc_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "default.png",
