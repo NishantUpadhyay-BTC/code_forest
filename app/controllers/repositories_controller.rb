@@ -27,9 +27,13 @@ class RepositoriesController < ApplicationController
 
   def create
     @repository = Repository.new(repository_params)
-    save = @repository.save
-    flash[:green] = "POC is created successfully..!" if save
-    redirect_to repositories_path
+    if @repository.save
+      flash[:green] = "POC is created successfully..!"
+      redirect_to repositories_path
+    else
+      flash[:red] = @repository.errors.full_messages.first
+      redirect_to :back
+    end
   end
 
   def update
