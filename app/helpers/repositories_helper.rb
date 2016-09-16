@@ -8,7 +8,9 @@ module RepositoriesHelper
   end
 
   def languages_for_option
-    l = Language.pluck(:name).uniq
+    l = ['All']
+    l << Language.pluck(:name).uniq
+    l = l.flatten
     l.zip(l)
   end
 

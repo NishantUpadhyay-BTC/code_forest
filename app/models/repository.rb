@@ -1,5 +1,4 @@
 class Repository < ApplicationRecord
-  include PgSearch
   self.per_page = 3
   is_impressionable
   has_many :lang_repos
@@ -15,14 +14,11 @@ class Repository < ApplicationRecord
   acts_as_taggable
   acts_as_taggable_on :tags_for_repository
 
-  pg_search_scope :search_by_all,
-	 :against => [:name, :author_name, :description],
-   :using => { :tsearch => {:prefix => true} }
-
   def self.search_repo(key_word, language)
     key_word = key_word.upcase
-    condition_for_key_word = language.present? ? "languages.name LIKE '%#{language}%' AND " : ""
-    condition_for_key_word += "repositories.hide != true AND (UPPER(repositories.name) LIKE '%#{key_word}%' OR UPPER(author_name) LIKE '%#{key_word}%' OR UPPER(description) LIKE '%#{key_word}%')"
-    joins(:languages).where(condition_for_key_word).uniq
+    condition_for_key_word = "repositories.hide != true AND (UPPER(repositories.name) LIKE '%#{key_word}%' OR UPPER(author_name) LIKE '%#{key_word}%' OR UPPER(description) LIKE '%#{key_word}%')"
+    repositories = (language == 'All' || language.nil?) ? Repository.all : Language.find_by(name: language).repositories
+    repositories = repositories.where(condition_for_key_word) if key_word.present?
+    repositories
   end
 end
