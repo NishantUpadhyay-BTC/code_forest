@@ -17,10 +17,11 @@ class RepositoriesController < ApplicationController
     @repository = Repository.new(repository_values_result[:repository_details])
     repository_values_result[:language].each do |language,code|
       l = Language.find_or_create_by(name: language);
-      @repository.languages.push l
-      @repository.lang_repos.each do |lr|
-        lr.code = code if lr.language == l
-      end
+      @repository.lang_repos.build(language_id: l.id, code: code, repository_id: @repository.id)
+      # @repository.languages.push l
+      # @repository.lang_repos.each do |lr|
+      #   lr.code = code if lr.language == l
+      # end
     end
   end
 
@@ -30,7 +31,8 @@ class RepositoriesController < ApplicationController
 
   def create
     @repository = Repository.new(repository_params)
-    save = @repository.save
+    binding.pry
+    save = @repository.save!
     redirect_to repositories_path
   end
 
@@ -63,7 +65,7 @@ class RepositoriesController < ApplicationController
   def destroy
     Repository.find(params[:id]).destroy
     @pocs = Repository.where(author_name: current_user.name)
-    @repositories = Github::FetchAllRepos.new(current_user.name).call
+    @repositories = Github::FetchAllRepos.new(current_user.name, session[:github_token]).call
     respond_to do |format|
        format.js
     end
