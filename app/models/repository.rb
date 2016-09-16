@@ -2,12 +2,13 @@ class Repository < ApplicationRecord
   include PgSearch
   self.per_page = 3
   is_impressionable
-  has_many :languages, inverse_of: :repository, dependent: :destroy
+  has_many :lang_repos
+  has_many :languages, through: :lang_repos
   has_many :favourites, dependent: :destroy
   has_many :users, through: :favourites
   has_attached_file :poc_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "default.png",
                       url: "/system/:id/:style/:filename"
-  accepts_nested_attributes_for :languages
+  accepts_nested_attributes_for :lang_repos
   validates_attachment_content_type :poc_image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   #searching by tags using actastaggable gem
