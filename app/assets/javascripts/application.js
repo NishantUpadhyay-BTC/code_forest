@@ -16,4 +16,5 @@
 //= require materialize
 //= require turbolinks
 //= require loader
+//= require social-share-button
 //= require_tree .

@@ -12,7 +12,9 @@
  *
  *= require font-awesome
  *= require theme
+ *= require social-share-button
  *= require_tree .
  *= require_self
  */
 @import "materialize";
+@import "social-share-button";
