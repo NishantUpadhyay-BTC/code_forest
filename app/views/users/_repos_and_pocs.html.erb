@@ -42,11 +42,11 @@
 
       </tbody>
     </table>
+    <%= will_paginate @pocs, param_name: 'poc_page' %>
   <% else %>
     <b>No POCs to show.</b>
     <% end %>
   </div>
-
   <br>
 
   <div class="container z-depth-1">
