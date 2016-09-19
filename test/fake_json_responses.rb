@@ -39,8 +39,20 @@ module FakeJsonResponses
         "wiki_url"=>"http://github.com//wiki",
         "repo_created_at"=>"2016-02-09T10:05:53Z",
         "last_updated_at"=>"2016-02-09T10:05:53Z",
-        "tag_list"=>"bliss, guestUI, "
+        "tag_list"=>"bliss, guestUI"
       }
     }
+  end
+
+  def lang_repos_attributes
+    {"lang_repos_attributes"=>
+      { "0"=>
+        {
+          "id"=>"298486374",
+          "repository_id"=>"147742440",
+          "language_id"=>"82481401",
+          "code"=>"1798663"
+        }
+      }}
   end
 end

@@ -45,7 +45,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_equal @app1, assigns(:repository)
   end
 
-  test "create" do
+  test "create repository using valid data" do
     total_repos = Repository.count
     post repositories_path, repo_params
     assert_redirected_to repositories_path
@@ -53,10 +53,21 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_match /POC is created successfully/, flash[:green]
   end
 
+  test "create repository using invalid data" do
+    total_repos = Repository.count
+    invalid_repo_params = repo_params
+    invalid_repo_params["repository"]["description"] = ""
+    post repositories_path, invalid_repo_params
+    assert_redirected_to new_repository_path(repo_name: invalid_repo_params["repository"]["name"], user_name: invalid_repo_params["repository"]["author_name"])
+    assert total_repos, Repository.count
+    assert_match /Description can\'t be blank/, flash[:red]
+  end
+
   test "update" do
     created_repo_params = repo_params
     created_repo_params["repository"]["id"] = 1
     created_repo_params["repository"]["name"] = 'test_app'
+    created_repo_params.merge(lang_repos_attributes)
     put repository_path(@app1.id), created_repo_params
     assert_redirected_to repositories_path
     assert_match /POC #{assigns(@repository)["repository"].name} updated successfully/, flash[:green]
@@ -78,7 +89,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "search" do
-    @app1.languages.build(name: "Ruby", code: 200)
+    @app1.languages.build(name: "Ruby")
     @app1.save
     get search_repositories_path, params: { key_word: "app1", language: "Ruby", format: 'js' }, xhr: true, as: :js
     assert_response 200

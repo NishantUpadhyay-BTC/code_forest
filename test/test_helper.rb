@@ -5,7 +5,11 @@ require "minitest/rails"
 require 'webmock/minitest'
 require 'mocha/mini_test'
 
+
 class ActiveSupport::TestCase
+  include Rails::Controller::Testing::TestProcess
+  include Rails::Controller::Testing::TemplateAssertions
+  include Rails::Controller::Testing::Integration
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
   before do
