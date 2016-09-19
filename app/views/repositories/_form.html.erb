@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col l5">
             <div style="width:300">
-              <div class="hovereffect" onclick="$('#poc_image').trigger('click');">
+              <div class="hovereffect" onclick="triggerPOCImage();">
                 <%= image_tag @repository.poc_image, width: 300, id: "image" %>
                 <div class="overlay">
                   <h2>Image</h2>
@@ -76,7 +76,11 @@
   };
   $(document).ready(function () {
     $('.chips-placeholder').material_chip({placeholder: 'Enter a tag', secondaryPlaceholder: '+Tag'});
-  })
+  });
+
+  function triggerPOCImage() {
+    $('#poc_image').trigger('click');
+  }
 
   function displayPreview() {
     $("#p_decription").text($("#description")[0].value);
