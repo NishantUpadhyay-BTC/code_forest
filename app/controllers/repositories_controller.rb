@@ -1,6 +1,6 @@
 class RepositoriesController < ApplicationController
   def index
-    @repositories = Repository.where(hide: false).paginate(:page => params[:page])
+    @repositories = Repository.unhide_repos.paginate(:page => params[:page])
     respond_to do |format|
         format.html
         format.js
@@ -8,7 +8,8 @@ class RepositoriesController < ApplicationController
   end
 
   def show
-    impressionist(find_repo_by_id, nil, { unique: [:session_hash] })
+    @repository = find_repo_by_id
+    impressionist(@repository, nil, { unique: [:session_hash] })
   end
 
   def new
