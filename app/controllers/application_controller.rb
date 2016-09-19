@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
   helper_method :current_user
+
+  def filter_pocs(repositories)
+    poc_names = Repository.where(author_name: current_user.name).pluck(:name)
+    repositories.select{ |repo| !poc_names.include?(repo[:name]) }
+  end
   
   private
 

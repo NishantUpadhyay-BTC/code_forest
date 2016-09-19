@@ -1,3 +1,4 @@
+require 'will_paginate/array'
 class RepositoriesController < ApplicationController
   def index
     @repositories = Repository.where(hide: false).paginate(:page => params[:page])
@@ -65,8 +66,9 @@ class RepositoriesController < ApplicationController
   def destroy
     destroyed = Repository.find(params[:id]).destroy
     @message = "POC Removed successfully..!" if destroyed
-    @pocs = Repository.where(author_name: current_user.name)
+    @pocs = Repository.where(author_name: current_user.name).paginate(page: params[:poc_page])
     @repositories = Github::FetchAllRepos.new(current_user.name, session[:github_token]).call
+    @repositories = filter_pocs(@repositories).paginate(page: params[:repo_page])
     respond_to do |format|
        format.js
     end
@@ -93,7 +95,8 @@ class RepositoriesController < ApplicationController
   private
 
   def repository_params
-    params.require(:repository).permit(:id, :author_name, :avatar_url, :repo_id, :name, :description, :private,
+    params.require(:repository).permit(:id, :author_name, :avatar_url, :repo_id,
+                  :name, :description, :private,
                   :download_link, :clone_url, :git_url, :ssh_url, :svn_url, :no_of_stars, :no_of_watchers,
                   :no_of_downloads, :no_of_views, :no_of_bookmarks,
                   :has_wiki, :wiki_url, :repo_created_at, :last_updated_at, :poc_image, :tag_list, lang_repos_attributes: [:id, :repository_id, :language_id , :code])

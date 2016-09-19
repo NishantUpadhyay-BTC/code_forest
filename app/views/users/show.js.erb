@@ -1,0 +1,3 @@
+$("#poc_table").html("<%= escape_javascript(render partial: 'poc_table', locals: { pocs: @pocs } ) %>");
+$("#repo_table").html("<%= escape_javascript(render partial: 'repository_table', locals: { repositories: @repositories } ) %>");
+$('.pagination > a').attr('data-remote', 'true');
