@@ -18,11 +18,15 @@
   </div>
 </div>
 <script>
-$('#key_word').keyup(function(){
-  if($('#key_word')[0].value.length == 0){
-   $("#searchform").trigger('submit.rails');
-}});
-$('#language').on('change', function() {
-  $("#searchform").trigger('submit.rails');
+$(document).ready(function(){
+  $('#key_word').keyup(function(){
+    if($('#key_word')[0].value.length == 0){
+      $("#searchform").trigger('submit.rails');
+    }
+  });
+  $('#language').on('change', function() {
+    $("#searchform").trigger('submit.rails');
+  });
 });
+
 </script>

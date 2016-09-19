@@ -8,10 +8,10 @@ module RepositoriesHelper
   end
 
   def languages_for_option
-    l = ['All']
-    l << Language.pluck(:name).uniq
-    l = l.flatten
-    l.zip(l)
+    language_options = ['All']
+    language_options << Language.pluck(:name).distinct
+    language_options = language_options.flatten
+    language_options.zip(language_options)
   end
 
   def language_graph(repo)

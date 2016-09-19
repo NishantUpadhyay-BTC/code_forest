@@ -2,7 +2,7 @@
   <%= render partial: "repos_and_pocs", locals: {pocs: @pocs, repositories: @repositories} %>
 </div>
 <script>
-  function change_hide(path)
+  function hide_show_repo(path)
   {
     $.ajax({
     url: path,

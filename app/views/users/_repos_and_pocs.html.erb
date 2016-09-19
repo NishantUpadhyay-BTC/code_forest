@@ -24,7 +24,7 @@
           <td>
             <div class="switch">
               <label>
-                <input type="checkbox" onchange="change_hide('<%= hide_repository_path(poc.id) %>')" <%= "checked" if poc.hide %>>
+                <input type="checkbox" onchange="show_or_hide_repo('<%= hide_repository_path(poc.id) %>')" <%= "checked" if poc.hide %>>
                 <span class="lever"></span>
               </label>
             </div>

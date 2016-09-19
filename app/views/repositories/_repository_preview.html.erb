@@ -1,53 +1,53 @@
 <div class="row repo-show white">
-	<div class="container z-depth-1">
-		<div class="panel-layout">
-			<div class="panel-box col-xs-8 col l10 white">
-				<div class="panel-layout">
-					<div class="panel-box col-xs-12 bg-green poc-img-show-box">
-						<div class="panel-content">
-							<div class="row">
-								<div class="col l4">
-									<%= image_tag @repository.poc_image, id: "image_preview" %>
-								</div>
-								<div class="col l8 para-text">
-									<h4 class="para-text"><%= @repository.name.titleize %></h4>
-									<h6>last updated on
-										<%= time_ago_in_words(@repository.last_updated_at) %>
-										ago
-									</h6>
-									<div id="display_tags"></div>
-									<div class="row">
-										<div class="col l12">
-											<div class="testimonial-author-wrapper">
-												<%= image_tag @repository.avatar_url,  class: "auth-img img-rounded float-right" %>
-												<div class="testimonial-author text-right">
-													<b><%= @repository.author_name %></b>
-													<span>UI Designer, Supina.com</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col l12 para-text">
-									<p class="poc-desc" id="p_decription"></p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col l6">
-									<div id="barchart_values" style="margin-left: 20px; width: auto; height: 300px;"></div>
-								</div>
-								<div class="col l6 para-text">
-									<div class="row download-links">
-										<ul>
-											<li>
-												<i class="medium fa fa-github"></i>
-												<a href="<%= @repository.svn_url%>">GITHUB PAGE</a>
-											</li>
-											<li>
-												<i class="medium fa fa-file-text-o"></i>
-												<a href="<%= "https://github.com/#{@repository.author_name}/#{@repository.name}/wiki" %>">GITHUB WIKI</a>
+  <div class="container z-depth-1">
+    <div class="panel-layout">
+      <div class="panel-box col-xs-8 col l10 white">
+        <div class="panel-layout">
+          <div class="panel-box col-xs-12 bg-green poc-img-show-box">
+            <div class="panel-content">
+              <div class="row">
+                <div class="col l4">
+                  <%= image_tag @repository.poc_image, id: "image_preview" %>
+                </div>
+                <div class="col l8 para-text">
+                  <h4 class="para-text"><%= @repository.name.titleize %></h4>
+                  <h6>last updated on
+                    <%= time_ago_in_words(@repository.last_updated_at) %>
+                    ago
+                  </h6>
+                  <div id="display_tags"></div>
+                  <div class="row">
+                    <div class="col l12">
+                      <div class="testimonial-author-wrapper">
+                        <%= image_tag @repository.avatar_url,  class: "auth-img img-rounded float-right" %>
+                        <div class="testimonial-author text-right">
+                          <b><%= @repository.author_name %></b>
+                          <span>UI Designer, Supina.com</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col l12 para-text">
+                  <p class="poc-desc" id="p_decription"></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col l6">
+                  <div id="barchart_values" style="margin-left: 20px; width: auto; height: 300px;"></div>
+                </div>
+                <div class="col l6 para-text">
+                  <div class="row download-links">
+                    <ul>
+                      <li>
+                        <i class="medium fa fa-github"></i>
+                        <a href="<%= @repository.svn_url%>">GITHUB PAGE</a>
+                      </li>
+                      <li>
+                        <i class="medium fa fa-file-text-o"></i>
+                        <a href="<%= "https://github.com/#{@repository.author_name}/#{@repository.name}/wiki" %>">GITHUB WIKI</a>
                       </li>
                       <li>
                         <i class="medium fa fa-download"></i>
