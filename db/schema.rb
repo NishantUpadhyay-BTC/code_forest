@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916051002) do
+ActiveRecord::Schema.define(version: 20160919113107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,14 +48,14 @@ ActiveRecord::Schema.define(version: 20160916051002) do
     t.index ["user_id"], name: "index_impressions_on_user_id", using: :btree
   end
 
-  create_table "lang_repos", force: :cascade do |t|
+  create_table "language_repositories", force: :cascade do |t|
     t.integer  "repository_id"
     t.integer  "language_id"
     t.integer  "code"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["language_id"], name: "index_lang_repos_on_language_id", using: :btree
-    t.index ["repository_id"], name: "index_lang_repos_on_repository_id", using: :btree
+    t.index ["language_id"], name: "index_language_repositories_on_language_id", using: :btree
+    t.index ["repository_id"], name: "index_language_repositories_on_repository_id", using: :btree
   end
 
   create_table "languages", force: :cascade do |t|
@@ -129,13 +129,14 @@ ActiveRecord::Schema.define(version: 20160916051002) do
     t.string   "email"
     t.string   "avtar_url"
     t.string   "github_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "subscribed", default: true
   end
 
   add_foreign_key "favourites", "repositories"
   add_foreign_key "favourites", "users"
-  add_foreign_key "lang_repos", "languages"
-  add_foreign_key "lang_repos", "repositories"
+  add_foreign_key "language_repositories", "languages"
+  add_foreign_key "language_repositories", "repositories"
   add_foreign_key "languages", "repositories"
 end

@@ -17,7 +17,7 @@ class RepositoriesController < ApplicationController
     @repository = Repository.new(repository_values_result[:repository_details])
     repository_values_result[:language].each do |language,code|
       new_language = Language.find_or_create_by(name: language)
-      @repository.lang_repos.build(language_id: new_language.id, code: code, repository_id: @repository.id)
+      @repository.language_repositories.build(language_id: new_language.id, code: code, repository_id: @repository.id)
     end
   end
 
@@ -96,7 +96,7 @@ class RepositoriesController < ApplicationController
     params.require(:repository).permit(:id, :author_name, :avatar_url, :repo_id, :name, :description, :private,
                   :download_link, :clone_url, :git_url, :ssh_url, :svn_url, :no_of_stars, :no_of_watchers,
                   :no_of_downloads, :no_of_views, :no_of_bookmarks,
-                  :has_wiki, :wiki_url, :repo_created_at, :last_updated_at, :poc_image, :tag_list, lang_repos_attributes: [:id, :repository_id, :language_id , :code])
+                  :has_wiki, :wiki_url, :repo_created_at, :last_updated_at, :poc_image, :tag_list, language_repositories_attributes: [:id, :repository_id, :language_id , :code])
   end
 
   def find_repo_by_id

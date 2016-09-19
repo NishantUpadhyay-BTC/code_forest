@@ -19,11 +19,11 @@ module RepositoriesHelper
   end
 
   def language_graph(repo)
-    total = @repository.lang_repos.collect{|lr| lr.code}.sum
+    total = @repository.language_repositories.collect{|lr| lr.code}.sum
     language_graph_array = []
     lang_with_percent = {}
     color = GRAPH_COLOR
-    repo.lang_repos.each do |lr|
+    repo.language_repositories.each do |lr|
       lang_with_percent[lr.language.name] = (lr.code.to_f/total.to_f)*100
     end
     lang_with_percent.each do |lang, percent|

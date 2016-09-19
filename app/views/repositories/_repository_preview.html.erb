@@ -63,7 +63,7 @@
                   <%= f.hidden_field field %>
                   <% end %>
 
-                  <%= f.fields_for :lang_repos do |builder| %>
+                  <%= f.fields_for :language_repositories do |builder| %>
                   <%= render 'language_fields', :f => builder %>
                   <% end %>
                   <%= f.submit "publish", class: "btn waves-effect waves-light"%>
