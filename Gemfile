@@ -25,6 +25,7 @@ gem "font-awesome-rails"
 gem 'impressionist'
 gem 'config'
 gem 'social-share-button'
+gem 'whenever', require: false
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
