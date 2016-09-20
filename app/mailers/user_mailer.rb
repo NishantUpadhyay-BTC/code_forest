@@ -1,12 +1,10 @@
 class UserMailer < ApplicationMailer
- default from: 'naiya.d.shah@gmail.com'
+ default from: 'codeforestdemo@gmail.com'
   def newsletter
-    # @recipients = User.subscribed_users
-    # @url  = root_url
-    # @recipients.each do |r|
-    #   @name = r.name
-      mail(:to => 'manojparmar5606@gmail.com',
+    @recipients = User.subscribed_users
+    @recipients.each do |r|
+      mail(:to => r.email,
         :subject => "Newsletter")
-    #  end
+     end
  end
 end

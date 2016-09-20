@@ -1,5 +1,19 @@
-<h1>IF you get this mail then multiple mail send to client and advocate</h1>
-    <p>
-      To login to the site, just follow this link
-    </p>
-    <p>Thanks for joining and have a great day!</p>
+<h4>Mostly viewed POCs</h4>
+  <p>
+    <% NewsletterData.mostly_viewed_pocs.each do |poc| %>
+      <p><%= link_to "#{poc.name}", repository_url(poc, host: "localhost", port: 3000) %></p>
+    <% end %>
+  </p>
+<h4>Mostly bookmarked POCs</h4>
+  <p>
+    <% NewsletterData.mostly_bookmarked_pocs.each do |poc| %>
+      <p><%= link_to "#{poc.name}", repository_url(poc, host: "localhost", port: 3000) %></p>
+    <% end %>
+  </p>
+<h4>Latest POCs</h4>
+  <p>
+    <% NewsletterData.latest_pocs.each do |poc| %>
+      <p><%= link_to "#{poc.name}", repository_url(poc, host: "localhost", port: 3000) %></p>
+    <% end %>
+  </p>
+<p>Thanks for joining and have a great day!</p>
