@@ -6,7 +6,6 @@ class LanguageGraphData
   end
 
   def call
-    binding.pry
     total = @repo.language_repositories.collect{|lr| lr.code}.sum
     language_graph_array = []
     lang_with_percent = {}
