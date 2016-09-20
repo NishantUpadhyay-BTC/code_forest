@@ -122,7 +122,7 @@
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
-    array_data = <%= raw language_graph(@repository) %>
+    array_data = <%= raw @language_graph %>
     var graph_style = [
       [
         "Language",
