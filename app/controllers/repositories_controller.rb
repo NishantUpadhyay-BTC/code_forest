@@ -9,6 +9,7 @@ class RepositoriesController < ApplicationController
 
   def show
     @repository = find_repo_by_id
+    @language_graph = LanguageGraphData.new(@repository).call
     impressionist(@repository, nil, { unique: [:session_hash] })
   end
 
@@ -88,6 +89,11 @@ class RepositoriesController < ApplicationController
   def hide
     repository = find_repo_by_id
     repository.update_attribute(:hide, !repository.hide)
+  end
+
+  def language_graph
+    binding.pry
+
   end
 
   private

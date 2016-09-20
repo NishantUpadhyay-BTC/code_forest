@@ -1,7 +1,6 @@
 module RepositoriesHelper
   FAV_REPO_COLOR = "pink"
   UNFAV_REPO_COLOR = "grey"
-  GRAPH_COLOR = "#689f38"
 
   def fav_repo(repo)
     if current_user.present? && current_user.is_favourited?(repo)
@@ -16,20 +15,6 @@ module RepositoriesHelper
     language_options << Language.pluck(:name).uniq
     language_options = language_options.flatten
     language_options.zip(language_options)
-  end
-
-  def language_graph(repo)
-    total = @repository.language_repositories.collect{|lr| lr.code}.sum
-    language_graph_array = []
-    lang_with_percent = {}
-    color = GRAPH_COLOR
-    repo.language_repositories.each do |lr|
-      lang_with_percent[lr.language.name] = (lr.code.to_f/total.to_f)*100
-    end
-    lang_with_percent.each do |lang, percent|
-      language_graph_array << [lang, percent.round(2), color]
-    end
-    language_graph_array
   end
 
   def update_repo(description, tag_list )
