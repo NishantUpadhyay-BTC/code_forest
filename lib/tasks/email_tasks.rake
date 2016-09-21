@@ -1,4 +1,6 @@
-desc 'send newsletter email'
-task send_newsletter_email: :development do
-  UserMailer.newsletter.deliver_now
+require 'sidekiq'
+include Sidekiq::Worker
+
+task send_newsletter_email: :environment do
+  NewsletterWorker.perform_async
 end

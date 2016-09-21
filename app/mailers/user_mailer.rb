@@ -1,10 +1,7 @@
 class UserMailer < ApplicationMailer
- default from: 'codeforestdemo@gmail.com'
-  def newsletter
-    @recipients = User.subscribed_users
-    @recipients.each do |r|
-      mail(:to => r.email,
-        :subject => "Newsletter")
-     end
- end
+  default from: 'codeforestdemo@gmail.com'
+  def newsletter(email, newsletter_pocs)
+    @newsletter_pocs = newsletter_pocs
+    mail(to: email, subject: "Newsletter")
+  end
 end
