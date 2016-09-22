@@ -1,5 +1,4 @@
 class Repository < ApplicationRecord
-  self.per_page = 3
   is_impressionable
   has_many :lang_repos, dependent: :destroy, inverse_of: :repository
   has_many :languages, through: :lang_repos, dependent: :destroy
