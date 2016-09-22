@@ -56,5 +56,11 @@ var common = {
       $("#load_info").text("");
       return;
     }
+  },
+
+  showOrHideRepo: function (path) {
+    $.ajax({
+    url: path,
+    type: 'put'});
   }
 }

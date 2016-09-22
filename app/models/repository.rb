@@ -1,5 +1,5 @@
 class Repository < ApplicationRecord
-  self.per_page = 3
+  self.per_page = Settings.pagination.default
   is_impressionable
   scope :unhide_repos, -> { where(hide: false) }
   has_many :language_repositories, dependent: :destroy, inverse_of: :repository

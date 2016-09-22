@@ -1,6 +1,6 @@
 class RepositoriesController < ApplicationController
   def index
-    @repositories = Repository.unhide_repos.paginate(:page => params[:page])
+    @repositories = paginated(Repository.unhide_repos, page: params[:page])
     respond_to do |format|
         format.html
         format.js
@@ -8,7 +8,7 @@ class RepositoriesController < ApplicationController
   end
 
   def show
-    @repository = find_repo_by_id
+    @repository = initialize_repo
     @language_graph = LanguageGraphData.new(@repository).call
     impressionist(@repository, nil, { unique: [:session_hash] })
   end
@@ -23,7 +23,7 @@ class RepositoriesController < ApplicationController
   end
 
   def edit
-    @repository = find_repo_by_id
+    @repository = initialize_repo
   end
 
   def create
@@ -38,14 +38,14 @@ class RepositoriesController < ApplicationController
   end
 
   def update
-    @repository = find_repo_by_id
+    @repository = initialize_repo
     updated = @repository.update_attributes(repository_params)
     flash[:green] = "POC #{@repository.name} updated successfully..!" if updated
     redirect_to repositories_path
   end
 
   def favourite
-    @repository = find_repo_by_id
+    @repository = initialize_repo
     @message = ""
     if current_user.present?
       if current_user.is_favourited?(@repository)
@@ -64,7 +64,7 @@ class RepositoriesController < ApplicationController
   end
 
   def destroy
-    destroyed = find_repo_by_id.destroy
+    destroyed = initialize_repo.destroy
     @message = "POC Removed successfully..!" if destroyed
     @pocs = Repository.where(author_name: current_user.name)
     @repositories = Github::FetchAllRepos.new(current_user.name, session[:github_token]).call
@@ -74,20 +74,17 @@ class RepositoriesController < ApplicationController
   end
 
   def search
-    @repositories = Repository.search_repo(params[:key_word], params[:language]).paginate(page: params[:page])
-    respond_to do |format|
-       format.js
-    end
+    @repositories = paginated(Repository.search_repo(params[:key_word], params[:language]), page: params[:page])
   end
 
   def total_downloads
-    repo = find_repo_by_id
+    repo = initialize_repo
     repo.no_of_downloads = repo.no_of_downloads.to_i + 1
     repo.save
   end
 
   def hide
-    repository = find_repo_by_id
+    repository = initialize_repo
     repository.update_attribute(:hide, !repository.hide)
   end
 
@@ -100,7 +97,7 @@ class RepositoriesController < ApplicationController
                   :has_wiki, :wiki_url, :repo_created_at, :last_updated_at, :poc_image, :tag_list, language_repositories_attributes: [:id, :repository_id, :language_id , :code])
   end
 
-  def find_repo_by_id
+  def initialize_repo
     Repository.find(params[:id])
   end
 end
