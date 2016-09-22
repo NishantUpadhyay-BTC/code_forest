@@ -1,5 +1,5 @@
 var common = {
-  displayTags: function (e){
+  displayTags: function (e) {
     var tags_string = "";
     if (e.which == 13) {
       $('#div_for_tags').append("<div class='chip'>" + ($("#tag_list")[0].value + "</div>"));
@@ -37,7 +37,7 @@ var common = {
     if ((previousPage < nextPage) && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
       $("#load_info").text("Loading...");
       path = "/repositories/";
-      data = {page: nextPage};
+      data = { page: nextPage };
       if (!$("#key_word")[0].value == "")
       {
         path = "/repositories/search/";
@@ -62,5 +62,15 @@ var common = {
     $.ajax({
     url: path,
     type: 'put'});
+  },
+
+  searchRepoByLanguage: function (searchFormId) {
+    $(searchFormId).trigger('submit.rails');
+  },
+
+  searchRepoByKeyword: function (searchFormId) {
+    if($('#key_word')[0].value.length == 0){
+      $("#searchform").trigger('submit.rails');
+    }
   }
 }

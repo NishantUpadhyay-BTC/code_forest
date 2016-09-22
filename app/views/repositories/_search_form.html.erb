@@ -4,11 +4,13 @@
     <div class="form-group">
        <div class="col m4 s4"></div>
        <div class="col m4 s4">
-          <%= select_tag 'language', options_for_select(languages_for_option), style: "display: block" %>
+          <%= select_tag 'language', options_for_select(languages_for_option),
+            style: "display: block", onchange: "common.searchRepoByLanguage('searchform')" %>
       </div>
       <div class="col m4 s4">
         <div class="input-group">
-          <%= text_field_tag 'key_word', nil, placeholder: "search", size: 40, title: "Enter to search" do %>
+          <%= text_field_tag 'key_word', nil, placeholder: "search",
+           size: 40, title: "Enter to search", onkeyup: "common.searchRepoByKeyword('searchform')" do %>
           <span class="fa fa-search"></span>
           <% end %>
         </div>
@@ -17,16 +19,3 @@
     <% end %>
   </div>
 </div>
-<script>
-$(document).ready(function(){
-  $('#key_word').keyup(function(){
-    if($('#key_word')[0].value.length == 0){
-      $("#searchform").trigger('submit.rails');
-    }
-  });
-  $('#language').on('change', function() {
-    $("#searchform").trigger('submit.rails');
-  });
-});
-
-</script>

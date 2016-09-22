@@ -55,17 +55,15 @@
 </div>
 
 <script>
-
-  $("#tag_list").keyup(function (e) {
-    common.displayTags(e);
-  })
-
-  document.getElementById("poc_image").onchange = function (e) {
-    common.uploadImage(e);
-  };
-  
   $(document).ready(function () {
+    $("#tag_list").keyup(function (e) {
+      common.displayTags(e);
+    });
+
+    document.getElementById("poc_image").onchange = function (e) {
+      common.uploadImage(e);
+    };
+
     $('.chips-placeholder').material_chip({placeholder: 'Enter a tag', secondaryPlaceholder: '+Tag'});
   });
-
 </script>

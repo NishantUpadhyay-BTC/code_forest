@@ -91,10 +91,12 @@ class RepositoriesController < ApplicationController
   private
 
   def repository_params
-    params.require(:repository).permit(:id, :author_name, :avatar_url, :repo_id, :name, :description, :private,
-                  :download_link, :clone_url, :git_url, :ssh_url, :svn_url, :no_of_stars, :no_of_watchers,
-                  :no_of_downloads, :no_of_views, :no_of_bookmarks,
-                  :has_wiki, :wiki_url, :repo_created_at, :last_updated_at, :poc_image, :tag_list, language_repositories_attributes: [:id, :repository_id, :language_id , :code])
+    params.require(:repository).permit(:id, :author_name, :avatar_url, :repo_id,
+                  :name, :description, :private, :download_link, :clone_url,
+                  :git_url, :ssh_url, :svn_url, :no_of_stars, :no_of_watchers,
+                  :no_of_downloads, :no_of_views, :no_of_bookmarks, :has_wiki,
+                  :wiki_url, :repo_created_at, :last_updated_at, :poc_image,
+                  :tag_list, language_repositories_attributes: [:id, :repository_id, :language_id , :code])
   end
 
   def initialize_repo
