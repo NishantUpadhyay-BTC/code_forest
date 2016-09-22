@@ -1,6 +1,7 @@
 require 'sidekiq'
 include Sidekiq::Worker
+desc 'send newsletter email'
 
 task send_newsletter_email: :environment do
-  NewsletterWorker.perform_async
+  NewsletterJob.perform_later
 end

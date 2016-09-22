@@ -3,4 +3,4 @@
 :logfile: ./log/sidekiq.log
 :timeout: 420
 :queues:
-  - default
+  - [default, 1]

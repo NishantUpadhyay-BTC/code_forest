@@ -1,5 +1,6 @@
-class NewsletterWorker
-  include Sidekiq::Worker
+class NewsletterJob < ApplicationJob
+  queue_as :default
+
   def perform
     @newsletter_pocs = NewsletterData.new.call
     @recipients = User.subscribed_users
