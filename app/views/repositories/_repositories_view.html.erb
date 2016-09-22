@@ -31,32 +31,10 @@
   <% end %>
 </div>
 <script>
-  var nextPage,
-    previousPage;
+  var nextPage, previousPage;
   previousPage = 0;
   nextPage = <%= @repositories.next_page %>
   $(window).on('scroll', function () {
-    if ((previousPage < nextPage) && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
-      $("#load_info").text("Loading...");
-      path = "/repositories/";
-      data = {page: nextPage};
-      if (!$("#key_word")[0].value == "")
-      {
-        path = "/repositories/search/";
-        data = Object.assign({},data, {key_word: $("#key_word")[0].value,
-                                      language: $("#language")[0].value,
-                                      append: true});
-      }
-
-      $.ajax({
-        url: path,
-        type: 'get',
-        dataType: 'script',
-        data: data
-      });
-      previousPage = nextPage;
-      $("#load_info").text("");
-      return;
-    }
+    Common.showRepositoriesOnScroll();
   });
 </script>
