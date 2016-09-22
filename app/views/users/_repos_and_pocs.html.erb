@@ -24,7 +24,7 @@
           <td>
             <div class="switch">
               <label>
-                <input type="checkbox" onchange="change_hide('<%= hide_repository_path(poc.id) %>')" <%= "checked" if poc.hide %>>
+                <input type="checkbox" onchange="common.showOrHideRepo('<%= hide_repository_path(poc.id) %>')" <%= "checked" if poc.hide %>>
                 <span class="lever"></span>
               </label>
             </div>
@@ -42,8 +42,8 @@
 
       </tbody>
     </table>
-  <% else %>
-    <b>No POCs to show.</b>
+    <% else %>
+      <b>No POCs to show.</b>
     <% end %>
   </div>
 
@@ -63,24 +63,24 @@
       <tbody>
         <% index = 1 %>
         <% @repositories.each do |repo| %>
-        <% unless @pocs.pluck(:name).include?(repo["name"]) %>
-        <tr>
-          <td><%= index %></td>
-          <td><%= repo["name"] %></td>
-          <td>
-            <%= link_to new_repository_path(user_name: current_user.name, repo_name: repo["name"]) do %>
-            <i class="material-icons">mode_add</i>
-            <% end %>
-            <% index+=1 %>
-          </td>
-        </tr>
-        <% end %>
+          <% unless @pocs.pluck(:name).include?(repo["name"]) %>
+          <tr>
+            <td><%= index %></td>
+            <td><%= repo["name"] %></td>
+            <td>
+              <%= link_to new_repository_path(user_name: current_user.name, repo_name: repo["name"]) do %>
+              <i class="material-icons">mode_add</i>
+              <% end %>
+              <% index+=1 %>
+            </td>
+          </tr>
+          <% end %>
         <% end %>
 
       </tbody>
     </table>
-  <% else %>
-    <b>No repositories to create POC.</b>
+    <% else %>
+      <b>No repositories to create POC.</b>
     <% end %>
   </div>
 </div>
