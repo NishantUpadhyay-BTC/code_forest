@@ -1,18 +1,18 @@
-var common = {
+var Common = {
   displayTags: function (e) {
-    var tags_string = "";
+    var tagsString = "";
+    var appendTags = "<div class='chip'>" + ($("#tag_list")[0].value + "</div>");
     if (e.which == 13) {
-      $('#div_for_tags').append("<div class='chip'>" + ($("#tag_list")[0].value + "</div>"));
-      $('#display_tags').append("<div class='chip'>" + ($("#tag_list")[0].value + "</div>"));
-      tags_string = tags_string.concat($("#tag_list")[0].value + ", ");
-      $("#tag_list")[0].value = ""
+      $('#div_for_tags').append(appendTags);
+      $('#display_tags').append(appendTags);
+      tagsString = tagsString.concat($("#tag_list")[0].value + ", ");
+      $("#tag_list")[0].value = "";
     }
   },
 
   uploadImage: function (e) {
     var reader = new FileReader();
-    var file = document.getElementById('poc_image');
-
+    var file = document.getElementById("poc_image");
     reader.onload = function (e) {
       document.getElementById("image").src = e.target.result;
       document.getElementById("image_preview").src = e.target.result;
@@ -25,10 +25,10 @@ var common = {
   },
 
   displayPreview: function () {
-    var tags_string = "";
+    var tagsString = "";
     $("#p_decription").text($("#description")[0].value);
     $("#repository_description").val($("#description")[0].value);
-    $("#repository_tag_list").val(tags_string);
+    $("#repository_tag_list").val(tagsString);
     $("#repository_preview").show();
     $("#repository_update").hide();
   },
