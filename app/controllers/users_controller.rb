@@ -7,10 +7,4 @@ class UsersController < ApplicationController
     @pocs = sort_data(pocs, params[:column], params[:poc_sorting], params[:poc_page], ASSOCIATIVE_COLUMNS.include?(params[:column]))
     @repositories = sort_data(filter_pocs(repositories), "name", params[:repo_sorting], params[:repo_page])
   end
-
-  private
-  def sort_with_association(pocs, sorting_order)
-    pocs = pocs.sort_by { |repo| repo.send(params[:column]).count }
-    sorting_order == "ASC" ? pocs : pocs.reverse
-  end
 end
