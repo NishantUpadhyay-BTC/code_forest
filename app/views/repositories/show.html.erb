@@ -123,7 +123,7 @@
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
-    array_data = <%= raw language_graph(@repository) %>
+    array_data = <%= raw @language_graph %>
     var graph_style = [["Language", "Percentage", { role: "style" } ]];
 
     for(var lg=0; lg < array_data.length; lg++){

@@ -1,11 +1,12 @@
 require 'will_paginate/array'
 class RepositoriesController < ApplicationController
   def index
-    @repositories = paginated(Repository.where(hide: false), params[:page])
+    @repositories = paginated(Repository.unhide_repos, params[:page])
   end
 
   def show
-    @repository = Repository.find(params[:id])
+    @repository = initialize_repo
+    @language_graph = LanguageGraphData.new(@repository).call
     impressionist(@repository, nil, { unique: [:session_hash] })
   end
 
@@ -13,13 +14,14 @@ class RepositoriesController < ApplicationController
     repository_values_result = Github::FetchRepo.new(params[:user_name], params[:repo_name], session[:github_token]).call
     @repository = Repository.new(repository_values_result[:repository_details])
     repository_values_result[:language].each do |language,code|
-      l = Language.find_or_create_by(name: language);
-      @repository.lang_repos.build(language_id: l.id, code: code, repository_id: @repository.id)
+      new_language = Language.find_or_create_by(name: language)
+      @repository.language_repositories.build(language_id: new_language.id, code: code, repository_id: @repository.id)
     end
+    @language_graph = LanguageGraphData.new(@repository).call
   end
 
   def edit
-    @repository = Repository.find(params[:id])
+    @repository = initialize_repo
   end
 
   def create
@@ -34,14 +36,14 @@ class RepositoriesController < ApplicationController
   end
 
   def update
-    @repository = Repository.find(params[:id])
+    @repository = initialize_repo
     updated = @repository.update_attributes(repository_params)
     flash[:green] = "POC #{@repository.name} updated successfully..!" if updated
     redirect_to repositories_path
   end
 
   def favourite
-    @repository = Repository.find(params[:id])
+    @repository = initialize_repo
     @message = ""
     if current_user.present?
       if current_user.is_favourited?(@repository)
@@ -60,7 +62,7 @@ class RepositoriesController < ApplicationController
   end
 
   def destroy
-    destroyed = Repository.find(params[:id]).destroy
+    destroyed = initialize_repo.destroy
     @message = "POC Removed successfully..!" if destroyed
     @pocs = paginated(Repository.where(author_name: current_user.name), params[:poc_page])
     @repositories = Github::FetchAllRepos.new(current_user.name, session[:github_token]).call
@@ -70,19 +72,20 @@ class RepositoriesController < ApplicationController
 
   def search
     @repositories = paginated(Repository.search_repo(params[:key_word], params[:language]), params[:page])
-    respond_to do |format|
-       format.js
-    end
+  end
+
+  def search
+    @repositories = paginated(Repository.search_repo(params[:key_word], params[:language]), page: params[:page])
   end
 
   def total_downloads
-    repo = Repository.find(params[:id])
+    repo = initialize_repo
     repo.no_of_downloads = repo.no_of_downloads.to_i + 1
     repo.save
   end
 
   def hide
-    repository = Repository.find(params[:id])
+    repository = initialize_repo
     repository.update_attribute(:hide, !repository.hide)
   end
 
@@ -95,9 +98,14 @@ class RepositoriesController < ApplicationController
 
   def repository_params
     params.require(:repository).permit(:id, :author_name, :avatar_url, :repo_id,
-                  :name, :description, :private,
-                  :download_link, :clone_url, :git_url, :ssh_url, :svn_url, :no_of_stars, :no_of_watchers,
-                  :no_of_downloads, :no_of_views, :no_of_bookmarks,
-                  :has_wiki, :wiki_url, :repo_created_at, :last_updated_at, :poc_image, :tag_list, lang_repos_attributes: [:id, :repository_id, :language_id , :code])
+                  :name, :description, :private, :download_link, :clone_url,
+                  :git_url, :ssh_url, :svn_url, :no_of_stars, :no_of_watchers,
+                  :no_of_downloads, :no_of_views, :no_of_bookmarks, :has_wiki,
+                  :wiki_url, :repo_created_at, :last_updated_at, :poc_image,
+                  :tag_list, language_repositories_attributes: [:id, :repository_id, :language_id , :code])
+  end
+
+  def initialize_repo
+    Repository.find(params[:id])
   end
 end

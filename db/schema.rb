@@ -48,14 +48,14 @@ ActiveRecord::Schema.define(version: 20160919074312) do
     t.index ["user_id"], name: "index_impressions_on_user_id", using: :btree
   end
 
-  create_table "lang_repos", force: :cascade do |t|
+  create_table "language_repositories", force: :cascade do |t|
     t.integer  "repository_id"
     t.integer  "language_id"
     t.integer  "code"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["language_id"], name: "index_lang_repos_on_language_id", using: :btree
-    t.index ["repository_id"], name: "index_lang_repos_on_repository_id", using: :btree
+    t.index ["language_id"], name: "index_language_repositories_on_language_id", using: :btree
+    t.index ["repository_id"], name: "index_language_repositories_on_repository_id", using: :btree
   end
 
   create_table "languages", force: :cascade do |t|
@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(version: 20160919074312) do
 
   add_foreign_key "favourites", "repositories"
   add_foreign_key "favourites", "users"
-  add_foreign_key "lang_repos", "languages"
-  add_foreign_key "lang_repos", "repositories"
+  add_foreign_key "language_repositories", "languages"
+  add_foreign_key "language_repositories", "repositories"
   add_foreign_key "languages", "repositories"
 end

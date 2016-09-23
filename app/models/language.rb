@@ -1,4 +1,4 @@
 class Language < ApplicationRecord
-  has_many :lang_repos
-  has_many :repositories, through: :lang_repos
+  has_many :language_repositories
+  has_many :repositories, through: :language_repositories
 end
