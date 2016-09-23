@@ -3,14 +3,13 @@
   <thead>
     <tr>
       <th>No.</th>
-      <th data-field="id">Name<%= sorting_link("name", "repo") %></th>
+      <th data-field="id">Name <%= sorting_link("name", "repo") %></th>
       <th data-field="price">Add Repo</th>
     </tr>
   </thead>
 
   <tbody>
     <% @repositories.each_with_index do |repo, index| %>
-    <% #unless @pocs.pluck(:name).include?(repo["name"]) %>
     <tr>
       <td><%= index + 1 %></td>
       <td><%= repo["name"] %></td>
@@ -20,7 +19,6 @@
         <% end %>
       </td>
     </tr>
-    <% #end %>
     <% end %>
 
   </tbody>
