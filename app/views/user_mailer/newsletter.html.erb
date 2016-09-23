@@ -1,0 +1,27 @@
+<% if @newsletter_pocs.present? %>
+  <% if @newsletter_pocs[:viewed_pocs].present? %>
+    <h4>Mostly viewed POCs</h4>
+    <p>
+      <% @newsletter_pocs[:viewed_pocs].each do |poc| %>
+        <p><%= link_to "#{poc.name}", repository_url(poc, Settings.host, Settings.port) %></p>
+      <% end %>
+    </p>
+  <% end %>
+  <% if @newsletter_pocs[:bookmarked_pocs].present? %>
+    <h4>Mostly bookmarked POCs</h4>
+    <p>
+      <% @newsletter_pocs[:bookmarked_pocs].each do |poc| %>
+        <p><%= link_to "#{poc.name}", repository_url(poc, Settings.host, Settings.port) %></p>
+      <% end %>
+    </p>
+  <% end %>
+  <% if @newsletter_pocs[:late_pocs].present? %>
+    <h4>Latest POCs</h4>
+    <p>
+      <% @newsletter_pocs[:late_pocs].each do |poc| %>
+        <p><%= link_to "#{poc.name}", repository_url(poc, Settings.host, Settings.port) %></p>
+      <% end %>
+    </p>
+  <% end %>
+  <p>Thanks for joining and have a great day!</p>
+<% end %>

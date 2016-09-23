@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  scope :subscribed_users, -> { where(subscribed: true) }
   has_many :favourites
   has_many :repositories, through: :favourites
 

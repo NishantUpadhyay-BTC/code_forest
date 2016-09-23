@@ -29,7 +29,7 @@ class RepositoriesController < ApplicationController
       redirect_to repositories_path
     else
       flash[:red] = @repository.errors.full_messages.first
-      redirect_to :back
+      redirect_back(fallback_location: new_repository_path(user_name: params[:repository][:author_name], repo_name: params[:repository][:name]))
     end
   end
 
