@@ -62,14 +62,14 @@ class RepositoriesController < ApplicationController
   def destroy
     destroyed = Repository.find(params[:id]).destroy
     @message = "POC Removed successfully..!" if destroyed
-    @pocs = Repository.where(author_name: current_user.name).paginate(page: params[:poc_page])
+    @pocs = paginated(Repository.where(author_name: current_user.name), params[:poc_page])
     @repositories = Github::FetchAllRepos.new(current_user.name, session[:github_token]).call
     @repositories = filter_pocs(@repositories).paginate(per_page:1, page: params[:repo_page])
     redirect_to user_path(params[:user_id])
   end
 
   def search
-    @repositories = Repository.search_repo(params[:key_word], params[:language]).paginate(page: params[:page])
+    @repositories = paginated(Repository.search_repo(params[:key_word], params[:language]), params[:page])
     respond_to do |format|
        format.js
     end
@@ -87,7 +87,7 @@ class RepositoriesController < ApplicationController
   end
 
   def search_by_tag
-    @repositories = Repository.tagged_with(params[:tag]).paginate(:page => params[:page])
+    @repositories = Repository.tagged_with(params[:tag])
     render :index
   end
 
