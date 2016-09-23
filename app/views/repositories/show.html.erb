@@ -30,7 +30,7 @@
                       </div>
                       <%= social_share_button_tag(repository_url(@repository), desc: @repository.name) %>
                     </div>
-                  </div>
+                    <div id="fav_repo_<%=@repository.id%>"><%= render partial: "favourite_repo", locals: { repository: @repository } %></div>                   </div>
                 </div>
               </div>
               <div class="row">
