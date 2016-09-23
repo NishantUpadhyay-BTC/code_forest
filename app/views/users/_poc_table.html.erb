@@ -14,7 +14,7 @@
   <tbody>
     <% @pocs.each_with_index do |poc, index| %>
     <tr>
-      <td><%= index + 1 %></td>
+      <td><%= serial_no(params[:poc_page], index) %></td>
       <td><%= poc.name %></td>
       <td><%= poc.no_of_downloads.to_i %></td>
       <td><%= poc.impressions.count.to_i %></td>

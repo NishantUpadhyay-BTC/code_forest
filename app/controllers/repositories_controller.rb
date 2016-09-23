@@ -74,10 +74,6 @@ class RepositoriesController < ApplicationController
     @repositories = paginated(Repository.search_repo(params[:key_word], params[:language]), params[:page])
   end
 
-  def search
-    @repositories = paginated(Repository.search_repo(params[:key_word], params[:language]), page: params[:page])
-  end
-
   def total_downloads
     repo = initialize_repo
     repo.no_of_downloads = repo.no_of_downloads.to_i + 1
@@ -90,7 +86,7 @@ class RepositoriesController < ApplicationController
   end
 
   def search_by_tag
-    @repositories = Repository.tagged_with(params[:tag])
+    @repositories = paginated(Repository.tagged_with(params[:tag]), params[:page])
     render :index
   end
 

@@ -7,4 +7,9 @@ module UsersHelper
   def toggle_order(order)
     order == "ASC" ? "DESC" : "ASC"
   end
+
+  def serial_no(page_no, index)
+    page_no ||= 1
+    (page_no.to_i-1)*3 + index + 1
+  end
 end

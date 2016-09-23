@@ -1,6 +1,6 @@
+var tagsString = "";
 var Common = {
   displayTags: function (e) {
-    var tagsString = "";
     var appendTags = "<div class='chip'>" + ($("#tag_list")[0].value + "</div>");
     if (e.which == 13) {
       $('#div_for_tags').append(appendTags);
@@ -24,7 +24,6 @@ var Common = {
   },
 
   displayPreview: function () {
-    var tagsString = "";
     $("#p_decription").text($("#description")[0].value);
     $("#repository_description").val($("#description")[0].value);
     $("#repository_tag_list").val(tagsString);

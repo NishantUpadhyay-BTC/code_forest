@@ -5,12 +5,12 @@
        <div class="col m4 s4"></div>
        <div class="col m4 s4">
           <%= select_tag 'language', options_for_select(languages_for_option),
-            style: "display: block", onchange: "Common.searchRepoByLanguage('searchform')" %>
+            style: "display: block", onchange: "Common.searchRepoByLanguage('#searchform')" %>
       </div>
       <div class="col m4 s4">
         <div class="input-group">
           <%= text_field_tag 'key_word', nil, placeholder: "search",
-           size: 40, title: "Enter to search", onkeyup: "Common.searchRepoByKeyword('searchform')" do %>
+           size: 40, title: "Enter to search", onkeyup: "Common.searchRepoByKeyword('#searchform')" do %>
           <span class="fa fa-search"></span>
           <% end %>
         </div>
