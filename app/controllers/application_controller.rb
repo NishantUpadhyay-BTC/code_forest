@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
     repositories.select{ |repo| !poc_names.include?(repo[:name]) }
   end
 
+  def paginated(resources, page)
+    resources.paginate(per_page: 3, page: page)
+  end
+
   def sort_data(resources, sort_by, sort_order, page, associative_column=false)
     if associative_column
       resources = sort_with_association(resources, sort_by)
@@ -31,9 +35,5 @@ class ApplicationController < ActionController::Base
 
   def sort_with_association(resources, sort_by)
     resources = resources.sort_by { |resource| resource.send(sort_by).count }
-  end
-
-  def paginated(resources, page)
-    resources.paginate(per_page: 3, page: page)
   end
 end
