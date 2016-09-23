@@ -10,14 +10,13 @@ var Common = {
     }
   },
 
-  uploadImage: function (e) {
+  uploadImage: function (e, file) {
     var reader = new FileReader();
-    var file = document.getElementById("poc_image");
     reader.onload = function (e) {
-      document.getElementById("image").src = e.target.result;
-      document.getElementById("image_preview").src = e.target.result;
+      $("#image").attr('src', e.target.result);
+      $("#image_preview").attr('src', e.target.result);
     };
-    reader.readAsDataURL(file.files[0]);
+    reader.readAsDataURL(file);
   },
 
   triggerPOCImage: function () {

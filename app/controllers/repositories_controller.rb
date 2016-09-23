@@ -20,6 +20,7 @@ class RepositoriesController < ApplicationController
       new_language = Language.find_or_create_by(name: language)
       @repository.language_repositories.build(language_id: new_language.id, code: code, repository_id: @repository.id)
     end
+    @language_graph = LanguageGraphData.new(@repository).call
   end
 
   def edit

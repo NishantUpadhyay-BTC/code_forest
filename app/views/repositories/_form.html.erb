@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col l5">
             <div style="width:300">
-              <div class="hovereffect" id="form_poc_image">
+              <div class="hovereffect" onclick="Common.triggerPOCImage();">
                 <%= image_tag @repository.poc_image, width: 300, id: "image" %>
                 <div class="overlay">
                   <h2>Image</h2>
@@ -56,21 +56,18 @@
 
 <script>
   $(document).ready(function () {
-    $("#tag_list").keyup(function (e) {
+    $("#tag_list").on('keyup', function (e) {
       Common.displayTags(e);
     });
 
-    $("#btn_preview")[0].onclick = function () {
+    $("#btn_preview").on('click',function () {
       Common.displayPreview();
-    };
+    });
 
-    $("#form_poc_image")[0].onclick = function () {
-      Common.triggerPOCImage();
-    };
-
-    document.getElementById("poc_image").onchange = function (e) {
-      Common.uploadImage(e);
-    };
+    $("#poc_image").on('change',function (e) {
+      var file = this.files[0];
+      Common.uploadImage(e, file);
+    });
 
     $('.chips-placeholder').material_chip({placeholder: 'Enter a tag', secondaryPlaceholder: '+Tag'});
   });
