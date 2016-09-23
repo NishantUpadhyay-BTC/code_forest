@@ -87,7 +87,7 @@ class RepositoriesController < ApplicationController
   end
 
   def search_by_tag
-    @repositories = Repository.tagged_with(params[:tag])
+    @repositories = paginated(Repository.tagged_with(params[:tag]), params[:page])
     render :index
   end
 
