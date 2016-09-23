@@ -16,7 +16,7 @@
                   </h6>
                   <% @repository.tag_list.each do |tag| %>
                   <div class="chip">
-                    <%= tag %>
+                     <a href="/repositories/tag/<%= tag %>"><%= tag %></a>
                   </div>
                   <% end %>
                   <div class="row">

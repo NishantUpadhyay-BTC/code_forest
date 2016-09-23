@@ -90,6 +90,11 @@ class RepositoriesController < ApplicationController
     repository.update_attribute(:hide, !repository.hide)
   end
 
+  def search_by_tag
+    @repositories = Repository.tagged_with(params[:tag]).paginate(:page => params[:page])
+    render :index
+  end
+
   private
 
   def repository_params

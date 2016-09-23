@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
     collection do
       get :search
+      get 'tag/:tag' => :search_by_tag
   	end
   end
   resources :users
