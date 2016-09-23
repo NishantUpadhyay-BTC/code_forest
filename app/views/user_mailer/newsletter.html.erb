@@ -3,7 +3,7 @@
     <h4>Mostly viewed POCs</h4>
     <p>
       <% @newsletter_pocs[:viewed_pocs].each do |poc| %>
-        <p><%= link_to "#{poc.name}", repository_url(poc, Settings.host, Settings.port) %></p>
+        <p><%= link_to "#{poc.name}", repository_url(poc) %></p>
       <% end %>
     </p>
   <% end %>
@@ -11,7 +11,7 @@
     <h4>Mostly bookmarked POCs</h4>
     <p>
       <% @newsletter_pocs[:bookmarked_pocs].each do |poc| %>
-        <p><%= link_to "#{poc.name}", repository_url(poc, Settings.host, Settings.port) %></p>
+        <p><%= link_to "#{poc.name}", repository_url(poc) %></p>
       <% end %>
     </p>
   <% end %>
@@ -19,7 +19,7 @@
     <h4>Latest POCs</h4>
     <p>
       <% @newsletter_pocs[:late_pocs].each do |poc| %>
-        <p><%= link_to "#{poc.name}", repository_url(poc, Settings.host, Settings.port) %></p>
+        <p><%= link_to "#{poc.name}", repository_url(poc) %></p>
       <% end %>
     </p>
   <% end %>
