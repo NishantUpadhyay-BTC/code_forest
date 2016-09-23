@@ -44,6 +44,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'omniauth-github'
 gem 'omniauth-bitbucket'
+gem 'blockuijs-rails',  :git => 'git://github.com/rusanu/blockuijs-rails.git'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

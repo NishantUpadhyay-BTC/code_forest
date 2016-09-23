@@ -55,10 +55,8 @@
                       </li>
                       <li>
                         <i class="medium fa fa-file-text-o"></i>
-                        <% if @repository.has_wiki? %>
                         <%= link_to "#{ @repository.wiki_url }" do %>
                         GITHUB WIKI
-                        <% end %>
                         <% end %>
                       </li>
                       <li>

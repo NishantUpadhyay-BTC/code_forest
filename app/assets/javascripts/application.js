@@ -17,4 +17,5 @@
 //= require turbolinks
 //= require loader
 //= require social-share-button
+//= require jquery.blockUI
 //= require_tree .
