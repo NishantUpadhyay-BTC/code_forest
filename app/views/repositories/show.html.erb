@@ -16,7 +16,7 @@
                   </h6>
                   <% @repository.tag_list.each do |tag| %>
                   <div class="chip">
-                    <%= tag %>
+                     <a href="/repositories/tag/<%= tag %>"><%= tag %></a>
                   </div>
                   <% end %>
                   <div class="row">
@@ -30,7 +30,7 @@
                       </div>
                       <%= social_share_button_tag(repository_url(@repository), desc: @repository.name) %>
                     </div>
-                  </div>
+                    <div id="fav_repo_<%=@repository.id%>"><%= render partial: "favourite_repo", locals: { repository: @repository } %></div>                   </div>
                 </div>
               </div>
               <div class="row">
