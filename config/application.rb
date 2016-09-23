@@ -13,8 +13,8 @@ module CodeForest
     # -- all .rb files in that directory are automatically loaded.
     config.autoload_paths = %W(#{config.root}/app/services)
     config.autoload_paths += %W(#{config.root}/lib)
-    config.assets.paths << Rails.root.join("lib")
     config.autoload_paths += %W(#{config.root}/app/services)
+    config.assets.paths << Rails.root.join("lib")
     config.active_record.raise_in_transactional_callbacks = true
     # config.active_job.queue_adapter = :sidekiq
   end
