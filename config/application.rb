@@ -15,6 +15,7 @@ module CodeForest
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{config.root}/app/services)
     config.assets.paths << Rails.root.join("lib")
+    config.eager_load_paths << "#{Rails.root}/lib"
     config.active_record.raise_in_transactional_callbacks = true
     # config.active_job.queue_adapter = :sidekiq
   end
