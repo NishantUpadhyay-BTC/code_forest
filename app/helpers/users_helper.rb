@@ -11,4 +11,9 @@ module UsersHelper
   def icon_for_sorting(order)
     "<i class='fa fa-sort-amount-#{order.downcase}' aria-hidden='true'></i>".html_safe
   end
+
+  def serial_no(page_no, index)
+    page_no ||= 1
+    (page_no.to_i-1)*3 + index + 1
+  end
 end

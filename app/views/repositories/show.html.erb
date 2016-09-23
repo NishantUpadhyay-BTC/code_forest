@@ -76,37 +76,37 @@
       <div class="panel-box col-xs-2 col l2 counter-box " style="vertical-align: top">
         <div class="panel-content">
           <div class="row">
-            <div class="col l6">
+            <div class="col l6" title="Stars">
               <i class="medium fa fa-star"></i>
             </div>
             <div class="col l6"><%= @repository.no_of_stars.to_i %></div>
           </div>
           <div class="row">
-            <div class="col l6">
+            <div class="col l6" title="Forks">
               <i class="medium fa fa-code-fork"></i>
             </div>
             <div class="col l6"><%= @repository.no_of_forks.to_i %></div>
           </div>
           <div class="row">
-            <div class="col l6">
+            <div class="col l6" title="Watchers">
               <i class="medium fa fa-bell"></i>
             </div>
             <div class="col l6"><%= @repository.no_of_watchers.to_i %></div>
           </div>
           <div class="row">
-            <div class="col l6">
+            <div class="col l6" title="Downloads">
               <i class="medium fa fa-download"></i>
             </div>
             <div class="col l6"><%= @repository.no_of_downloads.to_i %></div>
           </div>
           <div class="row">
-            <div class="col l6">
+            <div class="col l6" title="Views">
               <i class="medium fa fa-eye"></i>
             </div>
             <div class="col l6"><%= @repository.impressions.count.to_i %></div>
           </div>
           <div class="row">
-            <div class="col l6">
+            <div class="col l6" title="Favourites">
               <i class="medium fa fa-bookmark"></i>
             </div>
             <div class="col l6"><%= @repository.favourites.count.to_i %></div>
