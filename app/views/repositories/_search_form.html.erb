@@ -2,7 +2,7 @@
   <div class="row">
     <%= form_tag("/repositories/search/", method: :get, remote: true, id: "searchform") do %>
     <div class="form-group">
-       <div class="col m4 s4"></div>
+       <div class="col m2 s2"></div>
        <div class="col m4 s4">
           <%= select_tag 'language', options_for_select(languages_for_option),
             style: "display: block", onchange: "Common.searchRepoByLanguage('#searchform')" %>

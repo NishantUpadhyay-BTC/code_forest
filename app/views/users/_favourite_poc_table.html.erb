@@ -1,5 +1,6 @@
+<h5 class="table-heading">Favourite POCs</h5>
+<% if @favourite_pocs.present? %>
 <table class="highlight para-text dash-table">
-  <thead><h4>Favourite POCs</h4></thead>
   <thead>
     <tr>
       <th>No.</th>
@@ -22,3 +23,6 @@
     <% end %>
   </tbody>
 </table>
+<% else %>
+<h6 class="no-record">No Records found</h6>
+<% end %>

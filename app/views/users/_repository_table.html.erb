@@ -1,3 +1,4 @@
+<h5 class="table-heading">Github Repositories</h5>
 <% if @repositories.present? %>
 <table class="highlight para-text dash-table">
   <thead><h4>Repositories</h4></thead>
@@ -26,5 +27,5 @@
 </table>
 <%= will_paginate @repositories, param_name: 'repo_page' %>
 <% else %>
-<b>No repositories to create POC.</b>
+<h6 class="no-record">No Records found</h6>
 <% end %>

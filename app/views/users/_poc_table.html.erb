@@ -1,3 +1,4 @@
+<h5 class="table-heading">POCs</h5>
 <% if @pocs.present? %>
 <table class="highlight para-text dash-table">
   <thead><h4>POCs</h4></thead>
@@ -43,7 +44,5 @@
 </table>
 <%= will_paginate @pocs, param_name: 'poc_page' %>
 <% else %>
-  <b>No POCs to show.</b>
+  <h6 class="no-record">No Records found</h6>
 <% end %>
-</div>
-<br>

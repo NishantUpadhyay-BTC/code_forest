@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.blockUI
 //= require materialize-sprockets
 //= require materialize
 //= require turbolinks

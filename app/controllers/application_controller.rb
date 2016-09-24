@@ -16,15 +16,17 @@ class ApplicationController < ActionController::Base
   end
 
   def sort_data(resources, sort_by, sort_order, page, associative_column=false)
-    if associative_column
-      resources = sort_with_association(resources, sort_by)
-    elsif resources.class == Array && sort_by.present?
-      resources = resources.sort_by { |resource| resource[sort_by] }
-    else
-      resources = resources.order(sort_by)
+    if resources.present?
+      if associative_column
+        resources = sort_with_association(resources, sort_by)
+      elsif resources.class == Array && sort_by.present?
+        resources = resources.sort_by { |resource| resource[sort_by] }
+      else
+        resources = resources.order(sort_by)
+      end
+      resources = (sort_order == "ASC") ? resources : resources.reverse
+      paginated(resources, page)
     end
-    resources = (sort_order == "ASC") ? resources : resources.reverse
-    paginated(resources, page)
   end
 
   private
