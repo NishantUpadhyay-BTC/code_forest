@@ -1,0 +1,24 @@
+<table class="highlight para-text dash-table">
+  <thead><h4>Favourite POCs</h4></thead>
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th data-field="id">Name <%= sorting_link("name", "favourite_poc") %></th>
+      <th data-field="price">Downloads <%= sorting_link("no_of_downloads", "favourite_poc") %></th>
+      <th data-field="price">Views <%= sorting_link("impressions", "favourite_poc") %></th>
+      <th data-field="price">Favourites <%= sorting_link("favourites", "favourite_poc") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @favourite_pocs.each_with_index do |poc, index| %>
+    <tr>
+      <td><%= serial_no(params[:poc_page], index) %></td>
+      <td><%= poc.name %></td>
+      <td><%= poc.no_of_downloads.to_i %></td>
+      <td><%= poc.impressions.count.to_i %></td>
+      <td><%= poc.favourites.count.to_i %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
