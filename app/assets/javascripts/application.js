@@ -12,5 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.blockUI
+//= require materialize-sprockets
+//= require materialize
 //= require turbolinks
+//= require loader
+//= require social-share-button
 //= require_tree .

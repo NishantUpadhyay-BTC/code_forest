@@ -1,0 +1,11 @@
+<div id="repos_and_pocs">
+  <%= render partial: "repos_and_pocs", locals: {pocs: @pocs, repositories: @repositories} %>
+</div>
+<script>
+  function change_hide(path)
+  {
+    $.ajax({
+    url: path,
+    type: 'put'});
+  }
+</script>

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <%= form_tag("/repositories/search/", method: :get, remote: true, id: "searchform") do %>
+    <div class="form-group">
+       <div class="col m2 s2"></div>
+       <div class="col m4 s4">
+          <%= select_tag 'language', options_for_select(languages_for_option), style: "display: block" %>
+      </div>
+      <div class="col m4 s4">
+        <div class="input-group">
+          <%= text_field_tag 'key_word', nil, placeholder: "search", size: 40, title: "Enter to search" do %>
+          <span class="fa fa-search"></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<script>
+$('#key_word').keyup(function(){
+  if($('#key_word')[0].value.length == 0){
+   $("#searchform").trigger('submit.rails');
+}});
+$('#language').on('change', function() {
+  $("#searchform").trigger('submit.rails');
+});
+</script>

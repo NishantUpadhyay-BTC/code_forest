@@ -1,0 +1,14 @@
+<div class="row repo-show white">
+  <div class="container z-depth-1" id="poc_table">
+    <%= render partial: "users/poc_table", locals: {pocs: @pocs} %>
+  </div><br>
+  <div class="container z-depth-1" id="repo_table">
+    <%= render partial: "users/repository_table", locals: {repositories: @repositories} %>
+  </div>
+  <div class="container z-depth-1" id="favourite_poc_table">
+    <%= render partial: "users/favourite_poc_table", locals: {repositories: @favourite_pocs} %>
+  </div>
+</div>
+<script>
+$('.pagination > a').attr('data-remote', 'true');
+</script>

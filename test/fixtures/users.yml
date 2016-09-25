@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+john:
+  provider: github
+  uid: 19204262
+  name: john-btc
+
+two:
+  provider: MyString
+  uid: MyString
+  name: MyString
