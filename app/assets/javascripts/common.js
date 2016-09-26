@@ -15,6 +15,7 @@ var Common = {
     reader.onload = function (e) {
       $("#image").attr('src', e.target.result);
       $("#image_preview").attr('src', e.target.result);
+      $("#poc_image").attr('src', e.target.result);
     };
     reader.readAsDataURL(file);
   },
