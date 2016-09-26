@@ -1,9 +1,46 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+main {
+    flex: 1 0 auto;
+}
+
+
 nav {
   background-color: #689f38 !important;
   color: #fff;
   height: 56px;
   line-height: 56px;
   width: 100%;
+  #nav-mobile{
+    min-width:150px;
+    .menu-item{
+      .select-wrapper{
+        .caret{top:0;color:#fff}
+        .select-dropdown{border-bottom:none;height:auto;line-height:64px;margin:0}
+        .dropdown-content{
+          li{
+            span{padding:21px 16px}
+          }
+        }
+      }
+      .searchbox{
+        height:34px;line-height:34px;border-radius:4px;padding:0;width:90%;background:#fff;color:#444;text-indent:15px
+      }
+      .user-img-dropdown{line-height:13px;padding:0}
+      .dropdown-content{
+        min-width:150px;
+        .menu-item{
+          a{
+            line-height:35px;
+            .fa{margin-right:5px}
+          }
+        }
+      }
+    }
+  }
 }
 
 .navfeature {
@@ -26,6 +63,7 @@ nav {
     overflow: hidden;
     position: relative;
     width: 100%;
+    height:250px;
 
     img {
       border-radius: 2px 2px 0 0;
@@ -436,4 +474,8 @@ div.blockMsg {
   padding-bottom: 14px;
   text-align: center !important;
   font-weight: bold;
+}
+
+.fav-repo {
+  position: absolute; right: 15px; top: 15px; z-index: 999;
 }
