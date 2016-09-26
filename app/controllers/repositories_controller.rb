@@ -22,6 +22,7 @@ class RepositoriesController < ApplicationController
 
   def edit
     @repository = initialize_repo
+    @language_graph = LanguageGraphData.new(@repository).call
   end
 
   def create

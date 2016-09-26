@@ -21,14 +21,14 @@
                   <% end %>
                   <div class="row">
                     <div class="col l12">
+                      <br>
+                      <%= social_share_button_tag(repository_url(@repository), desc: @repository.name) %>
                       <div class="testimonial-author-wrapper">
                         <%= image_tag @repository.avatar_url, class: "auth-img img-rounded float-right", alt: "Author's image" %>
                         <div class="testimonial-author text-right">
                           <b><%= @repository.author_name %></b>
-                          <span>UI Designer, Supina.com</span>
                         </div>
                       </div>
-                      <%= social_share_button_tag(repository_url(@repository), desc: @repository.name) %>
                     </div>
                 </div>
                 </div>
@@ -50,13 +50,13 @@
                     <ul>
                       <li>
                         <i class="medium fa fa-github"></i>
-                        <%= link_to "#{ @repository.svn_url }" do %>
+                        <%= link_to "#{ @repository.svn_url }", target: "_blank" do %>
                         GITHUB PAGE
                         <% end %>
                       </li>
                       <li>
                         <i class="medium fa fa-file-text-o"></i>
-                        <%= link_to "#{ @repository.wiki_url }" do %>
+                        <%= link_to "#{ @repository.wiki_url }", target: "_blank" do %>
                         GITHUB WIKI
                         <% end %>
                       </li>
