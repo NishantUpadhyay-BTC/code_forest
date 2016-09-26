@@ -2,10 +2,10 @@ var tagsString = "";
 var Common = {
   displayTags: function (e) {
     var appendTags = "<div class='chip'>" + ($("#tag_list")[0].value + "</div>");
-    if (e.which == 13 && $("#tag_list")[0].value != "") {
+    if (e.which == 13 && $("#tag_list")[0].value.trim() != "") {
       $('#div_for_tags').append(appendTags);
       $('#display_tags').append(appendTags);
-      tagsString = tagsString.concat($("#tag_list")[0].value + ", ");
+      tagsString = tagsString.concat($("#tag_list")[0].value.trim() + ", ");
       $("#tag_list")[0].value = "";
     }
   },

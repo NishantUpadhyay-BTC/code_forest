@@ -11,7 +11,6 @@ module Utilities
         begin
           all_repos = @github.repos.list(user: user_name).body
           repository = all_repos.select{ |repo| repo["name"] == repository_name }.first.symbolize_keys
-          binding.pry
           language =  Support::Common.get_response(repository[:languages_url])
           { repository_details: repository_details(repository), language: language }
         rescue => e
