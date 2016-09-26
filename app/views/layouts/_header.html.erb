@@ -9,19 +9,30 @@
           <span style="font-weight:300;font-size:1.3rem;" id="header-large" class="leftRapper">Code Forest</span>
           <% end %>
         <ul class="hide-on-med-and-down right" id="nav-mobile">
+          <% if params[:action] == 'index' && params[:controller] == 'repositories' %>
+            <%= render partial: 'search_form' %>
+          <% end %>
           <% unless current_user.present? %>
           <li class="menu-item" id="menu-item-24">
             <a href="/auth/github">LOGIN</a>
           </li>
           <% else %>
           <li class="menu-item" id="menu-item-24">
-            <%= image_tag current_user.avtar_url, size: "60x60" %>
-          </li>
-          <li class="menu-item" id="menu-item-24">
-            <%= link_to(current_user.name, user_path(current_user.id)) %>
-          </li>
-          <li class="menu-item" id="menu-item-24">
-            <%= link_to('Logout', signout_path, method: :delete) %>
+            <a class="dropdown-button user-img-dropdown" href="#!" data-activates="dropdown1"><%= image_tag current_user.avtar_url, size: "64x64" %> <i class="material-icons right">arrow_drop_down</i></a>
+            <ul class="dropdown-content" id="dropdown1">
+              <li class="menu-item" id="menu-item-24">
+                <%= link_to user_path(current_user.id) do %>
+                <i class="fa fa-tachometer" aria-hidden="true"></i>
+                Dashboard
+                <% end %>
+              </li>
+              <li class="menu-item" id="menu-item-24">
+                <%= link_to signout_path, method: :delete do %>
+                <i class="fa fa-sign-in fa-rotate-180" aria-hidden="true"></i>
+                Logout
+                <% end %>
+              </li>
+            </ul>
           </li>
           <% end %>
         </ul>
@@ -31,4 +42,8 @@
       </div>
     </nav>
   </div>
+  <script>
+  $('select').material_select();
+$(".dropdown-button").dropdown();
+        </script>
 </header>

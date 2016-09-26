@@ -1,3 +1,3 @@
-<%= link_to repositories_favourite_path(repository), remote: true do %>
+<%= link_to repositories_favourite_path(repository), remote: true, class: "fav-icon" do %>
   <i style="font-size: 1.3rem; padding-right: 10px; cursor: pointer;" class="material-icons <%= fav_repo(repository) %>-text">favorite</i><%= repository.favourites.count %>
 <% end %>
