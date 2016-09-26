@@ -12,7 +12,7 @@ module RepositoriesHelper
 
   def languages_for_option
     language_options = ['All']
-    language_options << Language.pluck(:name).uniq
+    language_options << Language.pluck(:name).uniq.sort
     language_options = language_options.flatten
     language_options.zip(language_options)
   end
