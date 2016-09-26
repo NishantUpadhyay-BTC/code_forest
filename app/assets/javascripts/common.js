@@ -33,10 +33,9 @@ var Common = {
 
   showRepositoriesOnScroll: function () {
     if ((previousPage < nextPage) && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
-      $("#load_info").text("Loading...");
       path = "/repositories/";
       data = { page: nextPage };
-      if (!$("#key_word")[0].value == "")
+      if ($("#key_word")[0].value != "" || $('#language')[0].value != "All")
       {
         path = "/repositories/search/";
         data = Object.assign({},data, {key_word: $("#key_word")[0].value,
@@ -51,7 +50,6 @@ var Common = {
         data: data
       });
       previousPage = nextPage;
-      $("#load_info").text("");
       return;
     }
   },

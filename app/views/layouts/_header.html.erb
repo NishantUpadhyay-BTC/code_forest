@@ -9,26 +9,9 @@
           <span style="font-weight:300;font-size:1.3rem;" id="header-large" class="leftRapper">Code Forest</span>
           <% end %>
         <ul class="hide-on-med-and-down right" id="nav-mobile">
-          <li class="menu-item" id="menu-item-24">
-            <div class="row">
-              <form class="col s12">
-                <div class="row">
-                  <div class="input-field col s4">
-                    <select>
-                      <option value="" disabled selected>Filter By</option>
-                      <option value="1">All</option>
-                      <option value="2">Option 1</option>
-                      <option value="3">Option 2</option>
-                      <option value="4">Option 3</option>
-                    </select>
-                  </div>
-                  <div class="input-field col s8">
-                    <input placeholder="Keyword" id="first_name" type="text" class="validate searchbox">
-                  </div>
-                </div>
-              </form>
-            </div>
-          </li>
+          <% if params[:action] == 'index' && params[:controller] == 'repositories' %>
+            <%= render partial: 'search_form' %>
+          <% end %>
           <% unless current_user.present? %>
           <li class="menu-item" id="menu-item-24">
             <a href="/auth/github">LOGIN</a>

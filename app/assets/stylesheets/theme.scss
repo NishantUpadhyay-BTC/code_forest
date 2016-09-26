@@ -27,7 +27,14 @@ nav {
         }
       }
       .searchbox{
-        height:34px;line-height:34px;border-radius:4px;padding:0;width:90%;background:#fff;color:#444;text-indent:15px
+        height:34px;
+        line-height:34px;
+        border-radius:4px;
+        padding:0;
+        width:90%;
+        background:#fff;
+        color:#444;
+        text-indent:15px
       }
       .user-img-dropdown{line-height:13px;padding:0}
       .dropdown-content{
@@ -180,6 +187,7 @@ p.area {
   margin: 0 0 20px;
   table-layout: fixed;
   width: 100%;
+  position:relative;
 
   .panel-box {
     display: table-cell;
@@ -195,6 +203,10 @@ p.area {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
+
+      .fav-icon {
+        position: absolute; right: 15px; top: 15px; z-index: 999;
+      }
     }
 
     .panel-box.bg-default,
@@ -211,11 +223,11 @@ p.area {
     padding: 20px !important;
     background-color: #689f38 !important;
     text-align: center;
-
+    font-size: 1.0rem !important;
     i.medium {
       font-size: 1.5rem !important;
     };
-    font-size: 1.0rem !important;
+    .btn{background:#fff;color:#689f38}
   }
 }
 
@@ -409,6 +421,7 @@ p.area {
 
 .chip {
   margin-left: 5px;
+  a{color:#444}
 }
 
 .poc_desc_text_area {
@@ -474,8 +487,4 @@ div.blockMsg {
   padding-bottom: 14px;
   text-align: center !important;
   font-weight: bold;
-}
-
-.fav-repo {
-  position: absolute; right: 15px; top: 15px; z-index: 999;
 }
