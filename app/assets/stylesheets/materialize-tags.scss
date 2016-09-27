@@ -14,7 +14,14 @@
   -moz-transition: all .3s;
   -ms-transition: all .3s;
   -o-transition: all .3s;
-  transition: all .3s; }
+  transition: all .3s;
+  i{
+    font-size: 15px !important;
+    line-height: inherit;
+    margin-left: 9px !important;
+    vertical-align: -2px;
+  }
+}
   @media screen and (max-width: 600px) {
     .materialize-tags {
       margin-top: 8px; } }
