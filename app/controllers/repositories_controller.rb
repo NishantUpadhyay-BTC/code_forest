@@ -64,7 +64,7 @@ class RepositoriesController < ApplicationController
 
   def destroy
     destroyed = initialize_repo.destroy
-    @message = "POC Removed successfully..!" if destroyed
+    flash[:green] = "POC Removed successfully..!" if destroyed
     @pocs = paginated(Repository.where(author_name: current_user.name), params[:poc_page])
     @repositories = Github::FetchAllRepos.new(current_user.name, session[:github_token]).call
     @repositories = filter_pocs(@repositories).paginate(per_page:1, page: params[:repo_page])

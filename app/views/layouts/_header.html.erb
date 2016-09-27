@@ -42,8 +42,12 @@
       </div>
     </nav>
   </div>
-  <script>
-  $('select').material_select();
-$(".dropdown-button").dropdown();
-        </script>
 </header>
+<script>
+  $(document).ready(function () {
+    if ($('input.select-dropdown').length == 0) {
+      $('select').material_select();
+      $(".dropdown-button").dropdown();
+    }
+  });
+</script>
