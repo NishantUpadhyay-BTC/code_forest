@@ -31,7 +31,7 @@
         <div class="row">
           <div class="col l12">
             <label for="chips">Tags</label>
-            <div id="div_for_tags">
+            <div id="div_for_tags" class="chips chips-placeholder">
               <% @repository.tag_list.each do |tag| %>
               <div class="chip"><%= tag %></div>
               <% end %>

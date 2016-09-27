@@ -1,7 +1,7 @@
 var tagsString = "";
 var Common = {
   displayTags: function (e) {
-    var appendTags = "<div class='chip'>" + ($("#tag_list")[0].value + "</div>");
+    var appendTags = "<div class='chips'>" + $("#tag_list")[0].value + "<i class='material-icons'>close</i></div>";
     if (e.which == 13 && $("#tag_list")[0].value.trim() != "") {
       $('#div_for_tags').append(appendTags);
       $('#display_tags').append(appendTags);
