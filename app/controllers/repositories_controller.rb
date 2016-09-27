@@ -38,9 +38,13 @@ class RepositoriesController < ApplicationController
 
   def update
     @repository = initialize_repo
-    updated = @repository.update_attributes(repository_params)
-    flash[:green] = "POC #{@repository.name} updated successfully..!" if updated
-    redirect_to repositories_path
+    if @repository.update_attributes(repository_params)
+      flash[:green] = "POC #{@repository.name} updated successfully..!"
+      redirect_to repositories_path
+    else
+      flash[:red] = @repository.errors.full_messages.first
+      redirect_back(fallback_location: new_repository_path(user_name: params[:repository][:author_name], repo_name: params[:repository][:name]))
+    end
   end
 
   def favourite

@@ -53,6 +53,7 @@
 <script>
   $(document).ready(function () {
     $('#description').focus();
+    $('#description')[0].dispatchEvent(new Event('focus'));
     $("#tag_list").on('keyup', function (e) {
       Common.displayTags(e);
     });

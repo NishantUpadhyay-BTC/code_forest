@@ -16,8 +16,10 @@ var Common = {
   displayPreview: function () {
     $("#p_decription").text($("#description")[0].value);
     $("#repository_description").val($("#description")[0].value);
-    $("#repository_tag_list").val($('#tag_list')[0].value);
-    $("#display_tags").append(Common.displayTags());
+    if($('#tag_list')[0].value != ""){
+      $("#repository_tag_list").val($('#tag_list')[0].value);
+      $("#display_tags").append(Common.displayTags());
+    }
     $("#repository_preview").show();
     $("#repository_update").hide();
   },
