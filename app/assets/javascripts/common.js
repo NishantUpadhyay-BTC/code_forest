@@ -1,4 +1,3 @@
-var tagsString = "";
 var Common = {
   uploadImage: function (e, file) {
     var reader = new FileReader();
