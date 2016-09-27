@@ -50,19 +50,19 @@
                     <ul>
                       <li>
                         <i class="medium fa fa-github"></i>
-                        <%= link_to "#{ @repository.svn_url }", target: "_blank" do %>
+                        <%= link_to "#{ @repository.svn_url }", target: "_blank", title: "Github Page" do %>
                         GITHUB PAGE
                         <% end %>
                       </li>
                       <li>
                         <i class="medium fa fa-file-text-o"></i>
-                        <%= link_to "#{ @repository.wiki_url }", target: "_blank" do %>
+                        <%= link_to "#{ @repository.wiki_url }", target: "_blank", title: "Github Wiki" do %>
                         GITHUB WIKI
                         <% end %>
                       </li>
                       <li>
                         <i class="medium fa fa-download"></i>
-                        <%= link_to "#{ @repository.download_link }", onclick: "increment_downloads(#{@repository.id});"  do %>
+                        <%= link_to "#{ @repository.download_link }", onclick: "increment_downloads(#{@repository.id});", title: "Download POC"  do %>
                         DOWNLOAD
                         <% end %>
                       </li>

@@ -23,7 +23,6 @@
                         <%= image_tag @repository.avatar_url,  class: "auth-img img-rounded float-right" %>
                         <div class="testimonial-author text-right">
                           <b><%= @repository.author_name %></b>
-                          <span>UI Designer, Supina.com</span>
                         </div>
                       </div>
                     </div>
@@ -44,15 +43,21 @@
                     <ul>
                       <li>
                         <i class="medium fa fa-github"></i>
-                        <a target="_blank" href="<%= @repository.svn_url%>">GITHUB PAGE</a>
+                        <%= link_to "#{ @repository.svn_url }", target: "_blank", title: "Github Page" do %>
+                        GITHUB PAGE
+                        <% end %>
                       </li>
                       <li>
                         <i class="medium fa fa-file-text-o"></i>
-                        <a target="_blank" href="<%= "https://github.com/#{@repository.author_name}/#{@repository.name}/wiki" %>">GITHUB WIKI</a>
+                        <%= link_to "#{ @repository.wiki_url }", target: "_blank", title: "Github Wiki" do %>
+                        GITHUB WIKI
+                        <% end %>
                       </li>
                       <li>
                         <i class="medium fa fa-download"></i>
-                        <a href="<%= @repository.download_link%>">DOWNLOAD</a>
+                        <%= link_to "#{ @repository.download_link }", onclick: "increment_downloads(#{@repository.id});", title: "Download POC"  do %>
+                        DOWNLOAD
+                        <% end %>
                       </li>
                     </ul>
                   </div>

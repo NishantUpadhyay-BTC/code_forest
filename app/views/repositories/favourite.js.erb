@@ -1,6 +1,6 @@
-Materialize.toast('<%= @message %>', 5000, 'green');
+Materialize.toast('<%= @message %>', 4000, 'green');
 $("#fav_repo_<%= @repository.id %>").html("<%= escape_javascript(render partial: 'repositories/favourite_repo', locals: {repository: @repository}) %>");
 <% unless current_user.present? %>
   var $toastContent = $('<span>Please login first</span>');
-  Materialize.toast($toastContent, 5000, 'red');
+  Materialize.toast($toastContent, 4000, 'red');
 <% end %>
