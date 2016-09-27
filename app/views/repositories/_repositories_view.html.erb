@@ -25,9 +25,6 @@
           <span style="float: left; padding-right: 1rem;" id="fav_repo_<%=repository.id%>">
             <%= render partial: "favourite_repo", locals: { repository: repository } %>
           </span>
-          <span style="float: right;">
-            <%= social_share_button_tag(repository_url(repository), desc: repository.name) %>
-          </span>
         </p>
       </div>
     </div>
