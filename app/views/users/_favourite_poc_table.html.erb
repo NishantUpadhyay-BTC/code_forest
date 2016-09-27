@@ -14,7 +14,7 @@
   <tbody>
     <% @favourite_pocs.each_with_index do |poc, index| %>
     <tr>
-      <td><%= serial_no(params[:poc_page], index) %></td>
+      <td><%= serial_no(params[:favourite_poc_page], index) %></td>
       <td><%= poc.name %></td>
       <td><%= poc.no_of_downloads.to_i %></td>
       <td><%= poc.impressions.count.to_i %></td>
@@ -23,6 +23,7 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @favourite_pocs, param_name: 'favourite_poc_page' %>
 <% else %>
 <h6 class="no-record">No Records found</h6>
 <% end %>
