@@ -1,15 +1,5 @@
 var tagsString = "";
 var Common = {
-  displayTags: function (e) {
-    var appendTags = "<div class='chips'>" + $("#tag_list")[0].value + "<i class='material-icons'>close</i></div>";
-    if (e.which == 13 && $("#tag_list")[0].value.trim() != "") {
-      $('#div_for_tags').append(appendTags);
-      $('#display_tags').append(appendTags);
-      tagsString = tagsString.concat($("#tag_list")[0].value.trim() + ", ");
-      $("#tag_list")[0].value = "";
-    }
-  },
-
   uploadImage: function (e, file) {
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -27,7 +17,8 @@ var Common = {
   displayPreview: function () {
     $("#p_decription").text($("#description")[0].value);
     $("#repository_description").val($("#description")[0].value);
-    $("#repository_tag_list").val(tagsString);
+    $("#repository_tag_list").val($('#tag_list')[0].value);
+    $("#display_tags").append(Common.displayTags());
     $("#repository_preview").show();
     $("#repository_update").hide();
   },
@@ -69,5 +60,15 @@ var Common = {
     if($('#key_word')[0].value.length == 0){
       $("#searchform").trigger('submit.rails');
     }
+  },
+
+  displayTags: function() {
+    var tags = $('#tag_list')[0].value.split(",");
+    var tag_divs = "";
+    for(i=0; i<tags.length; i++)
+    {
+      tag_divs= tag_divs + "<div class='chip'><a href='/repositories/tag/"+tags[i] +"'>" + tags[i] + "</a></div>";
+    }
+    return tag_divs;
   }
 }
