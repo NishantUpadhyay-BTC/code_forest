@@ -118,7 +118,7 @@
                 <%= f.fields_for :language_repositories do |builder| %>
                 <%= render 'language_fields', :f => builder %>
                 <% end %>
-                <%= f.submit "publish", class: "btn waves-effect waves-dark"%>
+                <%= f.submit "#{@repository.new_record? ? 'publish' : 'save'}", class: "btn waves-effect waves-dark"%>
               <% end %>
             </div>
           </div>
