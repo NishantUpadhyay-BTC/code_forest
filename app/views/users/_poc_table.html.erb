@@ -29,7 +29,7 @@
         </div>
       </td>
       <td data-field="price">
-        <%= link_to edit_repository_path(poc.id) do %>
+        <%= link_to edit_repository_path(poc.id), data: { turbolinks: false }  do %>
         <i class="material-icons">mode_edit</i>
         <% end %>
         <%= link_to repository_path(poc.id, user_id: params[:id]), method: :delete, data: { confirm: 'Are you sure?' } do %>
