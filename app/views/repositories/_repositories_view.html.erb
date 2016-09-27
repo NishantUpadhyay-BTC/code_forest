@@ -22,8 +22,8 @@
           <span style="float: left; padding-right: 1rem;">
             <i style="font-size: 1.3rem; padding-right: 10px;" class="material-icons light-blue-text">visibility</i><%= repository.impressions.count %>
           </span>
-          <span style="float: left; padding-right: 1rem;" id="fav_repo_<%=repository.id%>">
-            <%= render partial: "favourite_repo", locals: { repository: repository } %>
+          <span style="float: right; padding-right: 1rem;">
+            <div  id="fav_repo_<%=repository.id%>"><%= render partial: "favourite_repo", locals: { repository: repository } %></div>
           </span>
         </p>
       </div>
