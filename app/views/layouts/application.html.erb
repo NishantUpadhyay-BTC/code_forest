@@ -19,5 +19,11 @@
   </body>
 </html>
 <script>
-$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+$( document ).ajaxStart(function() {
+  $.blockUI({ message: "<h6>please wait...</h6>" });
+});
+
+$( document ).ajaxStop(function() {
+  $.unblockUI();
+});
 </script>
