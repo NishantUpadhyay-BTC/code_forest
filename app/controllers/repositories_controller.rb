@@ -12,13 +12,18 @@ class RepositoriesController < ApplicationController
   end
 
   def new
-    repository_values_result = Github::FetchRepo.new(params[:user_name], params[:repo_name], session[:github_token]).call
-    @repository = Repository.new(repository_values_result[:repository_details])
-    repository_values_result[:language].each do |language,code|
-      new_language = Language.find_or_create_by(name: language)
-      @repository.language_repositories.build(language_id: new_language.id, code: code, repository_id: @repository.id)
+    begin
+      repository_values_result = Github::FetchRepo.new(params[:user_name], params[:repo_name], session[:github_token]).call
+      @repository = Repository.new(repository_values_result[:repository_details])
+      repository_values_result[:language].each do |language,code|
+        new_language = Language.find_or_create_by(name: language)
+        @repository.language_repositories.build(language_id: new_language.id, code: code, repository_id: @repository.id)
+      end
+      @language_graph = LanguageGraphData.new(@repository).call
+    rescue => e
+      flash[:red] = "Error: #{e}"
+      redirect_to repositories_path
     end
-    @language_graph = LanguageGraphData.new(@repository).call
   end
 
   def edit

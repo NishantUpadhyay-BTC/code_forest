@@ -6,6 +6,10 @@ class Github::FetchAllRepos
   end
 
   def call
-    github_client.fetch_all_repositories(user_name)
+    begin
+      github_client.fetch_all_repositories(user_name)
+    rescue => e
+      raise StandardError.new(e)
+    end
   end
 end

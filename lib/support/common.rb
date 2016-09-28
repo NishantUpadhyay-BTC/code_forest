@@ -4,9 +4,13 @@ module Support
       begin
         uri = URI(path)
         http_response = Net::HTTP.get_response(uri)
-        JSON(http_response.body).symbolize_keys
-      rescue e
-        #write code for handling exception
+        response = JSON(http_response.body).symbolize_keys
+        if response[:message].present?
+          raise StandardError.new(e)
+        end
+        response
+      rescue => e
+        raise StandardError.new(e)
       end
     end
   end
