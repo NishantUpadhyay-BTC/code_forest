@@ -1,5 +1,6 @@
 require 'will_paginate/array'
 class RepositoriesController < ApplicationController
+  before_action :change_in_own_repo, only: [:edit, :update, :destroy]
   def index
     @repositories = paginated(Repository.unhide_repos, params[:page])
   end
@@ -108,5 +109,12 @@ class RepositoriesController < ApplicationController
 
   def initialize_repo
     Repository.find(params[:id])
+  end
+
+  def change_in_own_repo
+    unless initialize_repo.author_name == current_user.name
+      flash[:red] = "You dont have permission to access that."
+      redirect_to repositories_path
+    end
   end
 end
