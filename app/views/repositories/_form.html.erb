@@ -1,0 +1,72 @@
+<main class="no-padding">
+<div class="row repo-show white" id="repository_update">
+  <div class="container z-depth-1">
+    <div class="row">
+      <div class="col l12">
+        <h4 class="para-text" style="margin-left: 10px">
+          <%= @repository.name.titleize %></h4>
+      </div>
+      <div class="col s12 poc_form">
+        <div class="row">
+          <div class="col l5">
+            <div style="width:300">
+              <div class="hovereffect" onclick="Common.triggerPOCImage();">
+                <%= image_tag @repository.poc_image, width: 300, id: "image" %>
+                <div class="overlay">
+                  <h2>Image</h2>
+                  <p>EDIT</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col l7">
+            <div class="input-field col l12">
+              <textarea id="description" class="materialize-textarea poc_desc_text_area"><%= @repository.description %></textarea>
+              <label for="textarea1">Description</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l12">
+            <label for="chips">Tags</label>
+            <input type="text" data-role="materialtags" value="<%= @repository.tag_list.to_s %>" id="tag_list">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l12">
+            <button class="btn waves-effect waves-light right" style="float:left" name="action" id="btn_preview">
+              PREVIEW<i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+<div id="repository_preview" hidden=true>
+  <%= render 'repository_preview' %>
+</div>
+
+<script>
+  $(document).ready(function () {
+    if ($('#description')[0].value != "") {
+      $('#description').focus();
+    }
+
+    $("#tag_list").on('keyup', function (e) {
+      Common.displayTags(e);
+    });
+
+    $("#btn_preview").on('click',function () {
+      Common.displayPreview();
+    });
+
+    $("#poc_image").on('change',function (e) {
+      var file = this.files[0];
+      Common.uploadImage(e, file);
+    });
+
+    $('.chips-placeholder').material_chip({placeholder: 'Enter a tag', secondaryPlaceholder: '+Tag'});
+  });
+</script>

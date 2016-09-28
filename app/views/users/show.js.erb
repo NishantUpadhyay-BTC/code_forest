@@ -1,0 +1,4 @@
+$("#poc_table").html("<%= escape_javascript(render partial: 'poc_table', locals: { pocs: @pocs } ) %>");
+$("#repo_table").html("<%= escape_javascript(render partial: 'repository_table', locals: { repositories: @repositories } ) %>");
+$("#favourite_poc_table").html("<%= escape_javascript(render partial: 'favourite_poc_table', locals: { favourite_pocs: @favourite_pocs } ) %>");
+$('.pagination > a').attr('data-remote', 'true');

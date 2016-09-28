@@ -1,3 +1,17 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'repositories#index'
+  resources :repositories do
+    member do
+      put :total_downloads
+      put :hide
+    end
+    collection do
+      get :search
+      get 'tag/:tag' => :search_by_tag
+  	end
+  end
+  resources :users
+  get "/auth/:provider/callback" => "callbacks#create"
+  get "/repositories/:id/favourite" => "repositories#favourite", :as => :repositories_favourite
+  delete "/signout" => "callbacks#destroy", :as => :signout
 end

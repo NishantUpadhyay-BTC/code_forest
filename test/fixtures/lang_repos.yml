@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  repository: one
+  language: one
+  code: 1
+
+two:
+  repository: two
+  language: two
+  code: 1
