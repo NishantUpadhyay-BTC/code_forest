@@ -19,14 +19,19 @@
   </body>
 </html>
 <script>
-$( document ).ajaxStart(function() {
-  $.blockUI({ message: "<h6>please wait...</h6>" });
-});
+  $( document ).ajaxStart(function() {
+    $.blockUI({ message: "<h6>please wait...</h6>" });
+  });
 
-$( document ).ajaxStop(function() {
-  $.unblockUI();
-});
-function closeToast() {
-  $('.green, .red').remove();
-};
+  $( document ).ajaxStop(function() {
+    $.unblockUI();
+  });
+
+  $(document).ready(function(){
+    $('.tooltipped').tooltip({delay: 50});
+  });
+
+  function closeToast() {
+    $('.green, .red').remove();
+  };
 </script>
