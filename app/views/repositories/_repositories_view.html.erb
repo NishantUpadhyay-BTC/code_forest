@@ -34,6 +34,9 @@
     </div>
   </div>
   <% end %>
+  <% if !@repositories.present? && (params[:page] == 1 || params[:page].nil?) %>
+    <h4><center>No Records Found</center></h4>
+  <% end %>
 </div>
 <script>
   var nextPage,

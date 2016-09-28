@@ -19,7 +19,7 @@ class Repository < ApplicationRecord
   def self.search_repo(key_word, language)
     key_word = "%#{key_word.upcase}%"
     condition_for_key_word = "repositories.hide != true AND (UPPER(repositories.name) LIKE ? OR UPPER(author_name) LIKE ? OR UPPER(description) LIKE ?)"
-    repositories = (language == 'All' || language.nil?) ? Repository.all : Language.find_by(name: language).repositories
+    repositories = (['All', 'Filter by'].include?(language) || language.nil?) ? Repository.all : Language.find_by(name: language).repositories
     repositories = repositories.where(condition_for_key_word, key_word, key_word, key_word) if key_word.present?
     repositories
   end

@@ -7,9 +7,6 @@
           <div class="section">
           <%= render partial: 'repositories_view', locals: { repositories: @repositories} %>
           <input type="hidden" id="loaded_page" value="">
-          <% unless @repositories.present? %>
-          <h4 class="no-record">No Records found</h4>
-          <% end %>
         </div>
         </div>
       </div>
