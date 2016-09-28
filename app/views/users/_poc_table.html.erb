@@ -29,11 +29,11 @@
         </div>
       </td>
       <td data-field="price">
-        <%= link_to edit_repository_path(poc.id), data: { turbolinks: false }  do %>
-        <i class="material-icons">mode_edit</i>
+        <%= link_to edit_repository_path(poc.id), class: "tooltipped", data: { turbolinks: false, position: 'top', delay: '50', tooltip: "edit" }  do %>
+          <i class="material-icons">mode_edit</i>
         <% end %>
-        <%= link_to repository_path(poc.id, user_id: params[:id]), method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <i class="material-icons">delete</i>
+        <%= link_to repository_path(poc.id, user_id: params[:id]), method: :delete, class: "tooltipped", data: { confirm: 'Are you sure?', position: 'top', delay: '50', tooltip: "delete" } do %>
+          <i class="material-icons">delete</i>
         <% end %>
       </td>
     </tr>

@@ -32,6 +32,11 @@
                     </div>
                 </div>
                 </div>
+                <% if @repository.author_name == current_user.name %>
+                  <%= link_to edit_repository_path(@repository.id), class: "edit-icon tooltipped", data: { turbolinks: false, position: 'top', delay: '50', tooltip: "edit" }  do %>
+                    <i class="material-icons">mode_edit</i>
+                  <% end %>
+                <% end %>
                 <div id="fav_repo_<%=@repository.id%>" class="fav_repo"><%= render partial: "favourite_repo", locals: { repository: @repository } %></div>
               </div>
               <div class="row">
@@ -50,19 +55,19 @@
                     <ul>
                       <li>
                         <i class="medium fa fa-github"></i>
-                        <%= link_to "#{ @repository.svn_url }", target: "_blank", title: "Github Page" do %>
+                        <%= link_to "#{ @repository.svn_url }", target: "_blank", class: "tooltipped", data: { position: 'left', delay: '50', tooltip: 'Github Page' } do %>
                         GITHUB PAGE
                         <% end %>
                       </li>
                       <li>
                         <i class="medium fa fa-file-text-o"></i>
-                        <%= link_to "#{ @repository.wiki_url }", target: "_blank", title: "Github Wiki" do %>
+                        <%= link_to "#{ @repository.wiki_url }", target: "_blank", class: "tooltipped", data: { position: 'left', delay: '50', tooltip: "Github Wiki" } do %>
                         GITHUB WIKI
                         <% end %>
                       </li>
                       <li>
                         <i class="medium fa fa-download"></i>
-                        <%= link_to "#{ @repository.download_link }", onclick: "increment_downloads(#{@repository.id});", title: "Download POC"  do %>
+                        <%= link_to "#{ @repository.download_link }", onclick: "increment_downloads(#{@repository.id});", class: "tooltipped", data: { position: 'left', delay: '50', tooltip: "Download POC" } do %>
                         DOWNLOAD
                         <% end %>
                       </li>
@@ -77,37 +82,37 @@
       <div class="panel-box col-xs-2 col l2 counter-box " style="vertical-align: top">
         <div class="panel-content">
           <div class="row">
-            <div class="col l6" title="Stars">
+            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Stars">
               <i class="medium fa fa-star"></i>
             </div>
             <div class="col l6"><%= @repository.no_of_stars.to_i %></div>
           </div>
           <div class="row">
-            <div class="col l6" title="Forks">
+            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Forks">
               <i class="medium fa fa-code-fork"></i>
             </div>
             <div class="col l6"><%= @repository.no_of_forks.to_i %></div>
           </div>
           <div class="row">
-            <div class="col l6" title="Watchers">
+            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Watchers">
               <i class="medium fa fa-bell"></i>
             </div>
             <div class="col l6"><%= @repository.no_of_watchers.to_i %></div>
           </div>
           <div class="row">
-            <div class="col l6" title="Downloads">
+            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Downloads">
               <i class="medium fa fa-download"></i>
             </div>
             <div class="col l6"><%= @repository.no_of_downloads.to_i %></div>
           </div>
           <div class="row">
-            <div class="col l6" title="Views">
+            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Views">
               <i class="medium fa fa-eye"></i>
             </div>
             <div class="col l6"><%= @repository.impressions.count.to_i %></div>
           </div>
           <div class="row">
-            <div class="col l6" title="Favourites">
+            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Favourites">
               <i class="medium fa fa-bookmark"></i>
             </div>
             <div class="col l6"><%= @repository.favourites.count.to_i %></div>
