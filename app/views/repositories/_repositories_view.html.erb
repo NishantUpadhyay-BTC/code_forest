@@ -1,5 +1,4 @@
 <div id='repositories_section'>
-  <% if @repositories.present? %>
   <% @repositories.each do |repository| %>
   <div class="col s12 m4 l3">
     <!-- new card start -->
@@ -34,9 +33,6 @@
       </div>
     </div>
   </div>
-  <% end %>
-  <% else %>
-    <h4 class="no-record">No Records found</h4>
   <% end %>
 </div>
 <script>
