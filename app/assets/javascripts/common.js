@@ -45,7 +45,6 @@ var Common = {
       previousPage = nextPage;
       return;
     }
-    $('.tooltipped').tooltip({delay: 50});
   },
 
   showOrHideRepo: function (path) {
