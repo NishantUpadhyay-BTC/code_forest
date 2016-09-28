@@ -77,7 +77,7 @@ class RepositoriesController < ApplicationController
   end
 
   def search
-    @repositories = paginated(Repository.search_repo(params[:key_word], params[:language]), params[:page])
+    @repositories = paginated(Repository.search_repo(params[:key_word].strip, params[:language]), params[:page])
   end
 
   def total_downloads
