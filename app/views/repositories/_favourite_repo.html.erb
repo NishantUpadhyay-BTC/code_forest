@@ -1,3 +1,6 @@
-<%= link_to repositories_favourite_path(repository), remote: true, class: "fav-icon", title: "Favourite this POC" do %>
-  <i style="font-size: 1.3rem; padding-right: 10px; cursor: pointer;" class="material-icons <%= fav_repo(repository) %>-text">favorite</i><%= repository.favourites.count %>
+<%= link_to repositories_favourite_path(repository), "remote"=>true, "class"=>"fav-icon tooltipped", "data-position"=>"top", "data-delay"=>"50", "data-tooltip"=>"Favourite this POC" do %>
+  <i style="font-size: 1.3rem; padding-right: 10px; cursor: pointer;" class="material-icons <%= fav_repo(repository) %>-text">
+    favorite
+  </i>
+  <%= repository.favourites.count %>
 <% end %>
