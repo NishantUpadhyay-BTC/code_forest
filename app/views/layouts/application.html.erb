@@ -11,6 +11,11 @@
 
   <body class="home page page-id-5 page-template page-template-home-page page-template-home-page-php" data-gr-c-s-loaded="true">
     <%= render partial: 'layouts/header'%>
+    <main>
+      <% unless current_user.present? %>
+        <%= render partial: 'layouts/section'%>
+      <% end %>
+    </main>
     <% flash.each do |key, message| %>
     <script>Materialize.toast("<%= message%> <a href='javascript:;' onclick='closeToast();'><i class='material-icons close'>close</i></a>", 4000, '<%= key %>');</script>
     <% end %>
