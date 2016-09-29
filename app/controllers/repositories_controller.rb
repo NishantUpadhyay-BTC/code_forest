@@ -117,7 +117,7 @@ class RepositoriesController < ApplicationController
   end
 
   def change_in_own_repo
-    unless initialize_repo.author_name == current_user.name
+    unless current_user.present? && initialize_repo.author_name == current_user.name
       flash[:red] = "You dont have permission to access that."
       redirect_to repositories_path
     end
