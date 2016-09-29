@@ -1,6 +1,6 @@
 module RepositoriesHelper
-  FAV_REPO_COLOR = "pink"
-  UNFAV_REPO_COLOR = "grey"
+  FAV_REPO_COLOR = "pink-text"
+  UNFAV_REPO_COLOR = ""
   AVAILABLE_LOGOS = ["C", "CoffeeScript", "CSS", "HTML", "Java",
     "JavaScript", "Perl", "Rouge", "Ruby", "Shell", "Visual Basic"]
 

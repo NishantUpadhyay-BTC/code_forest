@@ -36,40 +36,29 @@
   .bg-section input{background:#fff;box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)}
   .bg-section .search-icon{position:absolute;top:0;right:20px;height:3.5rem;line-height:3.5rem;color:#e6e6e6}
   .bg-section .search-icon:hover{color:#444}
-  
+
   .bg-section .down-arrow{position:absolute;bottom:30px;width:50px;height:50px;line-height:50px;border-radius:50%;font-size:20px;color:#fff;text-align:center;background:#7cb342;transition:all .4s}
   .bg-section .down-arrow:hover{background:#689f38}
-  
-  .projects-listing{padding-top:50px;display:inline-block;width:100%}
-  .card{width:200px;max-height:auto;float:left;text-align:center;margin:0}
+
+  .repositories-listing{padding:50px 0;display:inline-block;width:100%}
+  .card{width:200px;max-height:auto;float:left;text-align:center;margin:0 !important}
   .card .card-image img{/*max-height:200px;max-width:100%;*/width:100%;display:inline-block}
-  .card .card-content{padding:12px;text-align:left;font-size:14px}
-  .card .card-content .card-title{margin:0;padding:0;font-size:17px;line-height:24px;position:relative;color:#689f38;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+  .card .card-content{padding:12px 12px 6px 12px !important;text-align:left;font-size:14px}
+  .card .card-content .card-title{margin:0;padding:0;font-size:17px;line-height:24px !important;position:relative;color:#689f38;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
   .card .card-content .card-title a{color:#8bc34a}
   .card .card-content .card-title a:hover{color:#444}
-  .card .card-content .fa{color:#999}
-  .card .card-content .fa:hover{color:#689f38}
-  .card .card-content .card-title .fa{position:absolute;right:15px;top:3px;}
+  .card .card-content .card-title .fa{position:absolute;right:15px;top:3px}
   .card .card-content .user a{font-size:13px;color:#999}
   .card .card-content .user a:hover{color:#444}
-  .card .card-content .desc{margin-top:5px;color:#666}
-  .card .card-content .tech{display:inline-block;width:100%;list-style:none;padding:10px 0 0 0;margin:0;}
-  .card .card-content .tech li{float:left;padding:0 5px;margin-right:5px;text-align:center;}
+  .card .card-content .desc{margin-top:15px;color:#666}
   .card .card-content .action-icons{display:inline-block;width:100%;list-style:none;padding:10px 0 0 0;margin:15px 0 0 0;border-top:solid 1px #efefef}
   .card .card-content .action-icons li{float:left;width:50%}
-  .card .card-content .action-icons li.tech em{font-size:22px;line-height:32px;color:#999;margin-right:5px;cursor:pointer}
-  .card .card-content .action-icons li.tech em:hover{color:#689f38}
-  .card .card-content .action-icons li.tech{padding:0;}
-  /*.card .card-content .action-icons li.user{font-size:14px;color:#999}
-  .card .card-content .action-icons li.user .fa{margin-right:5px}
-  .card .card-content .action-icons li.user a{color:#999;line-height:32px}
-  .card .card-content .action-icons li.user:hover a, .card .card-content .action-icons li.user:hover .fa{color:#689f38}
- */ 
-  .card .card-content .action-icons li.fav span{font-size:13px;display:inline-block}
-  .card .card-content .action-icons li.fav span:first-of-type{margin-right:8px}
-  .card .card-content .action-icons li.fav span a{display:inline;font-size:14px;line-height:32px;text-align:center;color:#999}
-  .card .card-content .action-icons li.fav span a:hover{color:#444}
-  .card .card-content .action-icons li.fav span a .fa{margin-right:5px}
+  .card .card-content .action-icons li.tech{height:32px}
+  .card .card-content .action-icons li.tech img{margin-top:4px;height:24px}
+  .card .card-content .action-icons li.fav a{display:inline;font-size:15px;line-height:32px;text-align:center;color:#999}
+  .card .card-content .action-icons li.fav a:first-of-type{margin-right:5px}
+  .card .card-content .action-icons li.fav a:hover{color:#333}
+  .card .card-content .action-icons li.fav a .fa{margin-right:5px}
 
   @media (max-width:992px){
     nav .brand-logo{left:0;transform:translateX(0)}
