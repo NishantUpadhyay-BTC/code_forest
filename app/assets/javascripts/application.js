@@ -18,4 +18,5 @@
 //= require turbolinks
 //= require social-share-button
 //= require materialize-tags
+//= require freewall
 //= require_tree .
