@@ -1,16 +1,11 @@
-<main class="no-padding">
-  <div class="section white">
+<main>
+  <section class="projects-listing">
     <div class="container">
-      <!-- iterate for all repos -->
-      <div class="row">
-        <div class="col m12 s12">
-          <div class="section">
-          <%= render partial: 'repositories_view', locals: { repositories: @repositories} %>
-          <input type="hidden" id="loaded_page" value="">
-        </div>
-        </div>
+      <div id="freewall">
+        <%= render partial: 'repositories_view', locals: { repositories: @repositories } %>
+        <input type="hidden" id="loaded_page" value="">
       </div>
-      <!-- row complete-->
     </div>
-  </div>
+  </section>
 </main>
+<div class="row"></div>
