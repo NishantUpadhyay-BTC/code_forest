@@ -1,6 +1,8 @@
 module RepositoriesHelper
   FAV_REPO_COLOR = "pink"
   UNFAV_REPO_COLOR = "grey"
+  AVAILABLE_LOGOS = ["C", "CoffeeScript", "CSS", "HTML", "Java",
+    "JavaScript", "Perl", "Rouge", "Ruby", "Shell", "Visual Basic"]
 
   def fav_repo(repo)
     if current_user.present? && current_user.is_favourited?(repo)
@@ -36,5 +38,11 @@ module RepositoriesHelper
       tags += "<div class='chip'>#{tag}</div>"
     end
     tags.html_safe
+  end
+
+  def highest_used_language(repository)
+    language = repository.language_repositories.sort_by{|l| l.code}.last.language.name
+    image = AVAILABLE_LOGOS.include?(language) ? language : "Default"
+    {language: language, image: image}
   end
 end
