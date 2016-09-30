@@ -55,6 +55,13 @@ var Common = {
 
   searchRepoByLanguage: function (searchFormId) {
     $(searchFormId).trigger('submit.rails');
+    $("html,body").animate({
+      scrollTop: $(window).height() - 64
+    }, "slow");
+    $('#search_fields').css({
+      'display': 'block'
+    });
+    return false;
   },
 
   searchRepoByKeyword: function (searchFormId) {
