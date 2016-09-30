@@ -26,6 +26,7 @@ class Repository < ApplicationRecord
     repositories = repositories.where(condition_for_key_word, key_word, key_word, key_word) if key_word.present?
     repositories
   end
+
   private
   def create_repository_identicon
     RubyIdenticon.create_and_save(name, "public/images/repository_identicons/#{name}.png")
