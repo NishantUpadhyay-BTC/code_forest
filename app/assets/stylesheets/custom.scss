@@ -1,6 +1,6 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto:400,700';
   .navbar-fixed{height:64px}
-  nav{background:#7cb342;box-shadow:none;height:64px}
+  nav{background:#7cb342 !important;box-shadow:none;height:64px}
   nav .fa{margin-right:5px}
   nav .brand-logo{min-width:150px}
   nav .brand-logo span{display:inline-block;float:left;line-height:64px}
@@ -36,10 +36,10 @@
   .bg-section input{background:#fff;box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)}
   .bg-section .search-icon{position:absolute;top:0;right:20px;height:3.5rem;line-height:3.5rem;color:#e6e6e6}
   .bg-section .search-icon:hover{color:#444}
-  
+
   .bg-section .down-arrow{position:absolute;bottom:30px;width:50px;height:50px;line-height:50px;border-radius:50%;font-size:20px;color:#fff;text-align:center;background:#7cb342;transition:all .4s}
   .bg-section .down-arrow:hover{background:#689f38}
-  
+
   .projects-listing{padding-top:50px;display:inline-block;width:100%}
   .card{width:200px;max-height:auto;float:left;text-align:center;margin:0}
   .card .card-image img{/*max-height:200px;max-width:100%;*/width:100%;display:inline-block}
@@ -64,7 +64,7 @@
   .card .card-content .action-icons li.user .fa{margin-right:5px}
   .card .card-content .action-icons li.user a{color:#999;line-height:32px}
   .card .card-content .action-icons li.user:hover a, .card .card-content .action-icons li.user:hover .fa{color:#689f38}
- */ 
+ */
   .card .card-content .action-icons li.fav span{font-size:13px;display:inline-block}
   .card .card-content .action-icons li.fav span:first-of-type{margin-right:8px}
   .card .card-content .action-icons li.fav span a{display:inline;font-size:14px;line-height:32px;text-align:center;color:#999}
