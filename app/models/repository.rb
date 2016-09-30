@@ -30,9 +30,7 @@ class Repository < ApplicationRecord
 
   private
   def create_repository_identicon
-    if new_record?
       RubyIdenticon.create_and_save(name, "public/images/#{name}.png")
-    end
   end
 
   def set_default_url
