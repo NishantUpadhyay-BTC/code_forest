@@ -7,9 +7,9 @@
           <span>Code Forest</span>
         <% end %>
         <ul class="right menu">
-          <!-- <% if params[:action] == 'index' && params[:controller] == 'repositories' %>
+          <% if params[:action] == 'index' && params[:controller] == 'repositories' %>
             <%= render partial: 'search_form' %>
-          <% end %> -->
+          <% end %>
           <% unless current_user.present? %>
           <li>
             <a href="/auth/github">
@@ -51,8 +51,8 @@
 <script>
   $(document).ready(function () {
     if ($('input.select-dropdown').length == 0) {
-      // $('select').material_select();
-      // $(".dropdown-button").dropdown();
+      $('select').material_select();
+      $(".dropdown-button").dropdown();
     }
   });
 </script>

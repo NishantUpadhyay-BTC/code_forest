@@ -41,10 +41,15 @@
     </div>
   </section>
   <section class="projects-listing">
-    <%= render partial: 'repositories_view', locals: { repositories: @repositories} %>
-    <input type="hidden" id="loaded_page" value="">
+    <div class="container">
+      <div id="freewall">
+        <%= render partial: 'repositories_view', locals: { repositories: @repositories } %>
+        <input type="hidden" id="loaded_page" value="">
+      </div>
+    </div>
   </section>
 </main>
+<div class="row"></div>
 <script>
   $(function() {
     $('.green-bg').css({

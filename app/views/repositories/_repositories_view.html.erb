@@ -9,27 +9,42 @@
         <% end %>
       </div>
       <div class="card-content">
-        <p class="area">
-          <a href="https://github.com/<%= repository.author_name %>" target="_blank"><%= repository.author_name %></a>
+        <h4 class="card-title">
+          <%= link_to repository.name, repository_path(repository) %>
+        </h4>
+        <p class="user">
+          <a href="https://github.com/<%= repository.author_name %>" target="_blank">
+            <%= repository.author_name %>
+          </a>
         </p>
-        <span class="card-title activator brown-text text-darken-4">
-          <%= link_to(repository) do %>
-          <%= repository.name %>
-          <% end %>
-        </span>
-        <p>
-          <span style="float: left; padding-right: 1rem;">
-            <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="views">
-              <i style="font-size: 1.3rem; padding-right: 10px;" class="material-icons light-blue-text">
-                visibility
-              </i>
-              <%= repository.impressions.count %>
-            </a>
-          </span>
-          <span style="float: right; padding-right: 1rem;">
-            <div id="fav_repo_<%=repository.id%>"><%= render partial: "favourite_repo", locals: { repository: repository } %></div>
-          </span>
+        <p class="desc">
+          <%= repository.description[0, 50] %>
+          <%= link_to  "...", repository_path(repository) if (repository.description.length > 50)%>
         </p>
+        <ul class="action-icons">
+          <li class="tech">
+            <!-- technologies goes here -->
+            <span>
+            <%= image_tag "language_icons/#{highest_used_language(repository)[:image]}.png",
+                size: "35x35", alt: "Language Logo", class: "tooltipped",
+                data: {position: "top", delay: "50", tooltip: highest_used_language(repository)[:language]} %>
+            <span>
+          </li>
+          <li class="fav right-align">
+            <span>
+              <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="views">
+                <i style="font-size: 1.3rem; padding-right: 10px;" class="material-icons light-blue-text">
+                  visibility
+                </i>
+                <%= repository.impressions.count %>
+              </a>
+            </span>
+            <span>
+              <div id="fav_repo_<%=repository.id%>"><%= render partial: "favourite_repo", locals: { repository: repository } %></div>
+            </span>
+          </li>
+          <li></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -47,4 +62,23 @@
     Common.showRepositoriesOnScroll();
   });
   $('.tooltipped').tooltip({delay: 50});
+
+  /* Card Design */
+  var wall = new Freewall("#freewall");
+  wall.reset({
+    selector: '.card',
+    animate: true,
+    cellW: 250,
+    cellH: 'auto',
+    gutterX: 20,
+    gutterY: 20,
+    onResize: function() {
+      wall.fitWidth();
+    }
+  });
+  wall.container.find('.card img').load(function() {
+    wall.fitWidth();
+  });
+  wall.fitWidth();
+  /* End */
 </script>
