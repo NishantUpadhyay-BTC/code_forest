@@ -18,6 +18,7 @@ class Repository < ApplicationRecord
   acts_as_taggable_on :tags_for_repository
 
   after_initialize :create_repository_identicon
+  after_create :clean_files
 
   def self.search_repo(key_word, language)
     key_word = "%#{key_word.upcase}%"
@@ -29,10 +30,20 @@ class Repository < ApplicationRecord
 
   private
   def create_repository_identicon
-    RubyIdenticon.create_and_save(name, "public/images/repository_identicons/#{name}.png")
+    if new_record?
+      RubyIdenticon.create_and_save(name, "public/images/#{name}.png")
+    end
   end
 
   def set_default_url
-    "repository_identicons/#{name}.png"
+    "#{name}.png"
   end
+
+  def clean_files
+    path = "#{Rails.root}/public/images/#{name}.png"
+    if File.exist?(path)
+      File.delete(path)
+    end
+  end
+
 end
