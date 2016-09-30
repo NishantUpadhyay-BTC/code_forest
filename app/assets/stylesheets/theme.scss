@@ -492,3 +492,30 @@ div.blockMsg {
   text-align: center !important;
   font-weight: bold;
 }
+
+.pagination{
+  padding: 10px 0;
+}
+
+.pagination a, em, span {
+  border-radius: 2px;
+  display: inline-block;
+  font-size: 1.2rem;
+  line-height: 30px;
+  padding: 0 10px;
+  text-align: center;
+  list-style-type: none;
+}
+
+.pagination a{
+  color: #444;
+}
+.pagination {
+  em.current {
+    background-color: #7cb342;
+  }
+  a i, span i {
+    font-size: 2.2rem;
+    vertical-align: middle;
+  }
+}
