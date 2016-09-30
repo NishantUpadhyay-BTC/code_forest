@@ -282,6 +282,12 @@
     }
   }
 }
+.show{
+display: block !important;
+}
+.hide{
+display: none !important;
+}
 
   @media (max-width:992px){
     nav .brand-logo{left:0;transform:translateX(0)}
