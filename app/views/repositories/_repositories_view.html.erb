@@ -1,11 +1,10 @@
 <div id='repositories_section'>
   <% @repositories.each do |repository| %>
-  <div class="col s12 m4 l3">
     <!-- new card start -->
     <div class="card hoverable" >
       <div class="card-image waves-effect waves-block waves-light">
         <%= link_to(repository) do %>
-        <%= image_tag repository.poc_image, width: "305", height: "229", sizes: "(max-width: 305px) 100vw, 305px", title: "POC Image", alt: "POC Image", class: "responsive-img wp-post-image" %>
+        <%= image_tag repository.poc_image, alt: "", class: "responsive-img wp-post-image" %>
         <% end %>
       </div>
       <div class="card-content">
@@ -23,31 +22,22 @@
         </p>
         <ul class="action-icons">
           <li class="tech">
-            <!-- technologies goes here -->
-            <span>
             <%= image_tag "language_icons/#{highest_used_language(repository)[:image]}.png",
-                size: "35x35", alt: "Language Logo", class: "tooltipped",
+                alt: "Language Logo", class: "tooltipped",
                 data: {position: "top", delay: "50", tooltip: highest_used_language(repository)[:language]} %>
-            <span>
           </li>
           <li class="fav right-align">
-            <span>
               <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="views">
-                <i style="font-size: 1.3rem; padding-right: 10px;" class="material-icons light-blue-text">
-                  visibility
-                </i>
+                <i class="fa fa-eye" aria-hidden="true"></i>
                 <%= repository.impressions.count %>
               </a>
-            </span>
-            <span>
-              <div id="fav_repo_<%=repository.id%>"><%= render partial: "favourite_repo", locals: { repository: repository } %></div>
+            <span id="fav_repo_<%=repository.id%>">
+              <%= render partial: "favourite_repo", locals: { repository: repository } %>
             </span>
           </li>
-          <li></li>
         </ul>
       </div>
     </div>
-  </div>
   <% end %>
   <% if !@repositories.present? && (params[:page] == 1 || params[:page].nil?) %>
     <h4><center>No Records Found</center></h4>
@@ -62,7 +52,6 @@
     Common.showRepositoriesOnScroll();
   });
   $('.tooltipped').tooltip({delay: 50});
-
   /* Card Design */
   var wall = new Freewall("#freewall");
   wall.reset({
