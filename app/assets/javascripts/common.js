@@ -76,6 +76,7 @@ var Common = {
       $("html,body").animate({
         scrollTop: $(window).height() - 64
       }, "slow");
+      Common.syncTwoForms(searchFormId);
       return false;
     }
   },
