@@ -1,3 +1,3 @@
-every 1.week do
+every 1.minute do
   rake 'send_newsletter_email'
 end
