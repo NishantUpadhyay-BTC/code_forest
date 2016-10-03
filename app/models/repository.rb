@@ -29,6 +29,7 @@ class Repository < ApplicationRecord
   end
 
   private
+
   def create_repository_identicon
       directory_name = "public/images"
       Dir.mkdir(directory_name) unless File.exists?(directory_name)
@@ -45,5 +46,4 @@ class Repository < ApplicationRecord
       File.delete(path)
     end
   end
-
 end

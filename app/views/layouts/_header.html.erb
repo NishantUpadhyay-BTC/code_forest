@@ -55,9 +55,6 @@
 </header>
 <script>
   $(document).ready(function () {
-    if ($('input.select-dropdown').length == 0) {
-      $('select').material_select();
-      $(".dropdown-button").dropdown();
-    }
+    Common.selectDropdown();
   });
 </script>

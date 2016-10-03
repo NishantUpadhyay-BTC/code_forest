@@ -49,42 +49,9 @@
   </section>
 </main>
 <script>
-function init() {
-  $('#search_fields').addClass("hide");
-  window.addEventListener('scroll', function(e){
-    var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-        shrinkOn = 600,
-        header = $('#search_fields');
-    if (distanceY > shrinkOn) {
-      header.addClass("show");
-      header.removeClass('hide');
-    } else {
-        if (header.hasClass("show")) {
-          header.addClass('hide');
-          header.removeClass("show");
-        }
-    }
-  });
-}
-window.onload = init();
-$(document).ready(function () {
-  if ($('input.select-dropdown').length == 0) {
-    $('select').material_select();
-    $(".dropdown-button").dropdown();
-  }
-});
-  $(function() {
-    $('.green-bg').css({
-      'height': ($(window).height() - 64) + 'px'
-    });
-    $('#listing').click(function() {
-      $("html,body").animate({
-        scrollTop: $(window).height() - 64
-      }, "slow");
-      $('#search_fields').css({
-        'display': 'block'
-      });
-      return false;
-    });
+  window.onload = Common.showSearchOnScroll();
+  $(document).ready(function () {
+    Common.selectDropdown();
+    Common.showHideGreenBg();
   });
 </script>
