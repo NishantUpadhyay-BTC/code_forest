@@ -1,4 +1,44 @@
 <main>
+  <section class="bg-section">
+    <div class="container fullheight">
+      <div class="row valign-wrapper green-bg">
+        <div class="col s12 valign center-align">
+          <h1>Connect &bull; Add &bull; Share</h1>
+          <p>Show off your research and development</p>
+          <p>Open Source your knowledge and make better community for today and tomorrow</p>
+          <% unless current_user.present? %>
+            <a href="/auth/github" class="git-btn waves-effect btn-large">
+              <i class="fa fa-github" aria-hidden="true"></i>
+              Signup with GitHub
+            </a>
+          <% end %>
+          <div class="row">
+            <%= render partial: 'search_form', locals: { searchform: 'index_search', keyword: 'index_keyword' } %>
+          </div>
+          <div class="row">
+            <div class="col s12 m4">
+              <h4><i class="fa fa-code" aria-hidden="true"></i>
+                <%= Repository.count %>+ Projects
+              </h4>
+            </div>
+            <div class="col s12 m4">
+              <h4><i class="fa fa-users" aria-hidden="true"></i>
+                <%= User.count %>+ Contributers
+              </h4>
+            </div>
+            <div class="col s12 m4">
+              <h4><i class="fa fa-language" aria-hidden="true"></i>
+                <%= Language.count %>+ Languages
+              </h4>
+            </div>
+            <div class="col s12">
+              <a href="javascript:;" id="listing" class="down-arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="repositories-listing">
     <div class="container">
       <div id="freewall">
@@ -8,3 +48,43 @@
     </div>
   </section>
 </main>
+<script>
+function init() {
+  $('#search_fields').addClass("hide");
+  window.addEventListener('scroll', function(e){
+    var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+        shrinkOn = 600,
+        header = $('#search_fields');
+    if (distanceY > shrinkOn) {
+      header.addClass("show");
+      header.removeClass('hide');
+    } else {
+        if (header.hasClass("show")) {
+          header.addClass('hide');
+          header.removeClass("show");
+        }
+    }
+  });
+}
+window.onload = init();
+$(document).ready(function () {
+  if ($('input.select-dropdown').length == 0) {
+    $('select').material_select();
+    $(".dropdown-button").dropdown();
+  }
+});
+  $(function() {
+    $('.green-bg').css({
+      'height': ($(window).height() - 64) + 'px'
+    });
+    $('#listing').click(function() {
+      $("html,body").animate({
+        scrollTop: $(window).height() - 64
+      }, "slow");
+      $('#search_fields').css({
+        'display': 'block'
+      });
+      return false;
+    });
+  });
+</script>

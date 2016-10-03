@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <title>CodeForest</title>
@@ -9,13 +9,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
-  <body class="home page page-id-5 page-template page-template-home-page page-template-home-page-php" data-gr-c-s-loaded="true">
+  <body data-gr-c-s-loaded="true">
     <%= render partial: 'layouts/header'%>
-    <main>
-      <% unless current_user.present? %>
-        <%= render partial: 'layouts/section'%>
-      <% end %>
-    </main>
     <% flash.each do |key, message| %>
     <script>Materialize.toast("<%= message%> <a href='javascript:;' onclick='closeToast();'><i class='material-icons close'>close</i></a>", 4000, '<%= key %>');</script>
     <% end %>

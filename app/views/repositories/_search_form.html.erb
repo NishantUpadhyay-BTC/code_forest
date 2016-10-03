@@ -1,17 +1,13 @@
-<li class="menu-item" id="menu-item-24">
+<%= form_tag("/repositories/search/", method: :get, remote: true, id: searchform) do %>
   <div class="row">
-    <%= form_tag("/repositories/search/", method: :get, remote: true, id: "searchform") do %>
-      <div class="row">
-        <div class="input-field col s4">
-          <%= select_tag 'language', options_for_select(languages_for_option),
-            onchange: "Common.searchRepoByLanguage('#searchform')" %>
-        </div>
-        <div class="input-field col s8">
-          <%= text_field_tag 'key_word', nil, placeholder: "search",
-           class: "validate searchbox", title: "Enter to search", onkeyup: "Common.searchRepoByKeyword('#searchform')" %>
-        </div>
-      </div>
-      <input type="submit" hidden=true>
-    <% end %>
+    <div class="input-field col s4">
+      <%= select_tag 'language', options_for_select(languages_for_option),
+        onchange: "Common.searchRepoByLanguage(#{searchform})" %>
+    </div>
+    <div class="input-field col s8">
+      <%= text_field_tag 'key_word', nil, placeholder: "search",
+       class: "searchbox", style: "color:black;", id: keyword, title: "Enter to search", onkeyup: "Common.searchRepoByKeyword(#{searchform}, #{keyword})" %>
+    </div>
   </div>
-</li>
+  <input type="submit" hidden=true onclick="Common.scrollTopOnSearch(<%= searchform %>);">
+<% end %>
