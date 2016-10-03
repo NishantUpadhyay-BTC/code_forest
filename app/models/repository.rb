@@ -30,6 +30,8 @@ class Repository < ApplicationRecord
 
   private
   def create_repository_identicon
+      directory_name = "public/images"
+      Dir.mkdir(directory_name) unless File.exists?(directory_name)
       RubyIdenticon.create_and_save(name, "public/images/#{name}.png")
   end
 
