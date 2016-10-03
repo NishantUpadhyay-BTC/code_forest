@@ -41,7 +41,8 @@
 
   </tbody>
 </table>
-<%= will_paginate @pocs, param_name: 'poc_page' %>
+<%= will_paginate @pocs, param_name: 'poc_page', class: pagination[:class], previous_label: pagination[:previous_label],
+next_label: pagination[:next_label] %>
 <% else %>
   <h6 class="no-record">No Records found</h6>
 <% end %>

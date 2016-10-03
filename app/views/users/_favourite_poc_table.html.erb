@@ -23,7 +23,8 @@
     <% end %>
   </tbody>
 </table>
-<%= will_paginate @favourite_pocs, param_name: 'favourite_poc_page' %>
+<%= will_paginate @favourite_pocs, param_name: 'favourite_poc_page', class: pagination[:class], previous_label: pagination[:previous_label],
+next_label: pagination[:next_label]  %>
 <% else %>
 <h6 class="no-record">No Records found</h6>
 <% end %>

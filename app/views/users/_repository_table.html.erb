@@ -24,7 +24,8 @@
 
   </tbody>
 </table>
-<%= will_paginate @repositories, param_name: 'repo_page' %>
+<%= will_paginate @repositories, param_name: 'repo_page', class: pagination[:class], previous_label: pagination[:previous_label],
+next_label: pagination[:next_label] %>
 <% else %>
 <h6 class="no-record">No Records found</h6>
 <% end %>

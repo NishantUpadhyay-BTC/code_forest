@@ -14,6 +14,11 @@ var Common = {
   },
 
   displayPreview: function () {
+    if($("#description")[0].value.trim() == "")
+    {
+      Materialize.toast("description can't be blank. <a href='javascript:;' onclick='closeToast();'><i class='material-icons close'>close</i></a>", 4000, 'red');
+      return false;
+    }
     $("#p_decription").text($("#description")[0].value);
     $("#repository_description").val($("#description")[0].value);
     if($('#tag_list')[0].value != ""){
