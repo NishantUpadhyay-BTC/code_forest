@@ -91,11 +91,44 @@ var Common = {
     return tag_divs;
   },
 
+  showHideGreenBg: function () {
+    $('.green-bg').css({
+      'height': ($(window).height() - 64) + 'px'
+    });
+    $('#listing').click(function() {
+      $("html,body").animate({
+        scrollTop: $(window).height() - 64
+      }, "slow");
+      $('#search_fields').css({
+        'display': 'block'
+      });
+      return false;
+    });
+  },
+
   scrollTopOnSearch: function (searchFormId) {
     Common.syncTwoForms(searchFormId);
     $("html,body").animate({
       scrollTop: $(window).height() - 64
     }, "slow");
+  },
+
+  showSearchOnScroll: function () {
+    $('#search_fields').addClass("hide");
+    window.addEventListener('scroll', function(e){
+      var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+          showOn = 600,
+          header = $('#search_fields');
+      if (distanceY > showOn) {
+        header.addClass("show");
+        header.removeClass('hide');
+      } else {
+          if (header.hasClass("show")) {
+            header.addClass('hide');
+            header.removeClass("show");
+          }
+      }
+    });
   },
 
   syncTwoForms: function (searchFormId) {
