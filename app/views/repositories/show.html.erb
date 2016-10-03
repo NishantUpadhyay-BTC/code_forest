@@ -37,7 +37,7 @@
                     <i class="material-icons">mode_edit</i>
                   <% end %>
                 <% end %>
-                <div id="fav_repo_<%=@repository.id%>" class="fav_repo"><%= render partial: "favourite_repo", locals: { repository: @repository } %></div>
+                <div id="fav_repo_<%= @repository.id %>" class="fav_repo"><%= render partial: "favourite_repo", locals: { repository: @repository } %></div>
               </div>
               <div class="row">
                 <div class="col l12 para-text">

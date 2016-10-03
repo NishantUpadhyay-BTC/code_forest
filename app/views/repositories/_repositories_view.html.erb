@@ -24,7 +24,7 @@
           <li class="tech">
             <%= image_tag "language_icons/#{highest_used_language(repository)[:image]}.png",
                 alt: "Language Logo", class: "tooltipped",
-                data: {position: "top", delay: "50", tooltip: highest_used_language(repository)[:language]} %>
+                data: { position: "top", delay: "50", tooltip: highest_used_language(repository)[:language] } %>
           </li>
           <li class="fav right-align">
               <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="views">
@@ -51,24 +51,9 @@
   $(window).on('scroll', function () {
     Common.showRepositoriesOnScroll();
   });
-  $('.tooltipped').tooltip({delay: 50});
 
-  /* Card Design */
-  var wall = new Freewall("#freewall");
-  wall.reset({
-    selector: '.card',
-    animate: true,
-    cellW: 250,
-    cellH: 'auto',
-    gutterX: 20,
-    gutterY: 20,
-    onResize: function() {
-      wall.fitWidth();
-    }
+  $(document).ready(function () {
+    $('.tooltipped').tooltip({delay: 50});
+    Common.cardArrange();
   });
-  wall.container.find('.card img').load(function() {
-    wall.fitWidth();
-  });
-  wall.fitWidth();
-  /* End */
 </script>

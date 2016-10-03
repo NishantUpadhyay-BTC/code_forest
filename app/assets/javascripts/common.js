@@ -106,6 +106,32 @@ var Common = {
     });
   },
 
+  cardArrange: function () {
+    var wall = new Freewall("#freewall");
+    wall.reset({
+      selector: '.card',
+      animate: true,
+      cellW: 250,
+      cellH: 'auto',
+      gutterX: 20,
+      gutterY: 20,
+      onResize: function() {
+        wall.fitWidth();
+      }
+    });
+    wall.container.find('.card img').load(function() {
+      wall.fitWidth();
+    });
+    wall.fitWidth();
+  },
+
+  selectDropdown: function () {
+    if ($('input.select-dropdown').length == 0) {
+      $('select').material_select();
+      $(".dropdown-button").dropdown();
+    }
+  },
+
   scrollTopOnSearch: function (searchFormId) {
     Common.syncTwoForms(searchFormId);
     $("html,body").animate({
