@@ -7,9 +7,14 @@
           <span>Code Forest</span>
         <% end %>
         <ul class="right menu">
-          <% if params[:action] == 'index' && params[:controller] == 'repositories' %>
-            <%= render partial: 'search_form' %>
-          <% end %>
+          <li>
+            <div class="row" id="search_fields">
+              <% if params[:action] == 'index' && params[:controller] == 'repositories' %>
+                <%= render partial: 'search_form',
+                  locals: { searchform: 'header_search', keyword: 'header_keyword' } %>
+              <% end %>
+            </div>
+          </li>
           <% unless current_user.present? %>
           <li>
             <a href="/auth/github">

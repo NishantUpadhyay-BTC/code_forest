@@ -13,17 +13,7 @@
             </a>
           <% end %>
           <div class="row">
-            <%= form_tag("/repositories/search/", method: :get, remote: true, id: "searchform") do %>
-              <div class="input-field col s6 center-align">
-                <%= select_tag 'language', options_for_select(languages_for_option),
-                onchange: "Common.searchRepoByLanguage('#searchform')" %>
-              </div>
-              <div class="input-field col s6 center-align">
-                <%= text_field_tag 'key_word', nil, placeholder: "search",
-                 class: "validate searchbox", title: "Enter to search", onkeyup: "Common.searchRepoByKeyword('#searchform')" %>
-              </div>
-              <input type="submit" hidden=true>
-            <% end %>
+            <%= render partial: 'search_form', locals: { searchform: 'index_search', keyword: 'index_keyword' } %>
           </div>
           <div class="row">
             <div class="col s12 m4">
@@ -59,6 +49,24 @@
   </section>
 </main>
 <script>
+function init() {
+  $('#search_fields').addClass("hide");
+  window.addEventListener('scroll', function(e){
+    var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+        shrinkOn = 600,
+        header = $('#search_fields');
+    if (distanceY > shrinkOn) {
+      header.addClass("show");
+      header.removeClass('hide');
+    } else {
+        if (header.hasClass("show")) {
+          header.addClass('hide');
+          header.removeClass("show");
+        }
+    }
+  });
+}
+window.onload = init();
 $(document).ready(function () {
   if ($('input.select-dropdown').length == 0) {
     $('select').material_select();
