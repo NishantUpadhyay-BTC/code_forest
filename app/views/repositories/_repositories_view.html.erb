@@ -31,7 +31,7 @@
                 <i class="fa fa-eye" aria-hidden="true"></i>
                 <%= repository.impressions.count %>
               </a>
-            <span id="fav_repo_<%=repository.id%>">
+            <span id="fav_repo_<%= repository.id %>">
               <%= render partial: "favourite_repo", locals: { repository: repository } %>
             </span>
           </li>

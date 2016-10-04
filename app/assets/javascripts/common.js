@@ -61,9 +61,7 @@ var Common = {
   searchRepoByLanguage: function (searchFormId) {
     Common.syncTwoForms(searchFormId);
     $(searchFormId).trigger('submit.rails');
-    $("html,body").animate({
-      scrollTop: $(window).height() - 64
-    }, "slow");
+    Common.hideHeader();
     $('#search_fields').css({
       'display': 'block'
     });
@@ -73,9 +71,7 @@ var Common = {
   searchRepoByKeyword: function (searchFormId, keywordId) {
     if($(keywordId)[0].value.length == 0){
       $(searchFormId).trigger('submit.rails');
-      $("html,body").animate({
-        scrollTop: $(window).height() - 64
-      }, "slow");
+      Common.hideHeader();
       Common.syncTwoForms(searchFormId);
       return false;
     }
@@ -92,13 +88,12 @@ var Common = {
   },
 
   showHideGreenBg: function () {
+    var greenBgHeight = 64;
     $('.green-bg').css({
-      'height': ($(window).height() - 64) + 'px'
+      'height': ($(window).height() - greenBgHeight) + 'px'
     });
     $('#listing').click(function() {
-      $("html,body").animate({
-        scrollTop: $(window).height() - 64
-      }, "slow");
+      Common.hideHeader();
       $('#search_fields').css({
         'display': 'block'
       });
@@ -134,9 +129,7 @@ var Common = {
 
   scrollTopOnSearch: function (searchFormId) {
     Common.syncTwoForms(searchFormId);
-    $("html,body").animate({
-      scrollTop: $(window).height() - 64
-    }, "slow");
+    Common.hideHeader();
   },
 
   showSearchOnScroll: function () {
@@ -163,5 +156,12 @@ var Common = {
     var changeSelect = searchFormId.id == 'index_search' ? '#header_search' : '#index_search';
     $(changeSelect)[0].elements[1].value = selectedLanguage;
     $(changeSelect)[0].elements[3].value = keyword;
+  },
+
+  hideHeader: function () {
+    var greenBgHeight = 64;
+    $("html,body").animate({
+      scrollTop: $(window).height() - greenBgHeight
+    }, "slow");
   }
 }

@@ -25,14 +25,14 @@
           <% else %>
           <li>
             <a class="dropdown-button user-pic" data-activates="child-menu">
-              <%= image_tag current_user.avtar_url, size: "64x64" %>
+              <%= image_tag current_user.avtar_url, size: Settings.user_image.size %>
               <i class="fa fa-caret-down right" aria-hidden="true"></i>
             </a>
           </li>
         </ul>
         <ul id="child-menu" class="dropdown-content">
           <li class="user-profile">
-            <%= image_tag current_user.avtar_url, size: "64x64" %>
+            <%= image_tag current_user.avtar_url, size: Settings.user_image.size %>
             <h4><%= current_user.name %></h4>
           </li>
           <li>

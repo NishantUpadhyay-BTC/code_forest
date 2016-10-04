@@ -20,7 +20,7 @@ class Repository < ApplicationRecord
   after_initialize :create_repository_identicon
   after_create :clean_files
 
-  def self.search_repo(key_word, language)
+  def self.search(key_word, language)
     key_word = "%#{key_word.upcase}%"
     condition_for_key_word = "repositories.hide != true AND (UPPER(repositories.name) LIKE ? OR UPPER(author_name) LIKE ? OR UPPER(description) LIKE ?)"
     repositories = (['All', 'Filter by'].include?(language) || language.nil?) ? Repository.all : Language.find_by(name: language).repositories
@@ -42,8 +42,6 @@ class Repository < ApplicationRecord
 
   def clean_files
     path = "#{Rails.root}/public/images/#{name}.png"
-    if File.exist?(path)
-      File.delete(path)
-    end
+    File.delete(path) if File.exist?(path)
   end
 end
