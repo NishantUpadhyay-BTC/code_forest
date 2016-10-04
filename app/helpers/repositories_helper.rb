@@ -45,4 +45,12 @@ module RepositoriesHelper
     image = AVAILABLE_LOGOS.include?(language) ? language : "Default"
     {language: language, image: image}
   end
+
+  def useful_counts
+    counts = {
+      repository_count: Repository.count,
+      user_count: User.count,
+      language_count: Language.count
+    }
+  end
 end
