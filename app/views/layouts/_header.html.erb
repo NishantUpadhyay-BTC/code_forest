@@ -1,0 +1,60 @@
+<header>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="container nav-wrapper">
+        <%= link_to repositories_path, class: "brand-logo" do %>
+          <span><%= image_tag "logo.png" %></span>
+          <span>Code Forest</span>
+        <% end %>
+        <ul class="right menu">
+          <li>
+            <div class="row" id="search_fields">
+              <% if params[:action] == 'index' && params[:controller] == 'repositories' %>
+                <%= render partial: 'search_form',
+                  locals: { searchform: 'header_search', keyword: 'header_keyword' } %>
+              <% end %>
+            </div>
+          </li>
+          <% unless current_user.present? %>
+          <li>
+            <a href="/auth/github">
+              <i class="fa fa-sign-in" aria-hidden="true"></i>
+              GitHub Login
+            </a>
+          </li>
+          <% else %>
+          <li>
+            <a class="dropdown-button user-pic" data-activates="child-menu">
+              <%= image_tag current_user.avtar_url, size: Settings.user_image.size %>
+              <i class="fa fa-caret-down right" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+        <ul id="child-menu" class="dropdown-content">
+          <li class="user-profile">
+            <%= image_tag current_user.avtar_url, size: Settings.user_image.size %>
+            <h4><%= current_user.name %></h4>
+          </li>
+          <li>
+            <%= link_to user_path(current_user.id) do %>
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              Dashboard
+            <% end %>
+          </li>
+          <li>
+            <%= link_to signout_path, method: :delete do %>
+              <i class="fa fa-sign-in fa-rotate-180" aria-hidden="true"></i>
+              Logout
+            <% end %>
+          </li>
+        </ul>
+        <% end %>
+      </div>
+    </nav>
+  </div>
+</header>
+<script>
+  $(document).ready(function () {
+    Common.selectDropdown();
+  });
+</script>

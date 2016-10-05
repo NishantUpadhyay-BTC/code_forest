@@ -1,0 +1,7 @@
+<%= link_to repositories_favourite_path(repository), remote: true, class: "fav-icon tooltipped", data: { position: 'top', delay: '50', tooltip: 'Favourite this POC' } do %>
+  <i class="fa fa-heart <%= fav_repo(repository) %>" aria-hidden="true"></i>
+  <%= repository.favourites.count %>
+<% end %>
+<script>
+  $('.tooltipped').tooltip({delay: 50});
+</script>

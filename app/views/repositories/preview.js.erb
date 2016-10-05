@@ -1,0 +1,3 @@
+$('#repository_form').hide();
+$('#repository_preview').show();
+$('#repository_preview').html("<%= escape_javascript(render partial: 'repository_preview',locals: {repository: @repository}) %>");

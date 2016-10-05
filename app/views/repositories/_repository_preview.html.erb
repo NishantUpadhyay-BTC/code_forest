@@ -1,0 +1,169 @@
+<main class="no-padding">
+<div class="row repo-show white">
+  <div class="container z-depth-1">
+    <div class="panel-layout">
+      <div class="panel-box col-xs-8 col l10 white">
+        <div class="panel-layout">
+          <div class="panel-box col-xs-12 bg-green poc-img-show-box">
+            <div class="panel-content">
+              <div class="row">
+                <div class="col l4">
+                  <%= image_tag @repository.poc_image, id: "image_preview" %>
+                </div>
+                <div class="col l8 para-text">
+                  <h4 class="para-text"><%= @repository.name.titleize %></h4>
+                  <h6>last updated on
+                    <%= time_ago_in_words(@repository.last_updated_at) %>
+                    ago
+                  </h6>
+                  <div id="display_tags"></div>
+                  <div class="row">
+                    <div class="col l12">
+                      <div class="testimonial-author-wrapper">
+                        <%= image_tag @repository.avatar_url, class: "auth-img img-rounded float-right" %>
+                        <div class="testimonial-author text-right">
+                          <b><%= @repository.author_name %></b>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col l12 para-text">
+                  <p class="poc-desc" id="p_decription"></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col l6">
+                  <div id="barchart_values" style="margin-left: 20px; width: auto; height: 300px;"></div>
+                </div>
+                <div class="col l6 para-text">
+                  <div class="row download-links">
+                    <ul>
+                      <li>
+                        <i class="medium fa fa-github"></i>
+                        <%= link_to "#{ @repository.svn_url }", target: "_blank", class: "tooltipped", data: { position: 'left', delay: '50', tooltip: 'Github Page' } do %>
+                          GITHUB PAGE
+                        <% end %>
+                      </li>
+                      <li>
+                        <i class="medium fa fa-file-text-o"></i>
+                        <%= link_to "#{ @repository.wiki_url }", target: "_blank", class: "tooltipped", data: { position: 'left', delay: '50', tooltip: "Github Wiki" } do %>
+                          GITHUB WIKI
+                        <% end %>
+                      </li>
+                      <li>
+                        <i class="medium fa fa-download"></i>
+                        <%= link_to "#{ @repository.download_link }", onclick: "increment_downloads(#{@repository.id});", class: "tooltipped", data: { position: 'left', delay: '50', tooltip: "Download POC" } do %>
+                          DOWNLOAD
+                        <% end %>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-box col-xs-2 col l2 counter-box " style="vertical-align: top">
+        <div class="panel-content">
+          <div class="row">
+            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Stars">
+              <i class="medium fa fa-star"></i>
+            </div>
+            <div class="col l6"><%= @repository.no_of_stars.to_i %></div>
+          </div>
+          <div class="row">
+            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Forks">
+              <i class="medium fa fa-code-fork"></i>
+            </div>
+            <div class="col l6"><%= @repository.no_of_forks.to_i %></div>
+          </div>
+          <div class="row">
+            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Watchers">
+              <i class="medium fa fa-bell"></i>
+            </div>
+            <div class="col l6"><%= @repository.no_of_watchers.to_i %></div>
+          </div>
+          <div class="row">
+            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Downloads">
+              <i class="medium fa fa-download"></i>
+            </div>
+            <div class="col l6"><%= @repository.no_of_downloads.to_i %></div>
+          </div>
+          <div class="row">
+            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Views">
+              <i class="medium fa fa-eye"></i>
+            </div>
+            <div class="col l6"><%= @repository.no_of_views.to_i %></div>
+          </div>
+          <div class="row">
+            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Favorites">
+              <i class="medium fa fa-bookmark"></i>
+            </div>
+            <div class="col l6"><%= @repository.no_of_bookmarks.to_i %></div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <%= form_for @repository do |f| %>
+                <%= f.hidden_field :id %>
+                <%= f.file_field :poc_image, id: 'poc_image' ,accept:'image/*', hidden: true %>
+                <% hidden_fields_array.each do |field| %>
+                  <%= f.hidden_field field %>
+                <% end %>
+
+                <%= f.fields_for :language_repositories do |builder| %>
+                  <%= render 'language_fields', :f => builder %>
+                <% end %>
+                <%= f.submit "#{@repository.new_record? ? 'publish' : 'save'}", class: "btn waves-effect waves-dark"%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+<script type="text/javascript">
+  google.charts.load("current", {packages: ["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    array_data = <%= raw @language_graph %>
+    var graph_style = [["Language", "Percentage", {role: "style"}]];
+
+    for (var lg = 0; lg < array_data.length; lg++) {
+      graph_style.push(array_data[lg]);
+    }
+
+    var data = google.visualization.arrayToDataTable(graph_style);
+    var view = new google.visualization.DataView(data);
+    view.setColumns([
+      0,
+      1, {
+        calc: "stringify",
+        sourceColumn: 1,
+        type: "string",
+        role: "annotation"
+      },
+      2
+    ]);
+
+    var options = {
+      title: "Language used in percentage",
+      width: 350,
+      height: 300,
+      bar: {
+        groupWidth: "15%"
+      },
+      legend: {
+        position: "none"
+      }
+    };
+    var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+    chart.draw(view, options);
+  }
+</script>

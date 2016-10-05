@@ -1,0 +1,59 @@
+<div id='repositories_section'>
+  <% @repositories.each do |repository| %>
+    <!-- new card start -->
+    <div class="card hoverable" >
+      <div class="card-image waves-effect waves-block waves-light">
+        <%= link_to(repository) do %>
+        <%= image_tag repository.poc_image, alt: "", class: "responsive-img wp-post-image" %>
+        <% end %>
+      </div>
+      <div class="card-content">
+        <h4 class="card-title">
+          <%= link_to repository.name, repository_path(repository) %>
+        </h4>
+        <p class="user">
+          <a href="https://github.com/<%= repository.author_name %>" target="_blank">
+            <%= repository.author_name %>
+          </a>
+        </p>
+        <p class="desc">
+          <%= repository.description[0, 50] %>
+          <%= link_to  "...", repository_path(repository) if (repository.description.length > 50)%>
+        </p>
+        <ul class="action-icons">
+          <li class="tech">
+            <%= image_tag "language_icons/#{highest_used_language(repository)[:image]}.png",
+                alt: "Language Logo", class: "tooltipped",
+                data: { position: "top", delay: "50", tooltip: highest_used_language(repository)[:language] } %>
+          </li>
+          <li class="fav right-align">
+              <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="views">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+                <%= repository.impressions.count %>
+              </a>
+            <span id="fav_repo_<%= repository.id %>">
+              <%= render partial: "favourite_repo", locals: { repository: repository } %>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+  <% if !@repositories.present? && (params[:page] == 1 || params[:page].nil?) %>
+    <h4><center>No Records Found</center></h4>
+  <% end %>
+</div>
+<script>
+  var nextPage,
+    previousPage;
+  previousPage = 0;
+  nextPage = <%= @repositories.next_page %>
+  $(window).on('scroll', function () {
+    Common.showRepositoriesOnScroll();
+  });
+
+  $(document).ready(function () {
+    $('.tooltipped').tooltip({delay: 50});
+    Common.cardArrange();
+  });
+</script>

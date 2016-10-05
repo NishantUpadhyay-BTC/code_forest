@@ -1,0 +1,51 @@
+<h5 class="table-heading">POCs</h5>
+<% if @pocs.present? %>
+  <table class="highlight para-text dash-table">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th data-field="id">Name <%= sorting_link("name", "poc") %></th>
+        <th data-field="price">Downloads <%= sorting_link("no_of_downloads", "poc") %></th>
+        <th data-field="price">Views <%= sorting_link("impressions", "poc") %></th>
+        <th data-field="price">Favourites <%= sorting_link("favourites", "poc") %></th>
+        <th data-field="price">Show/Hide</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @pocs.each_with_index do |poc, index| %>
+      <tr>
+        <td><%= serial_no(params[:poc_page], index) %></td>
+        <td><%= poc.name %></td>
+        <td><%= poc.no_of_downloads.to_i %></td>
+        <td><%= poc.impressions.count.to_i %></td>
+        <td><%= poc.favourites.count.to_i %></td>
+        <td>
+          <div class="switch">
+            <label>
+              <input type="checkbox" onchange="Common.showOrHideRepo('<%= hide_repository_path(poc.id) %>')" <%= "checked" if poc.hide %>>
+              <span class="lever"></span>
+            </label>
+          </div>
+        </td>
+        <td data-field="price">
+          <%= link_to edit_repository_path(poc.id), class: "tooltipped", data: { turbolinks: false, position: 'top', delay: '50', tooltip: "edit" }  do %>
+            <i class="material-icons">mode_edit</i>
+          <% end %>
+          <%= link_to repository_path(poc.id, user_id: params[:id]), method: :delete, class: "tooltipped", data: { confirm: 'Are you sure?', position: 'top', delay: '50', tooltip: "delete" } do %>
+            <i class="material-icons">delete</i>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+  <%= will_paginate @pocs, param_name: 'poc_page', class: pagination[:class],
+    previous_label: pagination[:previous_label], next_label: pagination[:next_label] %>
+<% else %>
+  <h6 class="no-record">No Records found</h6>
+<% end %>
+<script>
+  $('.tooltipped').tooltip({delay: 50});
+</script>
