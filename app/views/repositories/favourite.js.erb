@@ -1,6 +1,10 @@
-Materialize.toast('<%= @message %>', 5000, 'green');
+<% if @message.present? %>
+  Materialize.toast("<%= @message %> <a href='javascript:;' onclick='closeToast();'><i class='material-icons close'>close</i></a>", 4000, 'green');
+<% end %>
 $("#fav_repo_<%= @repository.id %>").html("<%= escape_javascript(render partial: 'repositories/favourite_repo', locals: {repository: @repository}) %>");
+function closeToast() {
+  $('.green').remove();
+};
 <% unless current_user.present? %>
-  var $toastContent = $('<span>Please login first</span>');
-  Materialize.toast($toastContent, 5000, 'red');
+  Materialize.toast("Please login first <a href='javascript:;' onclick='closeToast();'><i class='material-icons close'>close</i></a>", 4000, 'red');
 <% end %>

@@ -14,7 +14,7 @@ module Utilities
           language =  Support::Common.get_response(repository[:languages_url])
           { repository_details: repository_details(repository), language: language }
         rescue => e
-          #write code for handling exception
+          raise StandardError.new(e)
         end
       end
 
@@ -22,7 +22,7 @@ module Utilities
         begin
           @github.repos.list(user: user_name).body
         rescue => e
-          #write code for handling exception
+          raise StandardError.new(e)
         end
       end
 
@@ -45,7 +45,8 @@ module Utilities
           has_wiki: repository[:has_wiki],
           wiki_url: "http://github.com/#{repository[:full_name]}/wiki",
           repo_created_at: repository[:created_at],
-          last_updated_at: repository[:updated_at]
+          last_updated_at: repository[:updated_at],
+          no_of_forks: repository[:forks_count]
         }
       end
     end

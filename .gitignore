@@ -1,42 +1,25 @@
-*.rbc
-capybara-*.html
-.rspec
-/log
-/tmp
-/db/*.sqlite3
-/db/*.sqlite3-journal
-/public/system
-/coverage/
-/spec/tmp
-**.orig
-rerun.txt
-pickle-email-*.html
-
-# TODO Comment out these rules if you are OK with secrets being uploaded to the repo
-config/initializers/secret_token.rb
-config/secrets.yml
-
-## Environment normalisation:
-/.bundle
-/vendor/bundle
-
-# these should all be checked in to normalise the environment:
-# Gemfile.lock, .ruby-version, .ruby-gemset
-
-# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
-.rvmrc
-
-# if using bower-rails ignore default bower_components path bower.json files
-/vendor/assets/bower_components
-*.bowerrc
-bower.json
-
-# Ignore pow environment settings
-.powenv
-
-# Ignore Byebug command history file.
-.byebug_history
-/config/database.yml
-config/settings.local.yml
-config/settings/*.local.yml
-config/environments/*.local.yml
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/
+*.swp
+config/bliss.yml
+config/database.yml
+config/deploy/testing.rb
+config/deploy/production.rb
+config/deploy/deploy_local.rb
+.current
+.vimrc
+*.out
+doc/api
+doc/app
+.session
+vendor/bundle
+.gdbinit
+core
+public/images
+public/javascripts/all.js
+public/stylesheets/all.css
+.DS_Store
+vendor/ruby/*
+.idea/*

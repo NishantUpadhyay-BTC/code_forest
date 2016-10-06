@@ -38,4 +38,11 @@ class ApplicationController < ActionController::Base
   def sort_with_association(resources, sort_by)
     resources = resources.sort_by { |resource| resource.send(sort_by).count }
   end
+
+  def authorize
+    unless current_user.present?
+      flash[:red] = "Please login first..!"
+      redirect_to repositories_path
+    end
+  end
 end

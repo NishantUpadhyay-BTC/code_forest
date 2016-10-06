@@ -29,8 +29,8 @@ class RepositoryTest < ActiveSupport::TestCase
   test "search repo" do
     @app1.languages.build(name: "Ruby", code: 200)
     @app1.save
-    assert_equal @app1, Repository.search_repo("app1", "Ruby").first
-    assert_equal @app1, Repository.search_repo("Foo", "Ruby").first
-    assert_equal @app1, Repository.search_repo("my first app", "Ruby").first
+    assert_equal @app1, Repository.search("app1", "Ruby").first
+    assert_equal @app1, Repository.search("Foo", "Ruby").first
+    assert_equal @app1, Repository.search("my first app", "Ruby").first
   end
 end

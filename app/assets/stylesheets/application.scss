@@ -11,10 +11,12 @@
  * file per style scope.
  *
  *= require font-awesome
- *= require theme
  *= require social-share-button
+ *= materialize-tags
+ *= technology-icons
+ *= require custom
  *= require_tree .
  *= require_self
  */
-@import "materialize";
-@import "social-share-button";
+ @import "materialize";
+ @import "social-share-button";

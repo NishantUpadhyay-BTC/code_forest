@@ -1,5 +1,6 @@
 require 'will_paginate/array'
 class RepositoriesController < ApplicationController
+  before_action :change_in_own_repo, only: [:edit, :update, :destroy]
   def index
     @repositories = paginated(Repository.unhide_repos, params[:page])
   end
@@ -11,17 +12,23 @@ class RepositoriesController < ApplicationController
   end
 
   def new
-    repository_values_result = Github::FetchRepo.new(params[:user_name], params[:repo_name], session[:github_token]).call
-    @repository = Repository.new(repository_values_result[:repository_details])
-    repository_values_result[:language].each do |language,code|
-      new_language = Language.find_or_create_by(name: language)
-      @repository.language_repositories.build(language_id: new_language.id, code: code, repository_id: @repository.id)
+    begin
+      repository_values_result = Github::FetchRepo.new(params[:user_name], params[:repo_name], session[:github_token]).call
+      @repository = Repository.new(repository_values_result[:repository_details])
+      repository_values_result[:language].each do |language,code|
+        new_language = Language.find_or_create_by(name: language)
+        @repository.language_repositories.build(language_id: new_language.id, code: code, repository_id: @repository.id)
+      end
+      @language_graph = LanguageGraphData.new(@repository).call
+    rescue => e
+      flash[:red] = "Error: #{e}"
+      redirect_to repositories_path
     end
-    @language_graph = LanguageGraphData.new(@repository).call
   end
 
   def edit
     @repository = initialize_repo
+    @language_graph = LanguageGraphData.new(@repository).call
   end
 
   def create
@@ -37,9 +44,13 @@ class RepositoriesController < ApplicationController
 
   def update
     @repository = initialize_repo
-    updated = @repository.update_attributes(repository_params)
-    flash[:green] = "POC #{@repository.name} updated successfully..!" if updated
-    redirect_to repositories_path
+    if @repository.update_attributes(repository_params)
+      flash[:green] = "POC #{@repository.name} updated successfully..!"
+      redirect_to repositories_path
+    else
+      flash[:red] = @repository.errors.full_messages.first
+      redirect_back(fallback_location: new_repository_path(user_name: params[:repository][:author_name], repo_name: params[:repository][:name]))
+    end
   end
 
   def favourite
@@ -63,7 +74,7 @@ class RepositoriesController < ApplicationController
 
   def destroy
     destroyed = initialize_repo.destroy
-    @message = "POC Removed successfully..!" if destroyed
+    flash[:green] = "POC Removed successfully..!" if destroyed
     @pocs = paginated(Repository.where(author_name: current_user.name), params[:poc_page])
     @repositories = Github::FetchAllRepos.new(current_user.name, session[:github_token]).call
     @repositories = filter_pocs(@repositories).paginate(per_page:1, page: params[:repo_page])
@@ -71,7 +82,7 @@ class RepositoriesController < ApplicationController
   end
 
   def search
-    @repositories = paginated(Repository.search_repo(params[:key_word], params[:language]), params[:page])
+    @repositories = paginated(Repository.search(params[:key_word].strip, params[:language]), params[:page])
   end
 
   def total_downloads
@@ -103,5 +114,12 @@ class RepositoriesController < ApplicationController
 
   def initialize_repo
     Repository.find(params[:id])
+  end
+
+  def change_in_own_repo
+    unless current_user.present? && initialize_repo.author_name == current_user.name
+      flash[:red] = "You dont have permission to access that."
+      redirect_to repositories_path
+    end
   end
 end

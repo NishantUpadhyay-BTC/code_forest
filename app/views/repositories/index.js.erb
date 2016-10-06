@@ -1,3 +1,4 @@
-<% if @repositories.count > 1 %>
-$("#repositories_section").append("<%= escape_javascript(render partial: 'repositories_view', locals: { repositories: @repositories } ) %>");
-<% end %>
+if($('#loaded_page')[0].value < <%= params[:page] %>) {
+  $("#repositories_section").append("<%= escape_javascript(render partial: 'repositories_view', locals: { repositories: @repositories } ) %>");
+  $('#loaded_page')[0].value = <%= params[:page] %>;
+}

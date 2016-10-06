@@ -1,2 +1,4 @@
 pagination:
-  default: 6
+  default: 8
+user_image:
+  size: 64x64

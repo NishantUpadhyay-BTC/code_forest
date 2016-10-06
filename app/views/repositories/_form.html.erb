@@ -1,3 +1,4 @@
+<main class="no-padding">
 <div class="row repo-show white" id="repository_update">
   <div class="container z-depth-1">
     <div class="row">
@@ -13,9 +14,7 @@
                 <%= image_tag @repository.poc_image, width: 300, id: "image" %>
                 <div class="overlay">
                   <h2>Image</h2>
-                  <p>
-                    <a href="#">EDIT</a>
-                  </p>
+                  <p>EDIT</p>
                 </div>
               </div>
             </div>
@@ -30,12 +29,7 @@
         <div class="row">
           <div class="col l12">
             <label for="chips">Tags</label>
-            <div id="div_for_tags">
-              <% @repository.tag_list.each do |tag| %>
-              <div class="chip"><%= tag %></div>
-              <% end %>
-            </div>
-            <input type="text" class="chips chips-placeholder" id="tag_list" value="<%= @repository.tag_list %>">
+            <input type="text" data-role="materialtags" value="<%= @repository.tag_list.to_s %>" id="tag_list">
           </div>
         </div>
         <div class="row">
@@ -49,13 +43,17 @@
     </div>
   </div>
 </div>
-
+</main>
 <div id="repository_preview" hidden=true>
   <%= render 'repository_preview' %>
 </div>
 
 <script>
   $(document).ready(function () {
+    if ($('#description')[0].value != "") {
+      $('#description').focus();
+    }
+
     $("#tag_list").on('keyup', function (e) {
       Common.displayTags(e);
     });
