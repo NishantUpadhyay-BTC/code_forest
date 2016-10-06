@@ -1,0 +1,102 @@
+.repository-details{padding:50px 0 30px 0}
+.repository-details .body-content{position:relative;padding-top:15px;padding-bottom:15px}
+.repository-details .body-content .repo-img{padding-left:15px;padding-bottom:15px}
+.repository-details .body-content .repo-content{/*padding-right:115px;*/padding-right:15px;position:relative}
+.repository-details .body-content .repo-content h1{font-size:22px;line-height:30px;padding:0 50px 0 0;margin:0;color:#7cb342}
+.repository-details .body-content .repo-content p{color:#444}
+.repository-details .body-content .repo-content .description{margin-bottom:25px}
+.repository-details .body-content .repo-content .update-text{color:#999;font-size:13px;margin-top:5px}
+.repository-details .body-content .repo-content .update-text a:hover{color:#444}
+.repository-details .body-content .fav-icon{position:absolute;top:5px;right:20px;color:#999;font-size:14px}
+.repository-details .body-content .fav-icon:hover{color:#7cb342}
+.repository-details .body-content .fav-icon .fa{margin-right:4px}
+.repository-details .body-content .repo-content .chip{padding:0;background:#f2f2f2;transition:background .4s ease-in-out}
+.repository-details .body-content .repo-content .chip a{color:#666;padding:0 12px;line-height:32px;display:inline-block}
+.repository-details .body-content .repo-content .chip a:hover{color:#fff}
+.repository-details .body-content .repo-content .chip:hover{background:#7cb342}
+.repository-details .body-content .repo-content .chip:hover a{color:#fff}
+
+.repository-details .body-content .icons-row{display:inline-block;width:100%;padding:15px 0;border-top:solid 1px #e0e0e0;border-bottom:solid 1px #e0e0e0;
+/*position:absolute;top:0;right:0;width:100px;padding:0;background:#689f38;height:100%*/
+}
+
+/*
+.repository-details .body-content .icons-row:before,
+.repository-details .body-content .icons-row:after{content:"";position:absolute;width:100%;right:0;height:15px;background:#689f38}
+.repository-details .body-content .icons-row:before{top:-15px}
+.repository-details .body-content .icons-row:after{bottom:-15px}
+.repository-details .body-content .icons-row .left-icons,
+.repository-details .body-content .icons-row .right-icons{padding:0;margin:0;list-style:none;width:100%;display:inline-block}
+.repository-details .body-content .icons-row .left-icons li{text-align:left;color:#fff;margin-bottom:15px;padding-left:25px}
+.repository-details .body-content .icons-row .left-icons li .fa{font-size:20px;width:30px}
+.repository-details .body-content .icons-row .right-icons li{display:inline}
+.repository-details .body-content .icons-row .right-icons a{margin-left:6px;width:34px;height:34px;line-height:34px;border-radius:50%;border:solid 1px #689f38;text-align:center;display:inline-block;color:#689f38}
+.repository-details .body-content .icons-row .right-icons a:hover{background:#7cb342;color:#fff;border-color:#7cb342}
+*/
+
+.repository-details .body-content .icons-row .left-icons,
+.repository-details .body-content .icons-row .right-icons{float:left;padding:0;margin:0;list-style:none}
+.repository-details .body-content .icons-row .left-icons{line-height:28px}
+.repository-details .body-content .icons-row .left-icons li{float:left;padding-right:30px;text-align:center;color:#689f38}
+.repository-details .body-content .icons-row .left-icons li .fa{font-size:20px;margin-right:4px}
+.repository-details .body-content .icons-row .left-icons{width:80%}
+.repository-details .body-content .icons-row .right-icons{width:20%;text-align:right;height:28px}
+.repository-details .body-content .icons-row .right-icons li{display:inline}
+.repository-details .body-content .icons-row .right-icons a{margin-left:6px;width:28px;height:28px;border-radius:50%;display:inline-block}
+/*.repository-details .body-content .icons-row .right-icons a:hover{background:#fff !important}
+.repository-details .body-content .icons-row .right-icons a.twit{background:#55acee;border:solid 1px #55acee}
+.repository-details .body-content .icons-row .right-icons a.twit:hover{color:#55acee}
+.repository-details .body-content .icons-row .right-icons a.linkedin{background:#0077B5;border:solid 1px #0077B5}
+.repository-details .body-content .icons-row .right-icons a.linkedin:hover{color:#0077B5}*/
+
+.repository-details .body-content .data-column{display:inline-block;width:100%;margin:25px 0 15px 0}
+.repository-details .body-content .data-column .left-column,
+.repository-details .body-content .data-column .right-column{float:left;width:50%}
+.repository-details .body-content .data-column .right-column a{color:#689f38;display:inline-block;font-size:18px;border:solid 1px #689f38;padding:10px;width:180px;border-radius:4px}
+.repository-details .body-content .data-column .right-column a .fa{margin-right:6px}
+.repository-details .body-content .data-column .right-column a:hover{background:#689f38;color:#fff}
+.repository-details .body-content .data-column .right-column ul li{margin-bottom:15px;text-align:center}
+.repository-details .body-content a{transition:color .4s ease-in-out, background .4s ease-in-out}
+
+/*
+.dashboard-tabs .tab a{color:#689f38}
+.dashboard-tabs .tab a:hover{color:#333}
+.dashboard-tabs .indicator{background-color:#689f38 !important}
+
+.tables-data .action-links{padding:0 5px;margin-right:5px;color:#999}
+.tables-data .action-links:hover{color:#689f38}
+.tables-data .switch label input[type="checkbox"]:checked + .lever{background-color:#7cb342}
+.tables-data .switch label input[type="checkbox"]:checked + .lever::after{background-color:#7cb342}
+*/
+
+@media (max-width:600px){
+
+	.repository-details .body-content .repo-img{display:inline-block;padding-right:15px}
+	.repository-details .body-content .repo-content{padding-left:15px}
+	.repository-details .body-content .data-column .left-column,
+	.repository-details .body-content .data-column .right-column{float:none;width:100% !important}
+	.repository-details .body-content .data-column .left-column .responsive-img{display:inline-block}
+	.repository-details .body-content .data-column .right-column ul{margin-top:30px}
+}
+@media (min-width:601px) and (max-width:767px){
+	.repository-details .body-content .data-column .left-column, .repository-details .body-content .data-column .right-column{float:none;width:100% !important}
+	.repository-details .body-content .data-column .right-column ul{margin-top:30px}
+}
+
+@media (max-width:991px){
+	/*
+	.repository-details .body-content .repo-content{padding-right:15px}
+	.repository-details .body-content .icons-row{position:relative;top:auto;right:auto;width:100%;background:#f2f2f2;border-top:solid 1px #ddd;padding:15px 0}
+	.repository-details .body-content .icons-row:before, .repository-details .body-content .icons-row:after{display:none}
+	*/
+	.container{width:90%}
+	.repository-details .body-content .repo-content .update-text{margin-top:15px;margin-bottom:20px}
+	.repository-details .body-content .icons-row .left-icons,
+	.repository-details .body-content .icons-row .right-icons{width:100%}
+	.repository-details .body-content .icons-row .left-icons li{padding-right:25px}
+	.repository-details .body-content .icons-row .right-icons{text-align:left;margin-top:15px}
+	.repository-details .body-content .icons-row .right-icons a{margin-left:0;margin-right:15px}
+	.repository-details .body-content .data-column .left-column{width:60%}
+	.repository-details .body-content .data-column .right-column{width:40%}
+	.repository-details .body-content .data-column .right-column a{font-size:16px;padding:10px 5px;width:150px}
+}

@@ -4,7 +4,8 @@
     <div class="row">
       <div class="col l12">
         <h4 class="para-text" style="margin-left: 10px">
-          <%= @repository.name.titleize %></h4>
+          <%= @repository.name.titleize %>
+        </h4>
       </div>
       <div class="col s12 poc_form">
         <div class="row">
@@ -45,7 +46,7 @@
 </div>
 </main>
 <div id="repository_preview" hidden=true>
-  <%= render 'repository_preview' %>
+  <%= render partial: 'repository_preview' %>
 </div>
 
 <script>

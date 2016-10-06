@@ -1,0 +1,48 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto:400,700';
+body{display:flex;min-height:100vh;flex-direction:column}
+main{flex:1 0 auto}
+
+.navbar-fixed{height:64px}
+nav{background:#7cb342;box-shadow:none;height:64px}
+nav .fa{margin-right:5px}
+nav .brand-logo{min-width:150px}
+nav .brand-logo span{display:inline-block;float:left;line-height:64px}
+nav .brand-logo span img{width:24px}
+nav .brand-logo span:last-of-type{font-size:20px;margin-left:15px}
+nav .menu .searchbox{display:block;width:250px;height:36px;margin:15px 0;background:#fff}
+nav .menu .searchbox input[type="text"]{height:36px;border-bottom:0;margin:0;font-size:14px;line-height:36px;position:absolute;color:#999;width:150px;padding:0 10px;}
+nav .menu .searchbox input[type="text"]:focus:not([readonly]){border-bottom:none;box-shadow:none}
+nav .menu .searchbox .caret{top:0px;line-height:36px;right:5px;color:#999}
+nav .menu .searchbox .select-wrapper .select-options{width:100px}
+nav .menu a{text-transform:uppercase;line-height:64px;height:64px}
+nav .menu .user-pic{padding-right:0}
+nav .menu .user-pic img{border-radius:50%;width:48px;height:48px;margin:8px 0;}
+nav .menu .user-pic:hover{background:transparent}
+nav .menu #child-menu{width:180px !important;top:0 !important}
+nav .menu #child-menu li{min-height:50px}
+nav .menu #child-menu li.user-profile{text-align:center;border-bottom:solid 1px #ddd;background:#efefef}
+nav .menu #child-menu li.user-profile img{border-radius:50%;width:64px;height:64px;margin-top:15px}
+nav .menu #child-menu li.user-profile h4{font-size:18px;color:#689f38;margin:10px 0 !important;}
+nav .menu #child-menu li a{padding:0 12px;font-size:14px;color:#689f38;line-height:50px;height:50px}
+nav .menu #child-menu li a:hover{background:#689f38;color:#fff}
+nav .waves-effect{vertical-align:top}
+
+footer.page-footer{margin-top:0;background:#7cb342;color:#fff;font-size:14px}
+footer.page-footer .footer-links{text-align:right}
+footer.page-footer a{color:#fff;transition:color .4s ease-in-out}
+footer.page-footer a:hover{color:#333}
+footer.page-footer .footer-links ul{padding:0;margin:0;list-style:none}
+footer.page-footer .footer-links ul li{display:inline}
+footer.page-footer .footer-links ul li a{padding:0 5px}
+footer.page-footer .footer-links ul li:after{content:"|";padding:0 5px}
+footer.page-footer .footer-links ul li:last-of-type:after{display:none}
+
+@media (max-width:600px){
+	nav .fa{line-height:64px}
+	footer.page-footer, footer.page-footer .footer-links{text-align:center}
+	footer.page-footer .footer-links{padding-top:10px}
+	footer.page-footer .footer-links ul li::after{padding:0}
+}
+@media (max-width:991px){
+	nav .brand-logo{left:0;transform:translateX(0)}
+}

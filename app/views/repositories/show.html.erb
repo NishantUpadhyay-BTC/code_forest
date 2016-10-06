@@ -1,127 +1,92 @@
-<div class="row repo-show white">
-  <div class="container z-depth-1">
-    <div class="panel-layout">
-      <div class="panel-box col-xs-8 col l10 white">
-        <div class="panel-layout">
-          <div class="panel-box col-xs-12 bg-green poc-img-show-box">
-            <div class="panel-content">
-              <div class="row">
-                <div class="col l4">
-                  <%= image_tag @repository.poc_image %>
-                </div>
-                <div class="col l8 para-text">
-                  <h4 class="para-text"><%= @repository.name %></h4>
-                  <h6>last updated on
-                    <%= time_ago_in_words(@repository.last_updated_at) %> ago
-                  </h6>
-                  <% @repository.tag_list.each do |tag| %>
-                  <div class="chip">
-                     <a href="/repositories/tag/<%= tag %>"><%= tag %></a>
-                  </div>
-                  <% end %>
-                  <div class="row">
-                    <div class="col l12">
-                      <br>
-                      <%= social_share_button_tag(repository_url(@repository), desc: @repository.name) %>
-                      <div class="testimonial-author-wrapper">
-                        <%= image_tag @repository.avatar_url, class: "auth-img img-rounded float-right", alt: "Author's image" %>
-                        <div class="testimonial-author text-right">
-                          <b><%= @repository.author_name %></b>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-                </div>
-                <% if current_user.present? && @repository.author_name == current_user.name %>
-                  <%= link_to edit_repository_path(@repository.id), class: "edit-icon tooltipped", data: { turbolinks: false, position: 'top', delay: '50', tooltip: "edit" }  do %>
-                    <i class="material-icons">mode_edit</i>
-                  <% end %>
-                <% end %>
-                <div id="fav_repo_<%= @repository.id %>" class="fav_repo"><%= render partial: "favourite_repo", locals: { repository: @repository } %></div>
-              </div>
-              <div class="row">
-                <div class="col l12 para-text">
-                  <p class="poc-desc">
-                    <%= @repository.description %>
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col l6">
-                  <div id="barchart_values" style="margin-left: 20px; width: auto; height: 300px;"></div>
-                </div>
-                <div class="col l6 para-text">
-                  <div class="row download-links">
-                    <ul>
-                      <li>
-                        <i class="medium fa fa-github"></i>
-                        <%= link_to "#{ @repository.svn_url }", target: "_blank", class: "tooltipped", data: { position: 'left', delay: '50', tooltip: 'Github Page' } do %>
-                        GITHUB PAGE
-                        <% end %>
-                      </li>
-                      <li>
-                        <i class="medium fa fa-file-text-o"></i>
-                        <%= link_to "#{ @repository.wiki_url }", target: "_blank", class: "tooltipped", data: { position: 'left', delay: '50', tooltip: "Github Wiki" } do %>
-                        GITHUB WIKI
-                        <% end %>
-                      </li>
-                      <li>
-                        <i class="medium fa fa-download"></i>
-                        <%= link_to "#{ @repository.download_link }", onclick: "increment_downloads(#{@repository.id});", class: "tooltipped", data: { position: 'left', delay: '50', tooltip: "Download POC" } do %>
-                        DOWNLOAD
-                        <% end %>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+<main>
+  <section class="repository-details">
+    <div class="container z-depth-1">
+      <div class="row body-content">
+        <div class="col l3 m4 s12 center-align">
+          <%= image_tag @repository.poc_image, class: "responsive-img repo-img" %>
         </div>
-      </div>
-      <div class="panel-box col-xs-2 col l2 counter-box " style="vertical-align: top">
-        <div class="panel-content">
-          <div class="row">
-            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Stars">
-              <i class="medium fa fa-star"></i>
+        <div class="col l9 m8 s12">
+          <div class="repo-content">
+            <h1><%= @repository.name.titleize %></h1>
+            <p class="update-text">by
+              <a href="https://github.com/<%= @repository.author_name %>" target="_blank">
+                <%= @repository.author_name %>
+              </a>
+              / last updated on
+              <%= time_ago_in_words(@repository.last_updated_at) %>
+              ago
+            </p>
+            <div id="fav_repo_<%= @repository.id %>" class="fav_repo">
+              <%= render partial: "favourite_repo", locals: { repository: @repository } %>
             </div>
-            <div class="col l6"><%= @repository.no_of_stars.to_i %></div>
-          </div>
-          <div class="row">
-            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Forks">
-              <i class="medium fa fa-code-fork"></i>
+            <% @repository.tag_list.each do |tag| %>
+              <span class="chip waves-effect">
+                <a href="/repositories/tag/<%= tag %>"><%= tag %></a>
+              </span>
+            <% end %>
+            <p class="description"><%= @repository.description %></p>
+            <div class="icons-row">
+              <ul class="left-icons">
+                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Stars">
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <%= @repository.no_of_stars.to_i %>
+                </li>
+                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Fork">
+                  <i class="fa fa-code-fork" aria-hidden="true"></i>
+                  <%= @repository.no_of_forks.to_i %>
+                </li>
+                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Watchers">
+                  <i class="fa fa-bell" aria-hidden="true"></i>
+                  <%= @repository.no_of_watchers.to_i %>
+                </li>
+                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Downloads">
+                  <i class="fa fa-download" aria-hidden="true"></i>
+                  <%= @repository.no_of_downloads.to_i %>
+                </li>
+                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Views">
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                  <%= @repository.impressions.count.to_i %>
+                </li>
+                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Favourites">
+                  <i class="fa fa-bookmark" aria-hidden="true"></i>
+                  <%= @repository.favourites.count.to_i %>
+                </li>
+              </ul>
+              <ul class="right-icons">
+                <%= social_share_button_tag(repository_url(@repository), desc: @repository.name) %>
+              </ul>
             </div>
-            <div class="col l6"><%= @repository.no_of_forks.to_i %></div>
-          </div>
-          <div class="row">
-            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Watchers">
-              <i class="medium fa fa-bell"></i>
+            <div class="data-column">
+              <div id="barchart_values" class="left-column center-align"></div>
+              <div class="right-column">
+                <ul>
+                  <li>
+                    <%= link_to "#{ @repository.svn_url }", class: "waves-effect", target: "_blank" do %>
+                      <i class="fa fa-github"></i>
+                      GitHub Page
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to "#{ @repository.wiki_url }", class: "waves-effect", target: "_blank" do %>
+                      <i class="fa fa-file-text-o"></i>
+                      GitHub Wiki
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to "#{ @repository.download_link }", onclick: "increment_downloads(#{@repository.id});" do %>
+                      <i class="fa fa-download"></i>
+                      Download
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div class="col l6"><%= @repository.no_of_watchers.to_i %></div>
-          </div>
-          <div class="row">
-            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Downloads">
-              <i class="medium fa fa-download"></i>
-            </div>
-            <div class="col l6"><%= @repository.no_of_downloads.to_i %></div>
-          </div>
-          <div class="row">
-            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Views">
-              <i class="medium fa fa-eye"></i>
-            </div>
-            <div class="col l6"><%= @repository.impressions.count.to_i %></div>
-          </div>
-          <div class="row">
-            <div class="col l6 tooltipped" data-position="left" data-delay="50" data-tooltip="Favourites">
-              <i class="medium fa fa-bookmark"></i>
-            </div>
-            <div class="col l6"><%= @repository.favourites.count.to_i %></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
+</main>
 <script type="text/javascript">
   google.charts.load("current", {packages: ["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
@@ -130,7 +95,7 @@
     array_data = <%= raw @language_graph %>
     var graph_style = [["Language", "Percentage", { role: "style" } ]];
 
-    for(var lg=0; lg < array_data.length; lg++){
+    for (var lg = 0; lg < array_data.length; lg++) {
       graph_style.push(array_data[lg]);
     }
 
@@ -162,11 +127,10 @@
     chart.draw(view, options);
   }
 
-  function increment_downloads(repo_id)
-  {
+  function increment_downloads(repo_id) {
     $.ajax({
       type: "put",
-      url: '/repositories/'+ repo_id + '/total_downloads'
+      url: '/repositories/' + repo_id + '/total_downloads'
     })
   }
 </script>

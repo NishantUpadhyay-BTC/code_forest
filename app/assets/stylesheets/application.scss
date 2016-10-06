@@ -14,9 +14,20 @@
  *= require social-share-button
  *= materialize-tags
  *= technology-icons
+ *= require menu
  *= require custom
+ *= require details-page
  *= require_tree .
  *= require_self
  */
  @import "materialize";
  @import "social-share-button";
+
+ .social-share-button {
+   .ssb-icon {
+     background-size: 28px
+   }
+   .ssb-icon:hover {
+     background-color: inherit;
+   }
+ }
