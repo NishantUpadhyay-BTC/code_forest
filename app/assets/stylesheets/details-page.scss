@@ -1,0 +1,241 @@
+.repository-details {
+  padding: 50px 0 30px 0;
+  .body-content {
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    .repo-img {
+      padding-left: 15px;
+      padding-bottom: 15px;
+    }
+    .repo-content {
+      padding-right: 15px;
+      position: relative;
+      h1 {
+        font-size: 22px;
+        line-height: 30px;
+        padding: 0 50px 0 0;
+        margin: 0;
+        color: #7cb342;
+      }
+      p {
+        color: #444;
+      }
+      .description {
+        margin-bottom: 25px;
+      }
+      .update-text {
+        color: #999;
+        font-size: 13px;
+        margin-top: 5px;
+        a:hover {
+          color: #444;
+        }
+      }
+    }
+    .fav-icon {
+      position: absolute;
+      top: 5px;
+      right: 20px;
+      color: #999;
+      font-size: 14px;
+      &:hover {
+        color: #e91e63;
+      }
+      .fa {
+        margin-right: 4px;
+      }
+    }
+    .repo-content .chip {
+      padding: 0;
+      background: #f2f2f2;
+      transition: background .4s ease-in-out;
+      a {
+        color: #666;
+        padding: 0 12px;
+        line-height: 32px;
+        display: inline-block;
+        &:hover {
+          color: #fff;
+        }
+      }
+      &:hover {
+        background: #7cb342;
+        a {
+          color: #fff;
+        }
+      }
+    }
+    .icons-row {
+      display: inline-block;
+      width: 100%;
+      padding: 15px 0;
+      border-top: solid 1px #e0e0e0;
+      border-bottom: solid 1px #e0e0e0;
+    }
+  }
+}
+
+.social-share-button .ssb-icon {
+  background-size: 28px !important;
+  &:hover {
+    background-color: inherit !important;
+  }
+}
+
+.repository-details .body-content {
+  .icons-row {
+    .left-icons, .right-icons {
+      float: left;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .left-icons {
+      line-height: 28px;
+      li {
+        float: left;
+        padding-right: 30px;
+        text-align: center;
+        color: #689f38;
+        .fa {
+          font-size: 20px;
+          margin-right: 4px;
+        }
+      }
+      width: 80%;
+    }
+    .right-icons {
+      width: 20%;
+      text-align: right;
+      height: 28px;
+      li {
+        display: inline;
+      }
+      a {
+        margin-left: 6px;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+    }
+  }
+  .data-column {
+    display: inline-block;
+    width: 100%;
+    margin: 25px 0 15px 0;
+    .left-column {
+      float: left;
+      width: 50%;
+    }
+    .right-column {
+      float: left;
+      width: 50%;
+      a {
+        color: #689f38;
+        display: inline-block;
+        font-size: 18px;
+        border: solid 1px #689f38;
+        padding: 10px;
+        width: 180px;
+        border-radius: 4px;
+        .fa {
+          margin-right: 6px;
+        }
+        &:hover {
+          background: #689f38;
+          color: #fff;
+        }
+      }
+      ul li {
+        margin-bottom: 15px;
+        text-align: center;
+      }
+    }
+  }
+  a {
+    transition: color .4s ease-in-out, background .4s ease-in-out;
+  }
+}
+
+@media (max-width: 600px) {
+  .repository-details .body-content {
+    .repo-img {
+      display: inline-block;
+      padding-right: 15px;
+    }
+    .repo-content {
+      padding-left: 15px;
+    }
+    .data-column {
+      .left-column, .right-column {
+        float: none;
+        width: 100% !important;
+      }
+      .left-column .responsive-img {
+        display: inline-block;
+      }
+      .right-column ul {
+        margin-top: 30px;
+      }
+    }
+  }
+}
+
+@media (min-width: 601px) and (max-width: 767px) {
+  .repository-details .body-content .data-column {
+    .left-column {
+      float: none;
+      width: 100% !important;
+    }
+    .right-column {
+      float: none;
+      width: 100% !important;
+      ul {
+        margin-top: 30px;
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .container {
+    width: 90%;
+  }
+  .repository-details .body-content {
+    .repo-content .update-text {
+      margin-top: 15px;
+      margin-bottom: 20px;
+    }
+    .icons-row {
+      .left-icons, .right-icons {
+        width: 100%;
+      }
+      .left-icons li {
+        padding-right: 25px;
+      }
+      .right-icons {
+        text-align: left;
+        margin-top: 15px;
+        a {
+          margin-left: 0;
+          margin-right: 15px;
+        }
+      }
+    }
+    .data-column {
+      .left-column {
+        width: 60%;
+      }
+      .right-column {
+        width: 40%;
+        a {
+          font-size: 16px;
+          padding: 10px 5px;
+          width: 150px;
+        }
+      }
+    }
+  }
+}

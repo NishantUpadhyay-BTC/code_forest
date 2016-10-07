@@ -90,6 +90,10 @@
             font-size: 18px;
             color: #689f38;
             margin: 10px 0 !important;
+            width: 180px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            padding: 0 10px;
           }
         }
         a {
@@ -195,6 +199,7 @@
   padding: 50px 0;
   display: inline-block;
   width: 100%;
+  min-height: 700px;
 }
 
 .card {
@@ -282,11 +287,11 @@
     }
   }
 }
-.show{
-display: block !important;
+.show {
+  display: block !important;
 }
-.hide{
-display: none !important;
+.hide {
+  display: none !important;
 }
 
   @media (max-width:992px){
