@@ -13,8 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.blockUI
-//= require materialize-sprockets
-//= require materialize
+//= require materialize.min
 //= require turbolinks
 //= require social-share-button
 //= require materialize-tags

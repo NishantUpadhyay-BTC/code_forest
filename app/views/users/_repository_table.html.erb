@@ -1,32 +1,28 @@
-<h5 class="table-heading">Github Repositories</h5>
 <% if @repositories.present? %>
-  <table class="highlight para-text dash-table">
-    <thead>
-      <tr>
-        <th>No.</th>
-        <th data-field="id">Name <%= sorting_link("name", "repo") %></th>
-        <th data-field="price">Add Repo</th>
-      </tr>
-    </thead>
+  <table class="striped responsive-table tables-data">
+    <tr>
+      <th>No.</th>
+      <th>Name <%= sorting_link("name", "repo") %></th>
+      <th>Add Repo</th>
+    </tr>
 
-    <tbody>
-      <% @repositories.each_with_index do |repo, index| %>
-      <tr>
-        <td><%= serial_no(params[:repo_page], index) %></td>
-        <td><%= repo["name"] %></td>
-        <td>
-          <%= link_to new_repository_path(user_name: current_user.name, repo_name: repo["name"]), class: "tooltipped", data: { turbolinks: false, position: 'top', delay: '50', tooltip: "Add repository" } do %>
-            <i class="material-icons">mode_add</i>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-
-    </tbody>
+    <% @repositories.each_with_index do |repo, index| %>
+    <tr>
+      <td><%= serial_no(params[:repo_page], index) %></td>
+      <td><%= repo["name"] %></td>
+      <td>
+        <%= link_to new_repository_path(user_name: current_user.name, repo_name: repo["name"]), class: "tooltipped", data: { turbolinks: false, position: 'top', delay: '50', tooltip: "Add repository" } do %>
+          <i class="material-icons">mode_add</i>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
   </table>
-  <%= will_paginate @repositories, param_name: 'repo_page',
-    class: pagination[:class], previous_label: pagination[:previous_label],
-    next_label: pagination[:next_label] %>
+  <div class="tables-paging center-align">
+    <%= will_paginate @repositories, param_name: 'repo_page',
+      previous_label: pagination[:previous_label],
+      next_label: pagination[:next_label] %>
+  </div>
 <% else %>
   <h6 class="no-record">No Records found</h6>
 <% end %>

@@ -159,6 +159,62 @@
   }
 }
 
+.dashboard-tabs {
+  margin-top: -15px !important;
+  .tab a {
+    color: #689f38 !important;
+    &:hover {
+      color: #333 !important;
+    }
+  }
+  .indicator {
+    background-color: #689f38 !important;
+    .tables-data td {
+      padding: 15px 8px !important;
+    }
+  }
+}
+
+th {
+  padding: 15px 8px !important;
+}
+
+.tables-data {
+  .list-order {
+    padding: 0 5px;
+    color: #818181;
+    &.active {
+      color: #7cb342;
+    }
+  }
+  .action-links {
+    padding: 0 6px;
+    margin-right: 5px;
+    color: #818181;
+    font-size: 18px;
+    &:hover {
+      color: #689f38;
+    }
+  }
+  .switch label input[type="checkbox"]:checked + .lever {
+    background-color: #7cb342;
+    &::after {
+      background-color: #7cb342;
+    }
+  }
+}
+
+.tables-paging {
+  padding: 0 15px;
+  .pagination {
+    margin-bottom: 0;
+  }
+}
+
+.pagination li.active {
+  background-color: #7cb342;
+}
+
 @media (max-width: 600px) {
   .repository-details .body-content {
     .repo-img {
@@ -237,5 +293,11 @@
         }
       }
     }
+  }
+}
+
+@media (min-width: 993px) and (max-width: 1199px) {
+  .container {
+    width: 85%;
   }
 }

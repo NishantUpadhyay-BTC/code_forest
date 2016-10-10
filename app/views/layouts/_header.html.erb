@@ -36,7 +36,7 @@
             <h4><%= current_user.name %></h4>
           </li>
           <li>
-            <%= link_to user_path(current_user.id) do %>
+            <%= link_to user_path(current_user.id), data: { no_turbolink: true } do %>
               <i class="fa fa-tachometer" aria-hidden="true"></i>
               Dashboard
             <% end %>

@@ -1,15 +1,37 @@
-<div class="row repo-show white">
-  <div class="container z-depth-1" id="poc_table">
-    <%= render partial: "users/poc_table", locals: {pocs: @pocs} %>
-  </div><br>
-  <div class="container z-depth-1" id="repo_table">
-    <%= render partial: "users/repository_table", locals: {repositories: @repositories} %>
-  </div>
-  <div class="container z-depth-1" id="favourite_poc_table">
-    <%= render partial: "users/favourite_poc_table", locals: {repositories: @favourite_pocs} %>
-  </div>
-</div>
+<main>
+  <section class="repository-details">
+    <div class="container z-depth-1">
+      <div class="row body-content">
+        <div class="col s12">
+          <ul class="tabs dashboard-tabs">
+            <li class="tab col s3 waves-effect waves-green">
+              <a class="active" href="#poc_table">POCs</a>
+            </li>
+            <li class="tab col s3 waves-effect waves-green">
+              <a href="#repo_table">GitHub Repositories</a>
+            </li>
+            <li class="tab col s3 waves-effect waves-green">
+              <a href="#favourite_poc_table">Favourite POCs</a>
+            </li>
+          </ul>
+        </div>
+        <div id="poc_table" class="col s12">
+          <%= render partial: "users/poc_table", locals: { pocs: @pocs } %>
+        </div>
+        <div id="repo_table" class="col s12">
+          <%= render partial: "users/repository_table", locals: { repositories: @repositories } %>
+        </div>
+        <div id="favourite_poc_table" class="col s12">
+          <%= render partial: "users/favourite_poc_table", locals: { repositories: @favourite_pocs } %>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 <script>
+  $(document).ready(function(){
+    $('ul.tabs').tabs();
+  });
   $('.pagination > a').attr('data-remote', 'true');
   $('.tooltipped').tooltip({delay: 50});
 </script>
