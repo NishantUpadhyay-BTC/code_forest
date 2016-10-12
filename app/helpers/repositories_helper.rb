@@ -41,9 +41,13 @@ module RepositoriesHelper
   end
 
   def highest_used_language(repository)
-    language = repository.language_repositories.sort_by{|l| l.code}.last.language.name
-    image = AVAILABLE_LOGOS.include?(language) ? language : "Default"
-    {language: language, image: image}
+    if repository.languages.present?
+      language = repository.language_repositories.sort_by{|l| l.code}.last.language.name
+      image = AVAILABLE_LOGOS.include?(language) ? language : "Default"
+      {language: language, image: image}
+    else
+      {language: "No language", image: "Default"}
+    end
   end
 
   def useful_counts

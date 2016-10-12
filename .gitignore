@@ -18,6 +18,7 @@ vendor/bundle
 .gdbinit
 core
 public/images
+public/system
 public/javascripts/all.js
 public/stylesheets/all.css
 .DS_Store

@@ -1,5 +1,5 @@
 <% if @repositories.present? %>
-  <table class="striped responsive-table tables-data">
+  <table class="striped responsive-table tables-data git-repo-data">
     <tr>
       <th>No.</th>
       <th>Name <%= sorting_link("name", "repo") %></th>
@@ -11,8 +11,9 @@
       <td><%= serial_no(params[:repo_page], index) %></td>
       <td><%= repo["name"] %></td>
       <td>
-        <%= link_to new_repository_path(user_name: current_user.name, repo_name: repo["name"]), class: "tooltipped", data: { turbolinks: false, position: 'top', delay: '50', tooltip: "Add repository" } do %>
-          <i class="material-icons">mode_add</i>
+        <%= link_to new_repository_path(user_name: current_user.name, repo_name: repo["name"]),
+         class: "action-links waves-effect tooltipped", data: { turbolinks: false, position: 'top', delay: '50', tooltip: "Add repository" } do %>
+          <i class="fa fa-plus" aria-hidden="true"></i>
         <% end %>
       </td>
     </tr>

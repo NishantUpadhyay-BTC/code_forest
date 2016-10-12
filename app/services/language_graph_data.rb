@@ -7,16 +7,20 @@ class LanguageGraphData
   end
 
   def call
-    total = repo.language_repositories.collect{|lr| lr.code}.sum
-    language_graph_array = []
-    lang_with_percent = {}
-    color = GRAPH_COLOR
-    repo.language_repositories.each do |lr|
-      lang_with_percent[lr.language.name] = (lr.code.to_f/total.to_f)*100
+    if repo.languages.present?
+      total = repo.language_repositories.collect{|lr| lr.code}.sum
+      language_graph_array = []
+      lang_with_percent = {}
+      color = GRAPH_COLOR
+      repo.language_repositories.each do |lr|
+        lang_with_percent[lr.language.name] = (lr.code.to_f/total.to_f)*100
+      end
+      lang_with_percent.each do |lang, percent|
+        language_graph_array << [lang, percent.round(2), color]
+      end
+      language_graph_array
+    else
+      language_graph_array = ["No languages used."]
     end
-    lang_with_percent.each do |lang, percent|
-      language_graph_array << [lang, percent.round(2), color]
-    end
-    language_graph_array
   end
 end

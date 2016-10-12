@@ -47,7 +47,11 @@
               </ul>
             </div>
             <div class="data-column">
-              <div id="barchart_values" class="left-column center-align"></div>
+              <% if @language_graph[0] == "No languages used." %>
+                <div id="barchart_values" class="left-column">No languages used.</div>
+              <% else %>
+                <div id="barchart_values" class="left-column"></div>
+              <% end %>
               <div class="right-column">
                 <ul>
                   <li>
@@ -98,38 +102,42 @@
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
-    array_data = <%= raw @language_graph %>
-    var graph_style = [["Language", "Percentage", {role: "style"}]];
+    <% if @language_graph[0] == "No languages used." %>
+      var no_graph = 'No_languages_used';
+    <% else %>
+      array_data = <%= raw @language_graph %>
+      var graph_style = [["Language", "Percentage", {role: "style"}]];
 
-    for (var lg = 0; lg < array_data.length; lg++) {
-      graph_style.push(array_data[lg]);
-    }
-
-    var data = google.visualization.arrayToDataTable(graph_style);
-    var view = new google.visualization.DataView(data);
-    view.setColumns([
-      0,
-      1, {
-        calc: "stringify",
-        sourceColumn: 1,
-        type: "string",
-        role: "annotation"
-      },
-      2
-    ]);
-
-    var options = {
-      title: "Language used in percentage",
-      width: 350,
-      height: 300,
-      bar: {
-        groupWidth: "15%"
-      },
-      legend: {
-        position: "none"
+      for (var lg = 0; lg < array_data.length; lg++) {
+        graph_style.push(array_data[lg]);
       }
-    };
-    var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-    chart.draw(view, options);
+
+      var data = google.visualization.arrayToDataTable(graph_style);
+      var view = new google.visualization.DataView(data);
+      view.setColumns([
+        0,
+        1, {
+          calc: "stringify",
+          sourceColumn: 1,
+          type: "string",
+          role: "annotation"
+        },
+        2
+      ]);
+
+      var options = {
+        title: "Language used in percentage",
+        width: 350,
+        height: 300,
+        bar: {
+          groupWidth: "15%"
+        },
+        legend: {
+          position: "none"
+        }
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+      chart.draw(view, options);
+    <% end %>
   }
 </script>

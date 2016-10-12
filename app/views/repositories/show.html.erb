@@ -2,83 +2,90 @@
   <section class="repository-details">
     <div class="container z-depth-1">
       <div class="row body-content">
-        <div class="col l3 m4 s12 center-align">
-          <%= image_tag @repository.poc_image, class: "responsive-img repo-img" %>
-        </div>
-        <div class="col l9 m8 s12">
-          <div class="repo-content">
-            <h1><%= @repository.name.titleize %></h1>
-            <p class="update-text">by
-              <a href="https://github.com/<%= @repository.author_name %>" target="_blank">
-                <%= @repository.author_name %>
-              </a>
-              / last updated on
-              <%= time_ago_in_words(@repository.last_updated_at) %>
-              ago
-            </p>
-            <div id="fav_repo_<%= @repository.id %>" class="fav_repo">
-              <%= render partial: "favourite_repo", locals: { repository: @repository } %>
+        <div class="col s12">
+          <div class="repo-content-body">
+            <div class="top-bg">
             </div>
-            <% @repository.tag_list.each do |tag| %>
-              <span class="chip waves-effect">
-                <a href="/repositories/tag/<%= tag %>"><%= tag %></a>
-              </span>
-            <% end %>
-            <p class="description"><%= @repository.description %></p>
-            <div class="icons-row">
-              <ul class="left-icons">
-                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Stars">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <%= @repository.no_of_stars.to_i %>
-                </li>
-                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Fork">
-                  <i class="fa fa-code-fork" aria-hidden="true"></i>
-                  <%= @repository.no_of_forks.to_i %>
-                </li>
-                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Watchers">
-                  <i class="fa fa-bell" aria-hidden="true"></i>
-                  <%= @repository.no_of_watchers.to_i %>
-                </li>
-                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Downloads">
-                  <i class="fa fa-download" aria-hidden="true"></i>
-                  <%= @repository.no_of_downloads.to_i %>
-                </li>
-                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Views">
-                  <i class="fa fa-eye" aria-hidden="true"></i>
-                  <%= @repository.impressions.count.to_i %>
-                </li>
-                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Favourites">
-                  <i class="fa fa-bookmark" aria-hidden="true"></i>
-                  <%= @repository.favourites.count.to_i %>
-                </li>
-              </ul>
-              <ul class="right-icons">
-                <%= social_share_button_tag(repository_url(@repository), desc: @repository.name) %>
-              </ul>
-            </div>
-            <div class="data-column">
-              <div id="barchart_values" class="left-column center-align"></div>
-              <div class="right-column">
-                <ul>
-                  <li>
-                    <%= link_to "#{ @repository.svn_url }", class: "waves-effect", target: "_blank" do %>
-                      <i class="fa fa-github"></i>
-                      GitHub Page
-                    <% end %>
+            <div class="repo-content">
+              <div class="repo-img">
+                <span>
+                  <%= image_tag @repository.poc_image, class: "responsive-img z-depth-1" %>
+                </span>
+              </div>
+              <h1 class="center-align"><%= @repository.name.titleize %></h1>
+              <p class="center-align update-text">by
+                <a href="https://github.com/<%= @repository.author_name %>" target="_blank">
+                  <%= @repository.author_name %>
+                </a>
+                / last updated on
+                <%= time_ago_in_words(@repository.last_updated_at) %>
+                ago
+              </p>
+              <div class="center-align">
+                <% @repository.tag_list.each do |tag| %>
+                  <span class="chip waves-effect">
+                    <a href="/repositories/tag/<%= tag %>"><%= tag %></a>
+                  </span>
+                <% end %>
+              </div>
+              <p class="description center-align"><%= @repository.description %></p>
+              <div class="icons-row">
+                <ul class="left-icons">
+                  <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Stars">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <%= @repository.no_of_stars.to_i %>
                   </li>
-                  <li>
-                    <%= link_to "#{ @repository.wiki_url }", class: "waves-effect", target: "_blank" do %>
-                      <i class="fa fa-file-text-o"></i>
-                      GitHub Wiki
-                    <% end %>
+                  <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Fork">
+                    <i class="fa fa-code-fork" aria-hidden="true"></i>
+                    <%= @repository.no_of_forks.to_i %>
                   </li>
-                  <li>
-                    <%= link_to "#{ @repository.download_link }", onclick: "increment_downloads(#{@repository.id});" do %>
-                      <i class="fa fa-download"></i>
-                      Download
-                    <% end %>
+                  <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Watchers">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                    <%= @repository.no_of_watchers.to_i %>
+                  </li>
+                  <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Downloads">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                    <%= @repository.no_of_downloads.to_i %>
+                  </li>
+                  <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Views">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                    <%= @repository.impressions.count.to_i %>
+                  </li>
+                  <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Favourites">
+                    <i class="fa fa-bookmark" aria-hidden="true"></i>
+                    <%= @repository.favourites.count.to_i %>
                   </li>
                 </ul>
+                <%= social_share_button_tag(repository_url(@repository), desc: @repository.name) %>
+              </div>
+              <div class="data-column">
+                <% if @language_graph[0] == "No languages used." %>
+                  <div id="barchart_values" class="left-column">No languages used.</div>
+                <% else %>
+                  <div id="barchart_values" class="left-column"></div>
+                <% end %>
+                <div class="right-column">
+                  <ul>
+                    <li>
+                      <%= link_to "#{ @repository.svn_url }", class: "waves-effect", target: "_blank" do %>
+                        <i class="fa fa-github"></i>
+                        GitHub Page
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to "#{ @repository.wiki_url }", class: "waves-effect", target: "_blank" do %>
+                        <i class="fa fa-file-text-o"></i>
+                        GitHub Wiki
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to "#{ @repository.download_link }", onclick: "increment_downloads(#{@repository.id});" do %>
+                        <i class="fa fa-download"></i>
+                        Download
+                      <% end %>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -92,39 +99,43 @@
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
-    array_data = <%= raw @language_graph %>
-    var graph_style = [["Language", "Percentage", { role: "style" } ]];
+    <% if @language_graph[0] == "No languages used." %>
+      var no_graph = 'No_languages_used';
+    <% else %>
+      array_data = <%= raw @language_graph %>
+      var graph_style = [["Language", "Percentage", { role: "style" } ]];
 
-    for (var lg = 0; lg < array_data.length; lg++) {
-      graph_style.push(array_data[lg]);
-    }
-
-    var data = google.visualization.arrayToDataTable(graph_style);
-    var view = new google.visualization.DataView(data);
-    view.setColumns([
-      0,
-      1, {
-        calc: "stringify",
-        sourceColumn: 1,
-        type: "string",
-        role: "annotation"
-      },
-      2
-    ]);
-
-    var options = {
-      title: "Language used in percentage",
-      width: 350,
-      height: 300,
-      bar: {
-        groupWidth: "15%"
-      },
-      legend: {
-        position: "none"
+      for (var lg = 0; lg < array_data.length; lg++) {
+        graph_style.push(array_data[lg]);
       }
-    };
-    var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-    chart.draw(view, options);
+
+      var data = google.visualization.arrayToDataTable(graph_style);
+      var view = new google.visualization.DataView(data);
+      view.setColumns([
+        0,
+        1, {
+          calc: "stringify",
+          sourceColumn: 1,
+          type: "string",
+          role: "annotation"
+        },
+        2
+      ]);
+
+      var options = {
+        title: "Language used in percentage",
+        width: 350,
+        height: 300,
+        bar: {
+          groupWidth: "15%"
+        },
+        legend: {
+          position: "none"
+        }
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+      chart.draw(view, options);
+    <% end %>
   }
 
   function increment_downloads(repo_id) {

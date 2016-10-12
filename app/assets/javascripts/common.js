@@ -30,13 +30,12 @@ var Common = {
   },
 
   showRepositoriesOnScroll: function () {
-    if ((window.location.pathname == "/repositories")
-        && (previousPage < nextPage)
+    if ((previousPage < nextPage)
         && $(window).scrollTop() > $(document).height() - $(window).height() - 60)
     {
       path = "/repositories/";
       data = { page: nextPage };
-      if ($("#header_keyword").length!= 0 && ($("#header_keyword")[0].value != "" || $('#language')[0].value != "All"))
+      if ($("#header_keyword")[0].value != "" || $('#language')[0].value != "All")
       {
         path = "/repositories/search/";
         data = Object.assign({},data, {key_word: $("#header_keyword")[0].value,
