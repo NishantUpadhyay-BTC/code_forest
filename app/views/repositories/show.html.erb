@@ -21,6 +21,9 @@
                 <%= time_ago_in_words(@repository.last_updated_at) %>
                 ago
               </p>
+              <span id="fav_repo_<%= @repository.id %>" class="fav-icon-link">
+                <%= render partial: "favourite_repo", locals: { repository: @repository } %>
+              </span>
               <div class="center-align">
                 <% @repository.tag_list.each do |tag| %>
                   <span class="chip waves-effect">
@@ -97,7 +100,11 @@
 <script type="text/javascript">
   google.charts.load("current", {packages: ["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
-
+  var graphWidth = 350;
+  if($(window).width() < 480)
+  {
+    graphWidth= 250;
+  }
   function drawChart() {
     <% if @language_graph[0] == "No languages used." %>
       var no_graph = 'No_languages_used';
@@ -121,10 +128,9 @@
         },
         2
       ]);
-
       var options = {
         title: "Language used in percentage",
-        width: 350,
+        width: graphWidth,
         height: 300,
         bar: {
           groupWidth: "15%"
@@ -135,6 +141,10 @@
       };
       var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
       chart.draw(view, options);
+
+
+
+      $('#barchart_values div').css('width', '100%');
     <% end %>
   }
 

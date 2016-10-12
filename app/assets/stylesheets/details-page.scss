@@ -43,6 +43,16 @@
       p {
         color: #444;
       }
+      .fav-icon-link{
+        position: absolute;
+        top: 160px;
+        left:10px;
+        a{color:#999;
+          &:hover{
+            color:#e91e63
+          }
+        }
+      }
       .update-text {
         color: #999;
         font-size: 13px;
@@ -120,9 +130,6 @@
           width: 50%;
           text-align: center;
         }
-        // #barchart_values > div > div{
-        //   width: 100% !important;
-        // }
         .right-column {
           float: left;
           width: 50%;
@@ -216,9 +223,6 @@
    td:nth-child(3n){width:10%;text-align:center}
 }
 
-.favourite-poc-data {
-
-}
 .tables-paging {
   padding: 0 15px;
   .pagination {

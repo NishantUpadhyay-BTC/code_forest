@@ -2,81 +2,86 @@
   <section class="repository-details">
     <div class="container z-depth-1">
       <div class="row body-content">
-        <div class="col l3 m4 s12 center-align">
-          <%= image_tag @repository.poc_image, class: "responsive-img repo-img", id: "image_preview" %>
-        </div>
-        <div class="col l9 m8 s12">
-          <div class="repo-content">
-            <h1><%= @repository.name.titleize %></h1>
-            <p class="update-text">by
-              <a href="https://github.com/<%= @repository.author_name %>" target="_blank">
-                <%= @repository.author_name %>
-              </a>
-              / last updated on
-              <%= time_ago_in_words(@repository.last_updated_at) %>
-              ago
-            </p>
-            <div id="display_tags"></div>
-            <p class="description" id="p_decription"></p>
-            <div class="icons-row">
-              <ul class="left-icons">
-                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Stars">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <%= @repository.no_of_stars.to_i %>
-                </li>
-                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Fork">
-                  <i class="fa fa-code-fork" aria-hidden="true"></i>
-                  <%= @repository.no_of_forks.to_i %>
-                </li>
-                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Watchers">
-                  <i class="fa fa-bell" aria-hidden="true"></i>
-                  <%= @repository.no_of_watchers.to_i %>
-                </li>
-                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Downloads">
-                  <i class="fa fa-download" aria-hidden="true"></i>
-                  <%= @repository.no_of_downloads.to_i %>
-                </li>
-                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Views">
-                  <i class="fa fa-eye" aria-hidden="true"></i>
-                  <%= @repository.impressions.count.to_i %>
-                </li>
-                <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Favourites">
-                  <i class="fa fa-bookmark" aria-hidden="true"></i>
-                  <%= @repository.favourites.count.to_i %>
-                </li>
-              </ul>
+        <div class="col s12">
+          <div class="repo-content-body">
+            <div class="top-bg">
             </div>
-            <div class="data-column">
-              <% if @language_graph[0] == "No languages used." %>
-                <div id="barchart_values" class="left-column">No languages used.</div>
-              <% else %>
-                <div id="barchart_values" class="left-column"></div>
-              <% end %>
-              <div class="right-column">
-                <ul>
-                  <li>
-                    <%= link_to "#{ @repository.svn_url }", class: "waves-effect", target: "_blank" do %>
-                      <i class="fa fa-github"></i>
-                      GitHub Page
-                    <% end %>
+            <div class="repo-content">
+              <div class="repo-img">
+                <span>
+                  <%= image_tag @repository.poc_image,
+                    class: "responsive-img z-depth-1", id: "image_preview"  %>
+                </span>
+              </div>
+              <h1 class="center-align"><%= @repository.name.titleize %></h1>
+              <p class="center-align update-text">by
+                <a href="https://github.com/<%= @repository.author_name %>" target="_blank">
+                  <%= @repository.author_name %>
+                </a>
+                / last updated on
+                <%= time_ago_in_words(@repository.last_updated_at) %>
+                ago
+              </p>
+              <div id="display_tags" class="center-align"></div>
+              <p class="description center-align" id="p_decription"></p>
+              <div class="icons-row">
+                <ul class="left-icons">
+                  <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Stars">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <%= @repository.no_of_stars.to_i %>
                   </li>
-                  <li>
-                    <%= link_to "#{ @repository.wiki_url }", class: "waves-effect", target: "_blank" do %>
-                      <i class="fa fa-file-text-o"></i>
-                      GitHub Wiki
-                    <% end %>
+                  <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Fork">
+                    <i class="fa fa-code-fork" aria-hidden="true"></i>
+                    <%= @repository.no_of_forks.to_i %>
                   </li>
-                  <li>
-                    <%= link_to "#{ @repository.download_link }", onclick: "increment_downloads(#{@repository.id});" do %>
-                      <i class="fa fa-download"></i>
-                      Download
-                    <% end %>
+                  <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Watchers">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                    <%= @repository.no_of_watchers.to_i %>
+                  </li>
+                  <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Downloads">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                    <%= @repository.no_of_downloads.to_i %>
+                  </li>
+                  <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Views">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                    <%= @repository.impressions.count.to_i %>
+                  </li>
+                  <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Favourites">
+                    <i class="fa fa-bookmark" aria-hidden="true"></i>
+                    <%= @repository.favourites.count.to_i %>
                   </li>
                 </ul>
               </div>
-            </div>
-            <div class="row">
-              <div class="left-column center-align">
+              <div class="data-column">
+                <% if @language_graph[0] == "No languages used." %>
+                  <div id="barchart_values" class="left-column">No languages used.</div>
+                <% else %>
+                  <div id="barchart_values" class="left-column"></div>
+                <% end %>
+                <div class="right-column">
+                  <ul>
+                    <li>
+                      <%= link_to "#{ @repository.svn_url }", class: "waves-effect", target: "_blank" do %>
+                        <i class="fa fa-github"></i>
+                        GitHub Page
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to "#{ @repository.wiki_url }", class: "waves-effect", target: "_blank" do %>
+                        <i class="fa fa-file-text-o"></i>
+                        GitHub Wiki
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to "#{ @repository.download_link }", onclick: "increment_downloads(#{@repository.id});" do %>
+                        <i class="fa fa-download"></i>
+                        Download
+                      <% end %>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="center-align">
                 <%= form_for @repository do |f| %>
                   <%= f.hidden_field :id %>
                   <%= f.file_field :poc_image, id: 'poc_image' ,accept:'image/*', hidden: true %>
