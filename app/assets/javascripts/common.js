@@ -30,7 +30,8 @@ var Common = {
   },
 
   showRepositoriesOnScroll: function () {
-    if ((previousPage < nextPage)
+    if ((window.location.pathname == "/repositories")
+        && (previousPage < nextPage)
         && $(window).scrollTop() > $(document).height() - $(window).height() - 60)
     {
       path = "/repositories/";
